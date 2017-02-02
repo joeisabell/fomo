@@ -1,12 +1,83 @@
+#header_maintenance{
+    color: white;
+    background-color: #9B2C21;
+    font-size: 16px;
+    text-align: center;
+}
+
+#header_message{
+    position: fixed;
+    top: 24px;
+    right: 30px;
+    z-index: 1000;
+}
+
 #header_icon{
-    background-color: #FF0000
-    display: float;
+    float:left;
 }
 
-#header_icon > img {
-    height: 48px;
+#header_icon > a > img {
+    height: 50px;
+    padding: 5px;
 }
 
-#content{
-    background: blue;
+#header_navbar{
+    margin-bottom: 0px;
+}
+
+#body_section_before{
+    background-color: teal;
+    text-align: center;
+}
+
+#body_section{
+    position: relative;
+}
+
+#body_section_top{
+    background-color: purple;
+    text-align: center;
+}
+
+#body_section_left{
+    position: absolute;
+    width: 200px;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: blue;
+}
+
+#body_section_content{
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+#body_section_right{
+    position: absolute;
+    width: 200px;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background-color: #a1d0ae;
+}
+
+#body_section_after{
+    background-color: orange;
+}
+
+#body_footer{
+    background-color: green;
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+    #body_section_top, #body_section_content{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    #body_section_left, #body_section_right{
+        position: relative;
+        width: auto;
+    }
 }
