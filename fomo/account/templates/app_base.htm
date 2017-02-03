@@ -1,0 +1,7 @@
+<%inherit file="/homepage/templates/base.htm" />
+
+<%block name="header_menu_items">
+    <li class=${ 'active' if request.dmp_router_page == 'index' else '' }><a href="/account/index">Information</a></li>
+    <li class=${ 'active' if request.dmp_router_page == 'contact' else '' }><a href="/account/contact">Contact</a></li>
+    <li class=${ 'active' if request.dmp_router_page == 'orders' else '' }><a href="/account/orders">Orders</a></li>
+</%block>

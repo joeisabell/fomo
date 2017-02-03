@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
 
     <head>
-    <title><%block name="title"></%block>My Site</title>
+    <title><%block name="title">FOMO</%block></title>
     <link rel="icon" type="image/png" href="${STATIC_URL}homepage/media/logo.png" />
 
     ## add any site-wide scripts or CSS here; for example, jquery:
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="${STATIC_URL}homepage/media/bootstrap/bootstrap.js"></script>
-    <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/bootstrap/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/bootstrap/bootstrap-theme.css"/>
+    <script src="${STATIC_URL}homepage/media/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/bootstrap/css/bootstrap.min.css"/>
+
     ## render the css with the same name as this page
     ${ get_template_css(self, request, context)}
 
@@ -20,7 +20,6 @@
     </%block>
 
   </head>
-
   <body>
 
     <div id="header_maintenance">
@@ -49,7 +48,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Family Oriented Music Organization</a>
+          <a class="navbar-brand" href="/">Family Oriented Music Organization</a>
         </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="collapse_nav">
@@ -63,12 +62,14 @@
 
             %if user.is_authenticated:
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopups="true" aria-expanded="true"></a>
-                    <li class="dropdown-menu">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopups="true" aria-expanded="true">
+                        Welcome, ${user.first_name}
+                    </a>
+                    <ul class="dropdown-menu">
                         <li><a href="/account/index"><span class="glyphicon glyphicon-user"></span> My Account </a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/account/logout"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
-                    </li>
+                    </ul>
                 </li>
             %else:
                 <li><a href="/account/login"> Login </a></li>

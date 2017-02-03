@@ -29,6 +29,7 @@ u1.first_name = "Joseph"
 u1.last_name = "Isabell"
 u1.email = "joeisabell0@gmail.com"
 u1.is_staff = True
+u1.is_admin = True
 u1.is_active = True
 u1.date_joined = datetime.now()
 u1.address = "465 N 300 W Apt 29"
@@ -73,6 +74,24 @@ u3.state = "AR"
 u3.zip_code = "72712"
 u3.phone = "479-898-3344"
 u3.save()
+
+u4 = FomoUser()
+u4.set_password("mypass")
+u4.last_login = datetime.now()
+u4.is_superuser = True
+u4.username = "jackrabit"
+u4.first_name = "Jack"
+u4.last_name = "Rabbit"
+u4.email = "jill@bearriver.net"
+u4.is_staff = True
+u4.is_active = True
+u4.date_joined = datetime.now()
+u4.address = "12695 Strawberry Ridge Road"
+u4.city = "Bentonville"
+u4.state = "AR"
+u4.zip_code = "72712"
+u4.phone = "479-898-3344"
+u4.save()
 
 
 info = FomoUser.objects.filter(last_name='Isabell')

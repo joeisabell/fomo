@@ -9,5 +9,5 @@ def process_request(request):
         'now' : datetime.now(),
     }
 
-    print('>>>>>>>>>>>', context)
+    print('>>>', context)
     return dmp_render(request, 'index.html', context)

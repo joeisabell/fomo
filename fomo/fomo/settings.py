@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_mako_plus',
     'homepage',
-    'account'
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +58,7 @@ ROOT_URLCONF = 'fomo.urls'
 
 TEMPLATES = [
    {
+       'NAME': 'django_mako_plus',
        'BACKEND': 'django_mako_plus.MakoTemplates',
        'OPTIONS': {
            # functions to automatically add variables to the params/context before templates are rendered
@@ -110,6 +111,20 @@ TEMPLATES = [
    },
 
    # you'll likely already have the DjangoTemplates settings here
+    {
+        'NAME': 'django',
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors':[
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ]
+        },
+    },
  ]
 
 WSGI_APPLICATION = 'fomo.wsgi.application'
