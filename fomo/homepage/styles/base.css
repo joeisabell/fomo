@@ -17,17 +17,20 @@
 }
 
 #header_icon > a > img {
-    height: 50px;
-    padding: 5px;
+    height: 54px;
+    padding: 2px;
+    margin: 2px;
 }
 
 #header_navbar{
     margin-bottom: 0px;
+    border-radius: 0px;
 }
 
 #body_section_before{
-    background-color: teal;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #body_section{
@@ -35,7 +38,6 @@
 }
 
 #body_section_top{
-    background-color: purple;
     text-align: center;
 }
 
@@ -45,7 +47,6 @@
     top: 0;
     left: 0;
     height: 100%;
-    background-color: blue;
 }
 
 #body_section_content{
@@ -59,11 +60,10 @@
     top: 0;
     right: 0;
     height: 100%;
-    background-color: #a1d0ae;
 }
 
 #body_section_after{
-    background-color: orange;
+    padding: 20px;
 }
 
 #body_footer{
@@ -74,6 +74,8 @@
     #body_section_top, #body_section_content{
         margin-left: 0px;
         margin-right: 0px;
+        padding: 10px;
+        padding-top: 0px;
     }
     #body_section_left, #body_section_right{
         position: relative;

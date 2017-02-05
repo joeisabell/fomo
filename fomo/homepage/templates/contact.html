@@ -1,1 +1,29 @@
 <%inherit file="app_base.htm" />
+
+<%block name="title">Contact Us</%block>
+
+<%block name="body_section_before">
+  <h1>Contact Us</h1>
+</%block>
+
+<%block name="body_section_content">
+  <form action="/homepage/contact/">
+
+      <div class="form-group">
+          <label for="name">Name:</label>
+          <input class="form-control" type="text" id="name" name="user_name" />
+      </div>
+      <div class="form-group">
+          <label for="mail">E-mail:</label>
+          <input class="form-control" type="text" id="mail" name="user_mail" />
+      </div>
+      <div class="form-group">
+          <label for="msg">Message:</label>
+          <textarea class="form-control" id="msg" name="user_message"></textarea>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+
+  </form>
+</%block>

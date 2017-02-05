@@ -1,0 +1,33 @@
+
+#body_section_before{
+    background-color: teal;
+}
+
+
+#body_section_top{
+    background-color: #7A9F35;
+}
+
+#body_section_left{
+    background-color: #B1478E;
+    padding: 8px;
+}
+
+#body_section_right{
+    background-color: #a1d0ae;
+    padding: 8px;
+}
+
+#body_section_content{
+    background-color: #E8E35C;
+    padding: 8px;
+}
+
+#body_section_after{
+    background-color: orange;
+    text-align: center;
+}
+
+#body_footer{
+    background-color: lavender;
+}
