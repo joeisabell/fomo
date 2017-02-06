@@ -18,16 +18,36 @@ with connection.cursor() as cursor:
 management.call_command('makemigrations')
 management.call_command('migrate')
 
+# add groups and users
 from account.models import FomoUser
+from django.contrib.auth.models import Permission, Group
 
+# add groups
+#g1 = Group()
+#g1.name = 'Supers'
+#g1.save()
+
+#for p in Permissions.objects.all()
+#    g1.permissions.add(p)
+
+#g2 = Group()
+#g2.name = 'Salesperson'
+#g2.save()
+
+#g2.persmissions.add(Permission.objects.get(codename=('add_fomouser')))
+#g2.persmissions.add(Permission.objects.get(codename=('change_fomouser')))
+#g2.persmissions.add(Permission.objects.get(codename=('delete_fomouser')))
+
+# add users
 u1 = FomoUser()
-u1.set_password("mypass")
+u1.set_password("Utslcw2014")
 u1.last_login = datetime.now()
 u1.is_superuser = True
 u1.username = "isabell7"
-u1.first_name = "Joseph"
+u1.first_name = "Joe"
 u1.last_name = "Isabell"
 u1.email = "joeisabell0@gmail.com"
+#u1.groups.add(g1)
 u1.is_staff = True
 u1.is_admin = True
 u1.is_active = True
@@ -92,8 +112,3 @@ u4.state = "AR"
 u4.zip_code = "72712"
 u4.phone = "479-898-3344"
 u4.save()
-
-
-info = FomoUser.objects.filter(last_name='Isabell')
-for hello in info:
-		print(hello.id, hello.first_name)

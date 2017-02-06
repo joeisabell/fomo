@@ -9,7 +9,7 @@ from .. import dmp_render, dmp_render_to_string
 def process_request(request):
     print('>>>> Process Request')
     username = 'isabell7'
-    password = 'mypass'
+    password = 'Utslcw2014'
     user = authenticate(username=username, password=password)
 
     if user is not None:
