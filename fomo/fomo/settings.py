@@ -81,6 +81,7 @@ TEMPLATES = [
 
            # these are included in every template by default - if you put your most-used libraries here, you won't have to import them exlicitly in templates
            'DEFAULT_TEMPLATE_IMPORTS': [
+             'import django_mako_plus',
              'import os, os.path, re, json',
            ],
 
