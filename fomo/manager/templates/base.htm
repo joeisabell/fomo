@@ -1,0 +1,30 @@
+## this is the skeleton of all pages on in this app - it defines the basic html tags
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <head>
+
+        <title>manager</title>
+
+        ## add any site-wide scripts or CSS here; for example, jquery:
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+        ## render the styles with the same name as this template and its supertemplates
+        ${ django_mako_plus.link_css(self) }
+
+    </head>
+    <body>
+
+        <header>
+            <h1>Welcome to the manager app!<h1>
+        </header>
+
+        <%block name="content">
+            Site content goes here in sub-templates.
+        </%block>
+
+        ## render the scripts with the same name as this template and its supertemplates
+        ${ django_mako_plus.link_js(self) }
+
+    </body>
+</html>
