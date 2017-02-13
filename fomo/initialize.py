@@ -19,8 +19,14 @@ management.call_command('makemigrations')
 management.call_command('migrate')
 
 # add groups and users
-from account.models import FomoUser
+from catalog import models as cmod
+from account import models as amod
+
+from decimal import Decimal
+from datetime import datetime
+
 from django.contrib.auth.models import Permission, Group
+from django.contrib.contenttypes.models import ContentType
 
 # add groups
 #g1 = Group()
@@ -39,7 +45,7 @@ from django.contrib.auth.models import Permission, Group
 #g2.persmissions.add(Permission.objects.get(codename=('delete_fomouser')))
 
 # add users
-u1 = FomoUser()
+u1 = amod.FomoUser()
 u1.set_password("Utslcw2014")
 u1.last_login = datetime.now()
 u1.is_superuser = True
@@ -59,7 +65,7 @@ u1.zip_code = "84601"
 u1.phone = "479-802-9621"
 u1.save()
 
-u2 = FomoUser()
+u2 = amod.FomoUser()
 u2.set_password("mypass")
 u2.last_login = datetime.now()
 u2.is_superuser = True
@@ -77,7 +83,7 @@ u2.zip_code = "84601"
 u2.phone = "479-802-9621"
 u2.save()
 
-u3 = FomoUser()
+u3 = amod.FomoUser()
 u3.set_password("mypass")
 u3.last_login = datetime.now()
 u3.is_superuser = True
@@ -95,7 +101,7 @@ u3.zip_code = "72712"
 u3.phone = "479-898-3344"
 u3.save()
 
-u4 = FomoUser()
+u4 = amod.FomoUser()
 u4.set_password("mypass")
 u4.last_login = datetime.now()
 u4.is_superuser = True
@@ -112,3 +118,19 @@ u4.state = "AR"
 u4.zip_code = "72712"
 u4.phone = "479-898-3344"
 u4.save()
+
+# Categories
+cat1 = cmod.Category()
+cat1.code = 'brass'
+cat1.name = 'Brass Instruments'
+cat1.save()
+
+# Products
+bp1 = cmod.BulkProduct()
+bp1.category = cat1
+bp1.name = 'Kazoo'
+bp1.brand = 'ToysRUs'
+bp1.price = Decimal('90.50')
+bp1.quantity = 20
+bp1.reorder_point = 5
+bp1.reorder_quantity = 10
