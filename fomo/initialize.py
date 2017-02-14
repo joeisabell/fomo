@@ -128,6 +128,7 @@ bp1.price = Decimal('90.50')
 bp1.quantity = 20
 bp1.reorder_point = 5
 bp1.reorder_quantity = 10
+bp1.save()
 
 bp2 = cmod.BulkProduct()
 bp2.category = cat3
@@ -137,41 +138,54 @@ bp2.price = Decimal('10.66')
 bp2.quantity = 40
 bp2.reorder_point = 10
 bp2.reorder_quantity = 20
+bp2.save()
 
 # unique products
 up1 = cmod.UniqueProduct()
-up1.category = cat3
-up1.name = 'E String'
-up1.brand = 'String City'
-up1.price = Decimal('10.66')
+up1.category = cat1
+up1.name = 'Trumpet'
+up1.brand = 'Etude'
+up1.price = Decimal('200.09')
+up1.serial_number = 9458457208
+up1.save()
 
 up2 = cmod.UniqueProduct()
-up2.category = cat3
-up2.name = 'E String'
-up2.brand = 'String City'
-up2.price = Decimal('10.66')
+up2.category = cat1
+up2.name = 'Tuba'
+up2.brand = 'Elite'
+up2.price = Decimal('304.98')
+up2.serial_number = 8474857594
+up2.save()
 
 up3 = cmod.UniqueProduct()
-up3.category = cat3
-up3.name = 'E String'
-up3.brand = 'String City'
-up3.price = Decimal('10.66')
+up3.category = cat1
+up3.name = 'French Horn'
+up3.brand = 'Brass Horns Inc'
+up3.price = Decimal('309.90')
+up3.serial_number = 19384759483
+up3.save()
 
 # rental products
 rp1 = cmod.RentalProduct()
-rp1.category = cat3
-rp1.name = 'E String'
-rp1.brand = 'String City'
-rp1.price = Decimal('10.66')
+rp1.category = cat2
+rp1.name = 'Clarinet'
+rp1.brand = 'Elite'
+rp1.price = Decimal('500.98')
+rp1.serial_number = 8374895479
+rp1.save()
 
 rp2 = cmod.RentalProduct()
 rp2.category = cat3
-rp2.name = 'E String'
+rp2.name = 'Voilin'
 rp2.brand = 'String City'
-rp2.price = Decimal('10.66')
+rp2.price = Decimal('1500.98')
+rp2.serial_number = 509588033
+rp2.save()
 
 rp3 = cmod.RentalProduct()
 rp3.category = cat3
-rp3.name = 'E String'
-rp3.brand = 'String City'
-rp3.price = Decimal('10.66')
+rp3.name = 'Electric Guitar'
+rp3.brand = 'Fender'
+rp3.price = Decimal('576.98')
+rp3.serial_number = 94859584766
+rp3.save()
