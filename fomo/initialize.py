@@ -1,12 +1,19 @@
-from datetime import datetime
-from django.core import management
-from django.db import connection
 import os
+from datetime import datetime
+from decimal import Decimal
 
 # initialize django environment
 os.environ['DJANGO_SETTINGS_MODULE'] = 'fomo.settings'
 import django
 django.setup()
+
+from django.core import management
+from django.db import connection
+from django.contrib.auth.models import Permission, Group
+from django.contrib.contenttypes.models import ContentType
+
+from catalog import models as cmod
+from account import models as amod
 
 # drop and recreate database tables
 with connection.cursor() as cursor:
@@ -17,16 +24,6 @@ with connection.cursor() as cursor:
 
 management.call_command('makemigrations')
 management.call_command('migrate')
-
-# add groups and users
-from catalog import models as cmod
-from account import models as amod
-
-from decimal import Decimal
-from datetime import datetime
-
-from django.contrib.auth.models import Permission, Group
-from django.contrib.contenttypes.models import ContentType
 
 # add groups
 #g1 = Group()
@@ -119,13 +116,13 @@ u4.zip_code = "72712"
 u4.phone = "479-898-3344"
 u4.save()
 
-# Categories
+# add categories
 cat1 = cmod.Category()
 cat1.code = 'brass'
 cat1.name = 'Brass Instruments'
 cat1.save()
 
-# Products
+# add products
 bp1 = cmod.BulkProduct()
 bp1.category = cat1
 bp1.name = 'Kazoo'
