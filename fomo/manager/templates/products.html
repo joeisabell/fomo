@@ -1,0 +1,33 @@
+<%inherit file="app_base.htm"/>
+
+<%block name="body_section_before">
+  <h1>Manage Products</h1>
+</%block>
+
+<%block name="body_section_content">
+  <table class="table table-striped">
+      <tr>
+        <th>Category</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Serial Number</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    % for p in products:
+      <tr>
+        <td>${ p.category.name }</td>
+        <td>${ p.name }</td>
+        <td>${ p.quantity if hasattr(p, 'quantity') else '-' }</td>
+        <td>${ p.serial_number if hasattr(p, 'serial_number') else '-' }</td>
+        <td>${ p.price }</td>
+        <td>
+          <a href="/manager/product/${ p.id }">Edit</a>
+          |
+          <a href="/manager/product.delete/${ p.id }">Delete</a>
+        </td>
+      </tr>
+    % endfor
+  </table>
+
+</%block>
