@@ -5,6 +5,7 @@
 </%block>
 
 <%block name="body_section_content">
+  <a href="/manager/product.create">New Product</a>
   <table class="table table-striped">
       <tr>
         <th>Category</th>
@@ -18,7 +19,9 @@
       <tr>
         <td>${ p.category.name }</td>
         <td>${ p.name }</td>
-        <td>${ p.quantity if hasattr(p, 'quantity') else '-' }</td>
+        <td>
+          ${ p.quantity if hasattr(p, 'quantity') else '-' }
+        </td>
         <td>${ p.serial_number if hasattr(p, 'serial_number') else '-' }</td>
         <td>${ p.price }</td>
         <td>
