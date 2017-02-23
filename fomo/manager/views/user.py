@@ -13,7 +13,7 @@ def process_request(request):
     try:
         user = amod.FomoUser.objects.get(id=request.urlparams[0])
     except amod.FomoUser.DoesNotExist:
-        return HttpResponseRedirect('/account/users')
+        return HttpResponseRedirect('/manager/users')
 
     # process the form
     form = EditUserForm(request, user=user, initial={
@@ -21,7 +21,6 @@ def process_request(request):
         'last_name' : user.last_name,
         'username' : user.username,
         'email' : user.email,
-        'password' : user.password,
         'birthday' : user.birthday,
         'phone' : user.phone,
         'address' : user.address,
@@ -32,7 +31,7 @@ def process_request(request):
 
     if form.is_valid():
         form.commit(user)
-        return HttpResponseRedirect('/account/users/')
+        return HttpResponseRedirect('/manager/users/')
 
     context = {
         'user' : user,
@@ -52,7 +51,6 @@ class EditUserForm(FormMixIn, forms.Form):
         self.fields['last_name'] = forms.CharField(label='Last Name', max_length=30)
         self.fields['username'] = forms.CharField(label='Username', max_length=150)
         self.fields['email'] = forms.CharField(label='Email', max_length=30)
-        self.fields['password'] = forms.CharField(label='Password', max_length=100)
         self.fields['birthday'] = forms.DateTimeField(label='Birthday')
         self.fields['phone'] = forms.CharField(label='Phone Number', max_length=20)
         self.fields['address'] = forms.CharField(label='Street Address', max_length=200)
@@ -65,7 +63,6 @@ class EditUserForm(FormMixIn, forms.Form):
         user.last_name = self.cleaned_data.get('last_name')
         user.username = self.cleaned_data.get('username')
         user.email = self.cleaned_data.get('email')
-        user.password = self.cleaned_data.get('password')
         user.birthday = self.cleaned_data.get('birthday')
         user.phone = self.cleaned_data.get('phone')
         user.address = self.cleaned_data.get('address')
@@ -83,10 +80,10 @@ def delete(request):
     try:
         user = amod.FomoUser.objects.get(id=request.urlparams[0])
     except amod.FomoUser.DoesNotExist:
-        return HttpResponseRedirect('/account/users')
+        return HttpResponseRedirect('/manager/users')
 
     user.delete()
-    return HttpResponseRedirect('/account/users')
+    return HttpResponseRedirect('/manager/users')
 
 
 ###################################################
@@ -101,7 +98,7 @@ def create(request):
         if form.is_valid():
             print('>>> form is valid')
             form.commit(user)
-            return HttpResponseRedirect('/account/users/')
+            return HttpResponseRedirect('/manager/users/')
 
         context = {
             'user' : user,
@@ -119,7 +116,7 @@ class CreateUserForm(FormMixIn, forms.Form):
         self.fields['last_name'] = forms.CharField(label='Last Name', max_length=30)
         self.fields['username'] = forms.CharField(label='Username', max_length=150)
         self.fields['email'] = forms.CharField(label='Email', max_length=30)
-        self.fields['password'] = forms.CharField(label='Password', max_length=100)
+        self.fields['password'] = forms.CharField(label='Password', max_length=100, widget=forms.PasswordInput())
         self.fields['birthday'] = forms.DateTimeField(label='Birthday')
         self.fields['phone'] = forms.CharField(label='Phone Number', max_length=20)
         self.fields['address'] = forms.CharField(label='Street Address', max_length=200)
@@ -133,7 +130,7 @@ class CreateUserForm(FormMixIn, forms.Form):
         user.last_name = self.cleaned_data.get('last_name')
         user.username = self.cleaned_data.get('username')
         user.email = self.cleaned_data.get('email')
-        user.password = self.cleaned_data.get('password')
+        user.set_password(self.cleaned_data.get('password'))
         user.birthday = self.cleaned_data.get('birthday')
         user.phone = self.cleaned_data.get('phone')
         user.address = self.cleaned_data.get('address')

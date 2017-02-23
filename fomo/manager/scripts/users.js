@@ -5,7 +5,7 @@ $(function() {
         var modal = $('#myModal').modal()
 
         $.ajax({
-            url: '/account/users.user_info/' + uid,
+            url: '/manager/users.user_info/' + uid,
             success: function(data) {
               $('.modal-body').html(
                 '<h3>'+data[0]+'</h3>' +
@@ -17,7 +17,7 @@ $(function() {
 
         $('.confirm_delete').click(function() {
             console.log('confirm and execute' + uid)
-            window.location.href = '/account/user.delete/' + uid
+            window.location.href = '/manager/user.delete/' + uid
         });
 
     });

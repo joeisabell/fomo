@@ -20,13 +20,13 @@
         <td>${ u.username }</td>
         <td>${ u.phone }</td>
         <td>
-          <a class="btn btn-info btn-xs" href="/account/user/${ u.id }">Edit</a>
+          <a class="btn btn-info btn-xs" href="/manager/user/${ u.id }">Edit</a>
           <button data-uid=${u.id} class="delete_button btn btn-danger btn-xs">Delete</button>
         </td>
       </tr>
     % endfor
   </table>
-  <a class="btn btn-info" href="/account/user.create">Add New User</a>
+  <a class="btn btn-info" href="/manager/user.create">Add New User</a>
 </%block>
 
 <%block name="modal">

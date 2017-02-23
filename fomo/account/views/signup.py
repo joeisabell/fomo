@@ -16,12 +16,9 @@ def process_request(request):
 
         if form.is_valid():
             print('>>> form is valid')
-            print(user)
             form.commit(user)
-            user = authenticate(username=user.username, password=user.password)
-            if user is not None:
-                login(request, user)
-                return HttpResponseRedirect('/homepage/index/')
+            print(user)
+            return HttpResponseRedirect('/homepage/index/')
 
         context = {
             'user' : user,
@@ -53,7 +50,7 @@ class CreateUserForm(FormMixIn, forms.Form):
         user.last_name = self.cleaned_data.get('last_name')
         user.username = self.cleaned_data.get('username')
         user.email = self.cleaned_data.get('email')
-        user.password = self.cleaned_data.get('password')
+        user.set_password(self.cleaned_data.get('password'))
         user.birthday = self.cleaned_data.get('birthday')
         user.phone = self.cleaned_data.get('phone')
         user.address = self.cleaned_data.get('address')

@@ -20,9 +20,7 @@ def process_request(request):
 @view_function
 def user_info(request):
     if request.is_ajax():
-        print('>>>>USER!! AJAX')
         user = amod.FomoUser.objects.get(id=request.urlparams[0])
-        print(user)
         attributes = [user.get_full_name(), user.username, user.email, ]
         print(attributes)
         data = json.dumps(attributes)
