@@ -2,9 +2,8 @@ $(function() {
 
     $('.update_button').click(function() {
         var pid = $(this).attr('data-pid');
-        console.log("click")
-        console.log(pid)
-
+        var quantity = $(this).siblings('.product_quantity')
+        quantity.load('/manager/products.get_quantity/' + pid)
     });
 
     $('.delete_button').click(function() {

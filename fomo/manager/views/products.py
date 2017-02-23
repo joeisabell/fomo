@@ -17,6 +17,15 @@ def process_request(request):
     return dmp_render(request, 'products.html', context)
 
 @view_function
+def get_quantity(request):
+    if request.is_ajax():
+        product = cmod.Product.objects.get(id=request.urlparams[0])
+        quantity = product.quantity
+        return HttpResponse(quantity)
+    else:
+        raise Http404
+
+@view_function
 def product_info(request):
     if request.is_ajax():
         product = cmod.Product.objects.get(id=request.urlparams[0])

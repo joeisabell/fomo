@@ -23,7 +23,10 @@
         <td>
           %if hasattr(p, 'quantity'):
             <button data-pid=${p.id} class="update_button btn btn-info pull-right btn-xs">Update</button>
-            ${ p.quantity }
+            <span class="product_quantity">
+              ${ p.quantity }
+            </span>
+
           %else:
             -
           %endif
@@ -49,7 +52,7 @@
         <h4 class="modal-title" id="myModalLabel">Are you sure you want to delete this product?</h4>
       </div>
       <div class="modal-body">
-      
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
