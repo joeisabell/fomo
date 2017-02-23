@@ -19,11 +19,9 @@ def process_request(request):
 @view_function
 def product_info(request):
     if request.is_ajax():
-
         product = cmod.Product.objects.get(id=request.urlparams[0])
         attributes = [product.name, product.brand, product.category.name, ]
         data = json.dumps(attributes)
-
         return HttpResponse(data, content_type='application/json')
     else:
         raise Http404

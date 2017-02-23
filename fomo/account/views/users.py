@@ -1,5 +1,7 @@
+import json
+
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django_mako_plus import view_function
 from .. import dmp_render, dmp_render_to_string
 
@@ -14,3 +16,16 @@ def process_request(request):
     }
 
     return dmp_render(request, 'users.html', context)
+
+@view_function
+def user_info(request):
+    if request.is_ajax():
+        print('>>>>USER!! AJAX')
+        user = amod.FomoUser.objects.get(id=request.urlparams[0])
+        print(user)
+        attributes = [user.get_full_name(), user.username, user.email, ]
+        print(attributes)
+        data = json.dumps(attributes)
+        return HttpResponse(data, content_type='application/json')
+    else:
+        raise Http404

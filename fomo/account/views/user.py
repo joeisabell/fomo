@@ -11,59 +11,133 @@ from account import models as amod
 def process_request(request):
 
     try:
-        product = cmod.Product.objects.get(id=request.urlparams[0])
-    except cmod.Product.DoesNotExist:
-        return HttpResponseRedirect('/manager/products')
+        user = amod.FomoUser.objects.get(id=request.urlparams[0])
+    except amod.FomoUser.DoesNotExist:
+        return HttpResponseRedirect('/account/users')
 
     # process the form
-    form = EditProductForm(request, product=product, initial={
-        'name': product,
-        'category': product.category.name,
-        'price': product.price,
-        'quantity': getattr(product, 'quantity', 0)
+    form = EditUserForm(request, user=user, initial={
+        'first_name' : user.first_name,
+        'last_name' : user.last_name,
+        'username' : user.username,
+        'email' : user.email,
+        'password' : user.password,
+        'birthday' : user.birthday,
+        'phone' : user.phone,
+        'address' : user.address,
+        'city' : user.city,
+        'state' : user.state,
+        'zipcode' : user.zipcode,
     })
 
     if form.is_valid():
-        print('>>> form is valid')
-        form.commit(product)
-        return HttpResponseRedirect('/app/successurl/')
+        form.commit(user)
+        return HttpResponseRedirect('/account/users/')
 
     context = {
-        'product' : product,
+        'user' : user,
         'form': form,
+        'title': 'Edit User',
     }
+    print(form)
+    return dmp_render(request, 'user.html', context)
 
-    return dmp_render(request, 'product.html', context)
 
 
-class EditProductForm(FormMixIn, forms.Form):
+class EditUserForm(FormMixIn, forms.Form):
 
-    def init(self, product):
-        self.fields['name'] = forms.CharField(label='Product Name', max_length=100)
-        self.fields['category'] = forms.ModelChoiceField(label="Category",
-            queryset=cmod.Category.objects.order_by('name').all())
-        self.fields['price'] = forms.DecimalField(label='Price')
-        if hasattr(product, 'quantity'):
-            self.fields['quantity'] = forms.IntegerField(label='Quantity')
+    def init(self, user):
 
-    def commit(self, product):
-        product.name = self.form.cleaned_data('name')
-        product.category = self.form.cleaned_data.get('category')
-        product.price = self.form.cleaned_data.get('price')
-        if hasattr(product, 'quantity'):
-            product.quantity = self.form.cleaned_data.get('quantity')
-        product.save()
+        self.fields['first_name'] = forms.CharField(label='First Name', max_length=30)
+        self.fields['last_name'] = forms.CharField(label='Last Name', max_length=30)
+        self.fields['username'] = forms.CharField(label='Username', max_length=150)
+        self.fields['email'] = forms.CharField(label='Email', max_length=30)
+        self.fields['password'] = forms.CharField(label='Password', max_length=100)
+        self.fields['birthday'] = forms.DateTimeField(label='Birthday')
+        self.fields['phone'] = forms.CharField(label='Phone Number', max_length=20)
+        self.fields['address'] = forms.CharField(label='Street Address', max_length=200)
+        self.fields['city'] = forms.CharField(label='City', max_length=50)
+        self.fields['state'] = forms.CharField(label='State', max_length=50)
+        self.fields['zipcode'] = forms.CharField(label='Zipcode', max_length=50)
+
+    def commit(self, user):
+        user.first_name = self.cleaned_data.get('first_name')
+        user.last_name = self.cleaned_data.get('last_name')
+        user.username = self.cleaned_data.get('username')
+        user.email = self.cleaned_data.get('email')
+        user.password = self.cleaned_data.get('password')
+        user.birthday = self.cleaned_data.get('birthday')
+        user.phone = self.cleaned_data.get('phone')
+        user.address = self.cleaned_data.get('address')
+        user.city = self.cleaned_data.get('city')
+        user.state = self.cleaned_data.get('state')
+        user.zipcode = self.cleaned_data.get('zipcode')
+        user.save()
 
 
 ###################################################
-## Deleting of products
+## Deleting Users
 
 @view_function
 def delete(request):
     try:
-        product = cmod.Product.objects.get(id=request.urlparams[0])
-    except cmod.Product.DoesNotExist:
-        return HttpResponseRedirect('/manager/products')
+        user = amod.FomoUser.objects.get(id=request.urlparams[0])
+    except amod.FomoUser.DoesNotExist:
+        return HttpResponseRedirect('/account/users')
 
-    product.delete()
-    return HttpResponseRedirect('/manager/products')
+    user.delete()
+    return HttpResponseRedirect('/account/users')
+
+
+###################################################
+## Creating Users
+
+@view_function
+def create(request):
+        user = amod.FomoUser()
+        # process the form
+        form = CreateUserForm(request, user=user)
+
+        if form.is_valid():
+            print('>>> form is valid')
+            form.commit(user)
+            return HttpResponseRedirect('/account/users/')
+
+        context = {
+            'user' : user,
+            'form': form,
+            'title': 'Create a New User',
+        }
+        return dmp_render(request, 'user.html', context)
+
+
+class CreateUserForm(FormMixIn, forms.Form):
+
+    def init(self, user):
+
+        self.fields['first_name'] = forms.CharField(label='First Name', max_length=30)
+        self.fields['last_name'] = forms.CharField(label='Last Name', max_length=30)
+        self.fields['username'] = forms.CharField(label='Username', max_length=150)
+        self.fields['email'] = forms.CharField(label='Email', max_length=30)
+        self.fields['password'] = forms.CharField(label='Password', max_length=100)
+        self.fields['birthday'] = forms.DateTimeField(label='Birthday')
+        self.fields['phone'] = forms.CharField(label='Phone Number', max_length=20)
+        self.fields['address'] = forms.CharField(label='Street Address', max_length=200)
+        self.fields['city'] = forms.CharField(label='City', max_length=50)
+        self.fields['state'] = forms.CharField(label='State', max_length=50)
+        self.fields['zipcode'] = forms.CharField(label='Zipcode', max_length=50)
+
+    def commit(self, user):
+
+        user.first_name = self.cleaned_data.get('first_name')
+        user.last_name = self.cleaned_data.get('last_name')
+        user.username = self.cleaned_data.get('username')
+        user.email = self.cleaned_data.get('email')
+        user.password = self.cleaned_data.get('password')
+        user.birthday = self.cleaned_data.get('birthday')
+        user.phone = self.cleaned_data.get('phone')
+        user.address = self.cleaned_data.get('address')
+        user.city = self.cleaned_data.get('city')
+        user.state = self.cleaned_data.get('state')
+        user.zipcode = self.cleaned_data.get('zipcode')
+        user.save()
