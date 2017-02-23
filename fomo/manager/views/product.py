@@ -17,6 +17,7 @@ def process_request(request):
 
     # process the form
     form = EditProductForm(request, product=product, initial={
+        'id': product.id,
         'name': product,
         'category': product.category,
         'brand': product.brand,
@@ -36,7 +37,7 @@ def process_request(request):
         'form': form,
         'title': 'Edit Product',
     }
-
+    print(form)
     return dmp_render(request, 'product.html', context)
 
 
