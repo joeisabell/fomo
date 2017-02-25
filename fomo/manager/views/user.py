@@ -115,7 +115,7 @@ def delete(request):
 
 @view_function
 @login_required
-@permission_required('account.create_fomouser', raise_exception=True)
+@permission_required('account.add_fomouser', raise_exception=True)
 def create(request):
         user = amod.FomoUser()
         # process the form

@@ -41,7 +41,7 @@ def process_request(request):
         'form': form,
         'title': 'Edit Account Information',
     }
-    return dmp_render(request, 'info.html', context)
+    return dmp_render(request, 'edit.html', context)
 
 
 
@@ -85,7 +85,7 @@ class EditUserForm(FormMixIn, forms.Form):
 
 @view_function
 @login_required
-def change_password(request):
+def password(request):
 
         # process the form
         form = ChangeUserPasswordForm(request)
@@ -98,7 +98,7 @@ def change_password(request):
             'form': form,
             'title': 'Change Password',
         }
-        return dmp_render(request, 'info.html', context)
+        return dmp_render(request, 'edit.html', context)
 
 
 class ChangeUserPasswordForm(FormMixIn, forms.Form):
