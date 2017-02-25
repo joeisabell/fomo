@@ -1,4 +1,22 @@
 <%inherit file="app_base.htm" />
 
-<%block name="body_section_content">
+<%block name="body_section_before">
+  <h1> Your Account </h1>
 </%block>
+
+<%block name="body_section_content">
+
+  <h2>${ request.user.get_full_name() }</h2>
+
+  <ul>
+    <li>Username: ${ request.user.username }</li>
+    <li>Address: ${ request.user.address }</li>
+    <li>Birthday: ${ request.user.birthday.strftime(' %D ') }</li>
+  </ul>
+
+  <div class="text-center">
+    <a class="btn btn-primary" href="/account/info.change_password">Change Password</a>
+    <a class="btn btn-primary" href="/account/info">Edit Account Information</a>
+  </div>
+
+</%block>s

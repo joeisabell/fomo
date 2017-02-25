@@ -10,22 +10,22 @@ from account import models as amod
 
 @view_function
 def process_request(request):
+
+        if request.user.is_authenticated:
+            return HttpResponseRedirect('/account/index')
+
         user = amod.FomoUser()
-        # process the form
         form = CreateUserForm(request, user=user)
 
         if form.is_valid():
-            print('>>> form is valid')
             form.commit(user)
-            print(user)
             return HttpResponseRedirect('/homepage/index/')
 
         context = {
-            'user' : user,
             'form': form,
             'title': 'Sign-up',
         }
-        return dmp_render(request, 'user.html', context)
+        return dmp_render(request, 'signup.html', context)
 
 
 class CreateUserForm(FormMixIn, forms.Form):
@@ -43,6 +43,13 @@ class CreateUserForm(FormMixIn, forms.Form):
         self.fields['city'] = forms.CharField(label='City', max_length=50)
         self.fields['state'] = forms.CharField(label='State', max_length=50)
         self.fields['zipcode'] = forms.CharField(label='Zipcode', max_length=50)
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        users = amod.FomoUser.objects.filter(username=username)
+        if len(users) > 0:
+             raise forms.ValidationError('Sorry, this username is already taken')
+        return username
 
     def commit(self, user):
 

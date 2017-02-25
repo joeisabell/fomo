@@ -28,18 +28,20 @@ management.call_command('migrate')
 
 # add group
 g1 = Group()
-g1.name = 'Supers'
+g1.name = 'Managers'
+g1.save()
+g1.permissions.set(Permission.objects.all())
 g1.save()
 
-all_permissions = Permission.objects.all()
-g1.permissions.set(all_permissions)
-g1.save()
+g2 = Group()
+g2.name = 'Customers'
+g2.save()
 
 # add users
 u1 = amod.FomoUser()
 u1.set_password("Utslcw2014")
 u1.last_login = datetime.now()
-u1.is_superuser = True
+#u1.is_superuser = True
 u1.username = "isabell7"
 u1.first_name = "Joe"
 u1.last_name = "Isabell"
@@ -53,11 +55,12 @@ u1.state = "UT"
 u1.zip_code = "84601"
 u1.phone = "479-802-9621"
 u1.save()
+u1.groups.add(g1)
+u1.save()
 
 u2 = amod.FomoUser()
 u2.set_password("mypass")
 u2.last_login = datetime.now()
-u2.is_superuser = True
 u2.username = "misabell"
 u2.first_name = "Margo"
 u2.last_name = "Isabell"
@@ -69,11 +72,12 @@ u2.state = "UT"
 u2.zip_code = "84601"
 u2.phone = "479-802-9621"
 u2.save()
+u2.groups.add(g2)
+u2.save()
 
 u3 = amod.FomoUser()
 u3.set_password("mypass")
 u3.last_login = datetime.now()
-u3.is_superuser = True
 u3.username = "primeguard68"
 u3.first_name = "Jim"
 u3.last_name = "Fife"
@@ -85,11 +89,12 @@ u3.state = "AR"
 u3.zip_code = "72712"
 u3.phone = "479-898-3344"
 u3.save()
+u3.groups.add(g2)
+u3.save()
 
 u4 = amod.FomoUser()
 u4.set_password("mypass")
 u4.last_login = datetime.now()
-u4.is_superuser = True
 u4.username = "jackrabit"
 u4.first_name = "Jack"
 u4.last_name = "Rabbit"
@@ -100,6 +105,8 @@ u4.city = "Bentonville"
 u4.state = "AR"
 u4.zip_code = "72712"
 u4.phone = "479-898-3344"
+u4.save()
+u4.groups.add(g2)
 u4.save()
 
 # add categories

@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'account.FomoUser'
 
+LOGIN_URL = '/account/login'
+
 # Application definition
 
 INSTALLED_APPS = [

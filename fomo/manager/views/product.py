@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
+from django.contrib.auth.decorators import permission_required, login_required
 from django_mako_plus import view_function
 from .. import dmp_render, dmp_render_to_string
 
@@ -8,6 +9,8 @@ from formlib.form import FormMixIn
 from catalog import models as cmod
 
 @view_function
+@login_required
+@permission_required('catalog.change_product', raise_exception=True)
 def process_request(request):
 
     try:
@@ -80,6 +83,8 @@ class EditProductForm(FormMixIn, forms.Form):
 ## Deleting of products
 
 @view_function
+@login_required
+@permission_required('catalog.delete_product', raise_exception=True)
 def delete(request):
     try:
         product = cmod.Product.objects.get(id=request.urlparams[0])
@@ -94,6 +99,8 @@ def delete(request):
 ## Creating products
 
 @view_function
+@login_required
+@permission_required('catalog.create_product', raise_exception=True)
 def create(request):
         product = cmod.Product()
 

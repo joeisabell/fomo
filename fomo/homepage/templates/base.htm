@@ -12,6 +12,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="${STATIC_URL}homepage/media/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/jquery.datetimepicker.min.css"/>
 
     ## render the css with the same name as this page
     ${ get_template_css(self, request, context)}
@@ -60,13 +61,18 @@
             <%block name="header_menu_items_extra">
             </%block>
 
-            %if user.is_authenticated:
+            %if request.user.is_authenticated:
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopups="true" aria-expanded="true">
-                        Welcome, ${user.first_name}
+                        Welcome,  ${ request.user.first_name } <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="/account/index"><span class="glyphicon glyphicon-user"></span> My Account </a></li>
+
+                        %if request.user.has_perm('catalog.change_product'):
+                        <li><a href="/manager/index"><span class="glyphicon glyphicon-th"></span> Manager </a></li>
+                        %endif
+
                         <li role="separator" class="divider"></li>
                         <li><a href="/account/logout"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
                     </ul>
@@ -123,8 +129,10 @@
 
     </%block>
 
-        ## JavaScript References ## render the JS with the same name as this page
-        ${ get_template_js(self, request, context) }
+
     </%block>
+    ## JavaScript References ## render the JS with the same name as this page
+    ${ get_template_js(self, request, context) }
+    <script src="${STATIC_URL}homepage/media/jquery.datetimepicker.full.js"></script>
     </body>
 </html>
