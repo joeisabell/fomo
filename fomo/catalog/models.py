@@ -37,3 +37,9 @@ class UniqueProduct(Product):
 class RentalProduct(Product):
     #id
     serial_number = models.TextField(blank=True, null=True)
+
+class ProductPicture(models.Model):
+    product = models.ForeignKey('Product')
+    subdir = models.TextField()
+    alttext = models.TextField()
+    mimetype = models.TextField()
