@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'account.FomoUser'
 
+LOGIN_URL = '/account/login'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'catalog',
     'account',
     'manager',
+    'formlib',
 ]
 
 MIDDLEWARE = [
@@ -179,7 +182,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

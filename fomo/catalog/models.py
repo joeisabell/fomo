@@ -8,6 +8,9 @@ class Category(models.Model):
     code = models.TextField(blank=True, null=True)
     name = models.TextField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
 class Product(PolymorphicModel):
     #id
     create_date = models.DateTimeField(auto_now_add=True)
@@ -16,6 +19,9 @@ class Product(PolymorphicModel):
     name = models.TextField(blank=True, null=True)
     brand = models.TextField(blank=True, null=True)
     category = models.ForeignKey('Category')
+
+    def __str__(self):
+        return self.name
 
 class BulkProduct(Product):
     #id
