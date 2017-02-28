@@ -25,9 +25,9 @@ class Product(PolymorphicModel):
 
 class BulkProduct(Product):
     #id
-    quantity = models.IntegerField(default=0)
-    reorder_point = models.IntegerField(default=0)
-    reorder_quantity = models.IntegerField(default=0)
+    quantity = models.IntegerField(default=0, null=True)
+    reorder_point = models.IntegerField(default=0, null=True)
+    reorder_quantity = models.IntegerField(default=0, null=True)
     #vendor
 
 class UniqueProduct(Product):

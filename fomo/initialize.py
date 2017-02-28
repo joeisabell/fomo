@@ -28,7 +28,7 @@ management.call_command('migrate')
 
 # add group
 g1 = Group()
-g1.name = 'Managers'
+g1.name = 'Admin'
 g1.save()
 g1.permissions.set(Permission.objects.all())
 g1.save()
@@ -52,7 +52,7 @@ u1.date_joined = datetime.now()
 u1.address = "465 N 300 W Apt 29"
 u1.city = "Provo"
 u1.state = "UT"
-u1.zip_code = "84601"
+u1.zipcode = "84601"
 u1.phone = "479-802-9621"
 u1.save()
 u1.groups.add(g1)
@@ -69,7 +69,7 @@ u2.date_joined = datetime.now()
 u2.address = "465 N 300 W Apt 29"
 u2.city = "Provo"
 u2.state = "UT"
-u2.zip_code = "84601"
+u2.zipcode = "84601"
 u2.phone = "479-802-9621"
 u2.save()
 u2.groups.add(g2)
@@ -86,7 +86,7 @@ u3.date_joined = datetime.now()
 u3.address = "12695 Strawberry Ridge Road"
 u3.city = "Bentonville"
 u3.state = "AR"
-u3.zip_code = "72712"
+u3.zipcode = "72712"
 u3.phone = "479-898-3344"
 u3.save()
 u3.groups.add(g2)
@@ -103,7 +103,7 @@ u4.date_joined = datetime.now()
 u4.address = "12695 Strawberry Ridge Road"
 u4.city = "Bentonville"
 u4.state = "AR"
-u4.zip_code = "72712"
+u4.zipcode = "72712"
 u4.phone = "479-898-3344"
 u4.save()
 u4.groups.add(g2)

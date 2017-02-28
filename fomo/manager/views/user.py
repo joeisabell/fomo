@@ -210,7 +210,7 @@ def change_password(request):
 class ChangeUserPasswordForm(FormMixIn, forms.Form):
 
     def init(self, user):
-        self.fields['username'] = forms.CharField(label='Username', max_length=150)
+        self.fields['username'] = forms.CharField(label='Username', disabled=True, max_length=150)
         self.fields['password'] = forms.CharField(label='New Password', max_length=100, widget=forms.PasswordInput())
         self.fields['confirm_password'] = forms.CharField(label='Confirm New Password', max_length=100, widget=forms.PasswordInput())
 
