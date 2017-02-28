@@ -69,13 +69,13 @@ class EditProductForm(FormMixIn, forms.Form):
         product.brand = self.cleaned_data.get('brand')
         product.price = self.cleaned_data.get('price')
         if hasattr(product, 'serial_number'):
-            product.quantity = self.cleaned_data.get('serial_number')
+            product.serial_number = self.cleaned_data.get('serial_number')
         if hasattr(product, 'quantity'):
             product.quantity = self.cleaned_data.get('quantity')
         if hasattr(product, 'reorder_point'):
-            product.quantity = self.cleaned_data.get('reorder_point')
+            product.reorder_point = self.cleaned_data.get('reorder_point')
         if hasattr(product, 'reorder_quantity'):
-            product.quantity = self.cleaned_data.get('reorder_quantity')
+            product.reorder_quantity = self.cleaned_data.get('reorder_quantity')
         product.save()
 
 
@@ -100,7 +100,7 @@ def delete(request):
 
 @view_function
 @login_required
-@permission_required('catalog.create_product', raise_exception=True)
+@permission_required('catalog.add_product', raise_exception=True)
 def create(request):
         product = cmod.Product()
 
@@ -157,11 +157,11 @@ class CreateProductForm(FormMixIn, forms.Form):
         product.brand = self.cleaned_data.get('brand')
         product.price = self.cleaned_data.get('price')
         if hasattr(product, 'serial_number'):
-            product.quantity = self.cleaned_data.get('serial_number')
+            product.serial_number = self.cleaned_data.get('serial_number')
         if hasattr(product, 'quantity'):
             product.quantity = self.cleaned_data.get('quantity')
         if hasattr(product, 'reorder_point'):
-            product.quantity = self.cleaned_data.get('reorder_point')
+            product.reorder_point = self.cleaned_data.get('reorder_point')
         if hasattr(product, 'reorder_quantity'):
-            product.quantity = self.cleaned_data.get('reorder_quantity')
+            product.reorder_quantity = self.cleaned_data.get('reorder_quantity')
         product.save()
