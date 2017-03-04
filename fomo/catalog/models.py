@@ -5,8 +5,8 @@ from polymorphic.models import PolymorphicModel
 
 class Category(models.Model):
     #id
-    code = models.TextField(blank=True, null=True)
     name = models.TextField(blank=True, null=True)
+    codename = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name

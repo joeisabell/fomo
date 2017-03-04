@@ -142,6 +142,11 @@ class CreateProductForm(FormMixIn, forms.Form):
         self.fields['reorder_point'] = forms.IntegerField(label='Reorder Point', required=False)
         self.fields['reorder_quantity'] = forms.IntegerField(label='Reorder Quantity', required=False)
 
+    def clean_quantity(self):
+        quantity = self.cleaned_data.get('quantity')
+        cleaned_quantity = 0 if quantity == None else quantity
+        return cleaned_quantity
+
     def commit(self, product):
         product_type = self.cleaned_data.get('product_type')
 

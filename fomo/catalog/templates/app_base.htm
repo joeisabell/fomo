@@ -1,0 +1,23 @@
+<%inherit file="/homepage/templates/base.htm" />
+
+<%block name="header_menu_items">
+    <li>
+    <form class="navbar-form navbar-left">
+     <div class="form-group">
+       <input type="text" class="form-control" placeholder="Search Catalog">
+     </div>
+     <button type="submit" class="btn btn-default">Submit</button>
+   </form>
+    </li>
+    <li class=${ 'active' if request.dmp_router_page == 'index' else '' }><a href="/catalog/index">Catalog</a></li>
+</%block>
+
+<%block name="body_section_left">
+  Select a Category
+</%block>
+
+<%block name="body_section_right">
+  <h3>Recently Viewed Items</h3>
+  ${ request.last5}
+
+</%block>

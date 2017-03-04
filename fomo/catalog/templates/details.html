@@ -1,0 +1,10 @@
+<%inherit file="app_base.htm"/>
+
+<%block name="body_section_content">
+  ${ print(request.last5) }
+  <ul>
+    <li>${ product.id}</li>
+    <li>${ product.name}</li>
+    <li>${ product.price}</li>
+  </ul>
+</%block>
