@@ -1,0 +1,30 @@
+<%inherit file="app_base.htm" />
+
+<%block name="body_section_before">
+  <h1>Search Results</h1>
+  <p>${ products.count()} search results found</p>
+</%block>
+
+<%block name="body_section_content">
+<table class="table table-striped">
+  %for product in products:
+  <tr>
+  <td>
+  <a href="/catalog/details/${ product.id }">
+    <div class="row">
+      <div class="tile-image">
+        <img src="${ STATIC_URL + product.primary_image_subdir() }" alt="">
+        <span class="tile-title">
+          ${ product.name }
+        </span>
+      </div>
+
+    </div>
+  </a>
+  </td>
+
+  </tr>
+  %endfor
+</table>
+
+</%block>

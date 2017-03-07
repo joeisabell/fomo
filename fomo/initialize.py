@@ -68,17 +68,29 @@ for data in (
         ('Brass Instruments', 'brass'),
         ('String Instruments', 'string'),
         ('Wind Instruments', 'wind'),
+        ('Percussion Instruments', 'percussion'),
     ):
     cat = cmod.Category()
     cat.name = data[0]
     cat.codename = data[1]
     cat.save()
 
+# product picture base uri
+dir = 'catalog/media/product_images/'
+
 ## add products
 # add bulk products
 for data in (
-        ('Trumpet Mouthpiece', 'brass', 'Galaxy', Decimal('49.99'), 20, 5, 10),
-        ('E String', 'string', 'E-Tude', Decimal('9.99'), 20, 5, 10),
+        ('Trumpet Mouthpiece', 'brass', 'Galaxy', Decimal('49.99'), 20, 5, 10, [
+            [ dir + 'trumpet_mouthpiece.jpg', 'jpg', True ],
+            [ dir + 'trumpet_mouthpiece_1.jpg', 'jpg', False ],
+            [ dir + 'trumpet_mouthpiece_2.jpg', 'jpg', False ],
+            [ dir + 'trumpet_mouthpiece_3.jpg', 'jpg', False ],
+        ]),
+        ('Violin String Set', 'string', 'E-Tude', Decimal('9.99'), 20, 5, 10, [
+            [ dir + 'violin_string_set.jpg', 'jpg', True ],
+            [ dir + 'violin_string_set_1.jpg', 'jpg', False ],
+        ]),
     ):
     bulk_product = cmod.BulkProduct()
     bulk_product.name = data[0]
@@ -89,12 +101,35 @@ for data in (
     bulk_product.reorder_point = data[5]
     bulk_product.reorder_quantity = data[6]
     bulk_product.save()
+    for img in data[7]:
+        product_image = cmod.ProductImage()
+        product_image.product = bulk_product
+        product_image.subdir = img[0]
+        product_image.alttext = bulk_product.name
+        product_image.mimetype = img[1]
+        product_image.is_primary = img[2]
+        product_image.save()
 
 # add unique products
 for data in (
-        ('Trumpet', 'brass', 'Galaxy', Decimal('450.00'), '908839'),
-        ('Tuba', 'brass', 'E-Tude', Decimal('999.99'), '909839'),
-        ('French Horn', 'brass', 'Galaxy', Decimal('649.99'), '909787'),
+        ('Trumpet', 'brass', 'Galaxy', Decimal('450.00'), '908839', [
+            [ dir + 'trumpet.jpg', 'jpg', True ],
+            [ dir + 'trumpet_1.jpg', 'jpg', False ],
+            [ dir + 'trumpet_2.jpg', 'jpg', False ],
+            [ dir + 'trumpet_3.jpg', 'jpg', False ],
+        ]),
+        ('Tuba', 'brass', 'E-Tude', Decimal('999.99'), '909839', [
+            [ dir + 'tuba.jpg', 'jpg', True ],
+            [ dir + 'tuba_1.jpg', 'jpg', False ],
+            [ dir + 'tuba_2.jpg', 'jpg', False ],
+            [ dir + 'tuba_3.jpg', 'jpg', False ],
+        ]),
+        ('French Horn', 'brass', 'Mendini', Decimal('250.99'), '909787', [
+            [ dir + 'french_horn.jpg', 'jpg', True ],
+            [ dir + 'french_horn_1.jpg', 'jpg', False ],
+            [ dir + 'french_horn_2.jpg', 'jpg', False ],
+            [ dir + 'french_horn_3.jpg', 'jpg', False ],
+        ]),
     ):
     unique_product = cmod.UniqueProduct()
     unique_product.name = data[0]
@@ -103,12 +138,35 @@ for data in (
     unique_product.price = data[3]
     unique_product.serial_number = data[4]
     unique_product.save()
+    for img in data[5]:
+        product_image = cmod.ProductImage()
+        product_image.product = unique_product
+        product_image.subdir = img[0]
+        product_image.alttext = unique_product.name
+        product_image.mimetype = img[1]
+        product_image.is_primary = img[2]
+        product_image.save()
 
 # add rental products
 for data in (
-        ('Clarinet', 'wind', 'Windy', Decimal('499.99'), '900839'),
-        ('Violin', 'string', 'E-Tude', Decimal('1499.99'), '809839'),
-        ('Electric Guitar', 'string', 'Fender', Decimal('575.99'), '909187'),
+        ('Clarinet', 'wind', 'Windy', Decimal('499.99'), '900839', [
+            [ dir + 'clarinet.jpg', 'jpg', True ],
+            [ dir + 'clarinet_1.jpg', 'jpg', False ],
+            [ dir + 'clarinet_2.jpg', 'jpg', False ],
+            [ dir + 'clarinet_3.jpg', 'jpg', False ],
+        ]),
+        ('Violin', 'string', 'Samsung', Decimal('1499.99'), '809839', [
+            [ dir + 'violin.jpg', 'jpg', True ],
+            [ dir + 'violin_1.jpg', 'jpg', False ],
+            [ dir + 'violin_2.jpg', 'jpg', False ],
+            [ dir + 'violin_3.jpg', 'jpg', False ],
+        ]),
+        ('Guitar', 'string', 'Fender', Decimal('575.99'), '909187', [
+            [ dir + 'guitar.jpg', 'jpg', True ],
+            [ dir + 'guitar_1.jpg', 'jpg', False ],
+            [ dir + 'guitar_2.jpg', 'jpg', False ],
+            [ dir + 'guitar_3.jpg', 'jpg', False ],
+        ]),
     ):
     rental_product = cmod.RentalProduct()
     rental_product.name = data[0]
@@ -117,3 +175,11 @@ for data in (
     rental_product.price = data[3]
     rental_product.serial_number = data[4]
     rental_product.save()
+    for img in data[5]:
+        product_image = cmod.ProductImage()
+        product_image.product = rental_product
+        product_image.subdir = img[0]
+        product_image.alttext = rental_product.name
+        product_image.mimetype = img[1]
+        product_image.is_primary = img[2]
+        product_image.save()

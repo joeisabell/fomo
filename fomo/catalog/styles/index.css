@@ -1,0 +1,12 @@
+.tile-container {
+  display: inline-block;
+  background: blue;
+}
+
+.tile-image > img{
+  width: 250px;
+}
+
+.tile-title {
+  background: red;
+}

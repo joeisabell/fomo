@@ -1,7 +1,13 @@
 <%inherit file="app_base.htm"/>
 
+<%block name="body_section_before">
+  %if previous_page.find('catalog/index') != -1:
+    <a href="${ previous_page }">Return to results</a>
+  %endif
+</%block>
+
 <%block name="body_section_content">
-  ${ print(request.last5) }
+  <img class="img-responsive" src="${STATIC_URL + product.primary_image_subdir()}" alt="">
   <ul>
     <li>${ product.id}</li>
     <li>${ product.name}</li>

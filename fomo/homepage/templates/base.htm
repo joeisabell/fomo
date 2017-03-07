@@ -104,6 +104,12 @@
 
         <div id = "body_section_right">
             <%block name="body_section_right">
+            <h4>Recently Viewed Items</h4>
+            <ul class="nav">
+              %for product in request.last5products[:5]:
+                <li><a href="/catalog/details/${ product.id }">${ product.name }</a></li>
+              %endfor
+            </ul>
             </%block>
         </div>
 

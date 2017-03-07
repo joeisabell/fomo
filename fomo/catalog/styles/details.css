@@ -1,0 +1,13 @@
+#body_section_before {
+  text-align: left;
+}
+
+#body_section_content > img {
+  max-width: 50%;
+}
+
+@media (max-width: 800px) {
+  #body_section_content > img {
+    max-width: 100%;
+  }
+}

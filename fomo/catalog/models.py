@@ -20,6 +20,10 @@ class Product(PolymorphicModel):
     brand = models.TextField(blank=True, null=True)
     category = models.ForeignKey('Category')
 
+    def primary_image_subdir(self):
+        image = ProductImage.objects.get(product=self, is_primary=True)
+        return image.subdir
+
     def __str__(self):
         return self.name
 
@@ -28,7 +32,6 @@ class BulkProduct(Product):
     quantity = models.IntegerField(default=0, null=True)
     reorder_point = models.IntegerField(default=0, null=True)
     reorder_quantity = models.IntegerField(default=0, null=True)
-    #vendor
 
 class UniqueProduct(Product):
     #id
@@ -38,8 +41,9 @@ class RentalProduct(Product):
     #id
     serial_number = models.TextField(blank=True, null=True)
 
-class ProductPicture(models.Model):
+class ProductImage(models.Model):
     product = models.ForeignKey('Product')
     subdir = models.TextField()
-    alttext = models.TextField()
-    mimetype = models.TextField()
+    alttext = models.TextField(null=True)
+    mimetype = models.TextField(null=True)
+    is_primary = models.NullBooleanField()
