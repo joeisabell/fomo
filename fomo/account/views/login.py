@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login
 from django import forms
 
@@ -30,6 +30,32 @@ def process_request(request):
 
     # if not authenticated
     return dmp_render(request, 'login.html', context)
+
+@view_function
+def modal(request):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect('/account/index')
+
+        form = LoginForm(request)
+
+        form.form_action = '/account/login.modal'
+        if form.is_valid():
+            # set redirect_url to home index page if the a next urlparam doesn't exist
+            redirect_url = request.GET.get('next')
+            if redirect_url is None: redirect_url = '/homepage/index'
+            return HttpResponse(
+                "<script>" +
+                    "window.location.href='" + redirect_url + "'"
+                "</script>"
+            )
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+
+        # if not authenticated
+        return dmp_render(request, 'loginmodal.html', context)
 
 class LoginForm(FormMixIn, forms.Form):
 

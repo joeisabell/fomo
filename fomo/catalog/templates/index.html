@@ -1,14 +1,10 @@
 <%inherit file="app_base.htm" />
 
-<%block name="body_section_before">
-  <h1>Product Catalog</h1>
-</%block>
-
 
 <%block name="body_section_left">
-  <h4>Show results for: </h4>
-  <ul class="nav">
-  <li><a href="/catalog/index">< All Categories</a></li>
+<h5>Show results for:</h5>
+  <ul class="nav categories">
+    <li><a href="/catalog/index">All Categories</a></li>
     %for category in categories:
     <li><a href="/catalog/index?categoryid=${ category.id }">${ category.name }</a></li>
     %endfor
@@ -16,16 +12,35 @@
 </%block>
 
 <%block name="body_section_content">
+<h1>Product Catalog</h1>
   %for product in products:
-    <a href="/catalog/details/${ product.id }">
-      <div class="tile-container">
+    <div class="tile-container">
+
+      <a href="/catalog/details/${ product.id }">
+
         <div class="tile-image">
           <img src="${ STATIC_URL + product.primary_image_subdir() }" alt="">
         </div>
-        <div class="tile-title">
-          ${ product.name }
+
+        <div class="tile-text">
+          <div class="tile-title">
+            ${product.name}
+            <div class="tile-details hidden">
+            <ul>
+              <li class="brand-name">from ${ product.brand }</li>
+              <li class="price">$${ product.price }</li>
+            </ul>
+            <div class="view-now-button">
+              <button class="btn btn-info" type="button" name="button">More Details</button>
+            </div>
+
+            </div>
+          </div>
+
         </div>
-      </div>
-    </a>
+      </a>
+
+    </div>
   %endfor
+
 </%block>

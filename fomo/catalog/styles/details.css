@@ -1,10 +1,23 @@
-#body_section_before {
-  text-align: left;
+
+#product-name {
+  /*display: inline-block;*/
 }
 
-#body_section_content > img {
-  max-width: 50%;
+#product-image {
+  max-width: 350px;
+
 }
+
+.product-images {
+  max-width: 500px;
+  display: inline-block;
+}
+
+.change-picture-buttons {
+    display: inline-block;
+    text-align: center;
+}
+
 
 @media (max-width: 800px) {
   #body_section_content > img {

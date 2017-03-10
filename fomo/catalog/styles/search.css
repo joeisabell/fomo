@@ -1,4 +1,40 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.search-results {
+  margin: 10px;
+}
+
 .tile-image > img {
-  /*display: inline-block;*/
-  width: 100px;
+  width: 110px;
+}
+
+.search-result-container {
+  position: relative;
+  border-top-style: solid;
+  border-top-width: thin;
+  margin-right: 10px;
+  padding: 8px;
+}
+
+.search-result-title {
+  display: inline-block;
+  font-size: 24px;
+  margin-left: 20px;
+}
+
+.brand {
+  font-size: 14px;
+  padding-left: 12px;
+}
+
+.price {
+  font-size: 28px;
+  padding-bottom: 15px;
+}
+
+.view-now-button {
+  display: inline-block;
 }

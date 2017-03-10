@@ -1,28 +1,6 @@
-<%inherit file="app_base.htm"/>
+<%inherit file="base_ajax.htm"/>
 
-<%block name="body_section_before">
-
-</%block>
-
-<%block name="body_section_content">
-  <div>
-    %if previous_page.find('catalog/index') != -1:
-      <a href="${ previous_page }"> <span class="glyphicon glyphicon-chevron-left"></span> Return to results</a>
-    %elif previous_page.find('catalog/search') != -1:
-        <a href="${ previous_page }"> <span class="glyphicon glyphicon-chevron-left"></span> Return to search results</a>
-    %endif
-  </div>
-
-
-  <img data-pid=${product.id} id="product-image" src="${STATIC_URL + product.primary_image_subdir()}" alt="">
-  <h2 id="product-name">${ product.name}</h2>
-  <ul>
-    <li>${ product.price}</li>
-  </ul>
-</%block>
-
-
-<%block name="modal">
+<%block name="content">
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1">
   <div class="modal-dialog">

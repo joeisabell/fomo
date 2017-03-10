@@ -1,3 +1,5 @@
+import json
+
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -29,3 +31,18 @@ def process_request(request):
         'previous_page': previous_page,
     }
     return dmp_render(request, 'details.html', context)
+
+@view_function
+def product_images(request):
+
+    if request.is_ajax():
+        product = cmod.Product.objects.get(id=request.urlparams[0])
+    else:
+        raise Http404
+
+    product_images = []
+    for image in cmod.ProductImage.objects.filter(product=product):
+        product_images.append(image.subdir)
+
+    data = json.dumps(product_images)
+    return HttpResponse(data, content_type='application/json')

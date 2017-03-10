@@ -11,9 +11,11 @@
     ## add any site-wide scripts or CSS here; for example, jquery:
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="${STATIC_URL}homepage/media/bootstrap/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/jquery.datetimepicker.min.css"/>
-
+    <script src="${STATIC_URL}homepage/media/jquery.loadmodal.js"></script>
+    <script src="${STATIC_URL}homepage/media/jquery.form.js"></script>
     ## render the css with the same name as this page
     ${ get_template_css(self, request, context)}
 
@@ -35,7 +37,7 @@
 
     <%block name="body_container">
     <header id=body_header>
-        <nav id="header_navbar" class="navbar navbar-default ">
+        <nav id="header_navbar" class="navbar navbar-default">
         <div class="container-fluid">
           <div id="header_icon">
               <a href="/" title="FOMO Homepage">
@@ -79,6 +81,7 @@
                 </li>
             %else:
                 <li><a href="/account/login"> Login </a></li>
+                <li><a id="modallogin_button">Login Modal</a></li>
             %endif
             </ul>
           </div><!-- /.navbar-collapse -->
@@ -104,8 +107,8 @@
 
         <div id = "body_section_right">
             <%block name="body_section_right">
-            <h4>Recently Viewed Items</h4>
-            <ul class="nav">
+            <h5>Recently Viewed Items</h5>
+            <ul class="nav last-5-items">
               %for product in request.last5products[:5]:
                 <li><a href="/catalog/details/${ product.id }">${ product.name }</a></li>
               %endfor
