@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'account',
     'manager',
     'formlib',
+    'api',
 ]
 
 MIDDLEWARE = [

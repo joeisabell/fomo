@@ -1,5 +1,3 @@
-import json
-
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -16,6 +14,7 @@ def process_request(request):
     except cmod.Product.DoesNotExist:
         return HttpResponseRedirect('/catalog/index')
 
+    # add product to last 5 products list
     if product.id in request.last5:
         request.last5.remove(product.id)
         request.last5products.remove(product)
@@ -24,8 +23,7 @@ def process_request(request):
     request.last5products.insert(0, product)
 
     previous_page = request.META.get('HTTP_REFERER')
-    print(previous_page)
-
+    
     context = {
         'product': product,
         'previous_page': previous_page,
@@ -33,16 +31,16 @@ def process_request(request):
     return dmp_render(request, 'details.html', context)
 
 @view_function
-def product_images(request):
+def image_modal(request):
 
     if request.is_ajax():
         product = cmod.Product.objects.get(id=request.urlparams[0])
+        images = cmod.ProductImage.objects.filter(product=product)
     else:
         raise Http404
 
-    product_images = []
-    for image in cmod.ProductImage.objects.filter(product=product):
-        product_images.append(image.subdir)
-
-    data = json.dumps(product_images)
-    return HttpResponse(data, content_type='application/json')
+    context = {
+        'product': product,
+        'product_images': images,
+    }
+    return dmp_render(request, 'image_modal.html', context)

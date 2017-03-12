@@ -5,6 +5,7 @@
 </%block>
 
 <%block name="body_section_content">
+
   <div>
     %if previous_page.find('catalog/index') != -1:
       <a href="${ previous_page }"> <span class="glyphicon glyphicon-chevron-left"></span> Return to results</a>
@@ -12,36 +13,27 @@
         <a href="${ previous_page }"> <span class="glyphicon glyphicon-chevron-left"></span> Return to search results</a>
     %endif
   </div>
-
-
-  <img data-pid=${product.id} id="product-image" src="${STATIC_URL + product.primary_image_subdir()}" alt="">
-  <h2 id="product-name">${ product.name}</h2>
-  <ul>
-    <li>${ product.price}</li>
-  </ul>
-</%block>
-
-
-<%block name="modal">
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content text-center">
-      <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-        <img class="product-images" src="${STATIC_URL + product.primary_image_subdir()}" alt="">
-      </div>
-      <div class="modal-footer change-picture-buttons">
-        <button id="move-left" type="button" class="btn btn-default">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-        </button>
-        <button  id="move-right" type="button" class="btn btn-default">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </button>
-      </div>
+  <div class="row">
+    <div class="col-md-7 pull-right">
+      <h2 id="product-name">${ product.name}</h2>
+      <ul>
+        <li>Price: ${ product.price}</li>
+        <li>Brand: ${ product.brand}</li>
+        <li>Category: ${ product.category.name}</li>
+      </ul>
+      %if hasattr(product, 'quantity'):
+      Quantity:
+      <input class="form-group" type="text" name="" value="">
+      %endif
+      <button class="btn btn-warning" type="button" name="button">BUY NOW</button>
     </div>
+  <div class="col-md-5">
+    <img data-pid=${product.id} id="product-image" class="img-responsive" src="${STATIC_URL + product.primary_image_subdir()}" alt="">
   </div>
-</div>
+
+  </div>
+
+
+
+
 </%block>

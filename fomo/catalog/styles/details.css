@@ -4,18 +4,8 @@
 }
 
 #product-image {
-  max-width: 350px;
+  /*max-width: 350px;*/
 
-}
-
-.product-images {
-  max-width: 500px;
-  display: inline-block;
-}
-
-.change-picture-buttons {
-    display: inline-block;
-    text-align: center;
 }
 
 

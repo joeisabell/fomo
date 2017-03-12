@@ -1,0 +1,19 @@
+<%inherit file="base_ajax.htm"/>
+
+<%block name="content">
+  <!-- Modal -->
+  <div id="image-modal">
+    %for image in product_images:
+      <img class="product-images" src="${STATIC_URL + image.subdir}" alt="">
+    %endfor
+
+    <div class="modal-buttons">
+      <button id="move-left" type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </button>
+      <button  id="move-right" type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </button>
+    </div>
+  </div>
+</%block>
