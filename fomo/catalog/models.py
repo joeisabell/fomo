@@ -19,6 +19,7 @@ class Product(PolymorphicModel):
     name = models.TextField(blank=True, null=True)
     brand = models.TextField(blank=True, null=True)
     category = models.ForeignKey('Category')
+    description = models.TextField(blank=True, null=True)
 
     def primary_image_subdir(self):
         image = ProductImage.objects.get(product=self, is_primary=True)

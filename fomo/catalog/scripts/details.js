@@ -1,6 +1,6 @@
 $(function() {
 
-  $('#product-image').click(function() {
+  $('#product-image > img').click(function() {
     var pid = $(this).attr('data-pid');
     $.loadmodal({
           url: '/catalog/details.image_modal/' + pid,

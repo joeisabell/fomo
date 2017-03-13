@@ -80,8 +80,7 @@
                     </ul>
                 </li>
             %else:
-                <li><a href="/account/login"> Login </a></li>
-                <li><a id="modallogin_button">Login Modal</a></li>
+                <li><a id="modallogin_button">Login</a></li>
             %endif
             </ul>
           </div><!-- /.navbar-collapse -->
@@ -133,12 +132,9 @@
             &copy; Copyright ${datetime.now().year}. All rights reserved.
         </%block>
     </footer>
-
     <%block name="modal">
 
     </%block>
-
-
     </%block>
     ## JavaScript References ## render the JS with the same name as this page
     ${ get_template_js(self, request, context) }

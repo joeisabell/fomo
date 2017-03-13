@@ -1,16 +1,49 @@
 
-#product-name {
-  /*display: inline-block;*/
+#body_section_content {
+  /*margin-left: 30px;*/
+  padding: 15px;
 }
 
 #product-image {
-  /*max-width: 350px;*/
-
+  display: inline-block;
+  max-width: 400px;
 }
 
+#product-action {
+  display: inline-block;
+  padding: 10px;
+}
 
-@media (max-width: 800px) {
-  #body_section_content > img {
+#product-price {
+  font-size: 36px;
+}
+
+#buy-now-form {
+padding-top: 20px;
+}
+
+#order-qty {
+  width: 80px;
+}
+
+#product-info {
+  margin: 10px;
+  padding-top: 10px;
+}
+
+@media (max-width: 560px) {
+  .row {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1000px) {
+  #body_section_content  {
     max-width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  #body_section_right {
+    display: none;
   }
 }

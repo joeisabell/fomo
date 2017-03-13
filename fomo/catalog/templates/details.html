@@ -5,35 +5,66 @@
 </%block>
 
 <%block name="body_section_content">
-
   <div>
     %if previous_page.find('catalog/index') != -1:
-      <a href="${ previous_page }"> <span class="glyphicon glyphicon-chevron-left"></span> Return to results</a>
+    <a href="${ previous_page }"> <span class="glyphicon glyphicon-chevron-left"></span> Return to results</a>
     %elif previous_page.find('catalog/search') != -1:
-        <a href="${ previous_page }"> <span class="glyphicon glyphicon-chevron-left"></span> Return to search results</a>
+    <a href="${ previous_page }"> <span class="glyphicon glyphicon-chevron-left"></span> Return to search results</a>
+    %else:
+    <a href="/catalog/index"> <span class="glyphicon glyphicon-chevron-left"></span> Return to catalog</a>
     %endif
   </div>
+  
   <div class="row">
-    <div class="col-md-7 pull-right">
-      <h2 id="product-name">${ product.name}</h2>
-      <ul>
-        <li>Price: ${ product.price}</li>
-        <li>Brand: ${ product.brand}</li>
-        <li>Category: ${ product.category.name}</li>
-      </ul>
-      %if hasattr(product, 'quantity'):
-      Quantity:
-      <input class="form-group" type="text" name="" value="">
-      %endif
-      <button class="btn btn-warning" type="button" name="button">BUY NOW</button>
+
+    <div id="product-image" class="col-md-5">
+      <img data-pid=${product.id} class="img-responsive thumbnail" src="${STATIC_URL + product.primary_image_subdir()}" alt="">
     </div>
-  <div class="col-md-5">
-    <img data-pid=${product.id} id="product-image" class="img-responsive" src="${STATIC_URL + product.primary_image_subdir()}" alt="">
-  </div>
+
+    <div id="product-action">
+      <h2 id="product-name">${ product.name}</h2>
+      <h5>${ product.brand }</h5>
+      <h1 class="text-center text-success">$${ product.price }</h1>
+      <form id="buy-now-form" class="form-inline" action="#" method="get">
+        <div class="form-group">
+        %if hasattr(product, 'quantity'):
+          <div class="input-group">
+            <span class="input-group-addon">Qty</span>
+            <input id="order-qty" class="form-control" type="number" name="quantity" value="1">
+          </div>
+        %endif
+        </div>
+        <button class="btn btn-warning" type="button">BUY NOW</button>
+      </form>
+    </div>
 
   </div>
 
 
-
+  <div id="product-info">
+  <h3>Product Information</h3>
+    <table class="table table-striped">
+      <tr>
+        <td>Name: </td>
+        <td>${ product.name }</td>
+      </tr>
+      <tr>
+        <td>Description: </td>
+        <td>${ product.description }</td>
+      </tr>
+      <tr>
+        <td>Brand: </td>
+        <td>${ product.brand }</td>
+      </tr>
+      <tr>
+        <td>Category: </td>
+        <td>${ product.category.name }</td>
+      </tr>
+      <tr>
+        <td>Price: </td>
+        <td>$${ product.price }</td>
+      </tr>
+    </table>
+  </div>
 
 </%block>
