@@ -94,7 +94,7 @@ for data in (
             [ dir + 'trumpet_mouthpiece_2.jpg', 'jpg', False ],
             [ dir + 'trumpet_mouthpiece_3.jpg', 'jpg', False ],
         ], desc),
-        ('Violin String Set', 'string', 'E-Tude', Decimal('9.99'), 20, 5, 10, [
+        ('Violin String Set', 'string', 'E-Tune', Decimal('9.99'), 20, 5, 10, [
             [ dir + 'violin_string_set.jpg', 'jpg', True ],
             [ dir + 'violin_string_set_1.jpg', 'jpg', False ],
         ], desc),
@@ -126,7 +126,7 @@ for data in (
             [ dir + 'trumpet_2.jpg', 'jpg', False ],
             [ dir + 'trumpet_3.jpg', 'jpg', False ],
         ], desc),
-        ('Tuba', 'brass', 'E-Tude', Decimal('999.99'), '909839', [
+        ('Tuba', 'brass', 'E-Tune', Decimal('999.99'), '909839', [
             [ dir + 'tuba.jpg', 'jpg', True ],
             [ dir + 'tuba_1.jpg', 'jpg', False ],
             [ dir + 'tuba_2.jpg', 'jpg', False ],

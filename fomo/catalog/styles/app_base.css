@@ -7,6 +7,14 @@
   padding-left: 10px;
 }
 
+#body_section_left {
+  position: fixed;
+  margin-top: 60px;
+  background-color: rgba(128, 128, 128, .1);
+  padding-top: 30px;
+  padding-left: 10px;
+}
+
 #body_section_content {
   padding: 10px;
 }

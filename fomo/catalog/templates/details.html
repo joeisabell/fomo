@@ -5,7 +5,7 @@
 </%block>
 
 <%block name="body_section_content">
-  <div>
+  <div id="return-link">
     %if previous_page.find('catalog/index') != -1:
     <a href="${ previous_page }"> <span class="glyphicon glyphicon-chevron-left"></span> Return to results</a>
     %elif previous_page.find('catalog/search') != -1:
