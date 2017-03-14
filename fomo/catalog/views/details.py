@@ -14,19 +14,29 @@ def process_request(request):
     except cmod.Product.DoesNotExist:
         return HttpResponseRedirect('/catalog/index')
 
-    # add product to last 5 products list
+    # product details dictionary used for populating the product information table
+    # these attributes should be hidden from user
+    hidden = [
+        'product_images', 'category', 'create_date',
+        'modified_date', 'quantity', 'id', 'reorder_point', 'reorder_quantity']
+    product_details = {k:v for (k,v) in product.to_json().items() if k not in hidden}
+    product_details['category'] = product.category.name
+    product_details['price'] = '$' + str(product.price)
+
+    # add product to last 5 products list created in middleware.py
     if product.id in request.last5:
         request.last5.remove(product.id)
         request.last5products.remove(product)
-
     request.last5.insert(0, product.id)
     request.last5products.insert(0, product)
 
+    # provide return url to return to the same set of search results
     previous_page = request.META.get('HTTP_REFERER')
-    
+
     context = {
         'product': product,
         'previous_page': previous_page,
+        'product_details': product_details,
     }
     return dmp_render(request, 'details.html', context)
 

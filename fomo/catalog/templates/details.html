@@ -14,7 +14,7 @@
     <a href="/catalog/index"> <span class="glyphicon glyphicon-chevron-left"></span> Return to catalog</a>
     %endif
   </div>
-  
+
   <div class="row">
 
     <div id="product-image" class="col-md-5">
@@ -44,26 +44,12 @@
   <div id="product-info">
   <h3>Product Information</h3>
     <table class="table table-striped">
+    %for k,v in product_details.items():
       <tr>
-        <td>Name: </td>
-        <td>${ product.name }</td>
+        <td>${ ' '.join(k.split('_')).title() }: </td>
+        <td>${ v }</td>
       </tr>
-      <tr>
-        <td>Description: </td>
-        <td>${ product.description }</td>
-      </tr>
-      <tr>
-        <td>Brand: </td>
-        <td>${ product.brand }</td>
-      </tr>
-      <tr>
-        <td>Category: </td>
-        <td>${ product.category.name }</td>
-      </tr>
-      <tr>
-        <td>Price: </td>
-        <td>$${ product.price }</td>
-      </tr>
+    %endfor
     </table>
   </div>
 

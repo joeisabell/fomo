@@ -79,12 +79,12 @@ for data in (
 dir = 'catalog/media/product_images/'
 
 # product description filler
-desc =  '''
-        Nisi cillum reprehenderit anim esse aute officia Lorem nulla. Cupidatat commodo eiusmod mollit
-        dolore esse eu commodo qui nostrud ex fugiat culpa deserunt eu. Non nulla reprehenderit quis minim eiusmod
-        culpa qui do anim nisi esse est culpa veniam. Fugiat sint occaecat et minim cillum ut est adipisicing labore
-        exercitation ea. Fugiat ut veniam non esse do eu eu quis eu aliquip exercitation fugiat ad eiusmod ea.
-        '''
+desc =  ' '.join([
+        'Nisi cillum reprehenderit anim esse aute officia Lorem nulla. Cupidatat commodo eiusmod mollit ',
+        'dolore esse eu commodo qui nostrud ex fugiat culpa deserunt eu. Non nulla reprehenderit quis ',
+        'minim eiusmod culpa qui do anim nisi esse est culpa veniam. Fugiat sint occaecat et minim cillum ',
+        ])
+
 ## add products
 # add bulk products
 for data in (

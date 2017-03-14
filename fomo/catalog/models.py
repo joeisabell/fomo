@@ -13,13 +13,13 @@ class Category(models.Model):
 
 class Product(PolymorphicModel):
     #id
-    create_date = models.DateTimeField(auto_now_add=True)
-    modified_date = models.DateTimeField(auto_now=True)
-    price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
     name = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
     brand = models.TextField(blank=True, null=True)
     category = models.ForeignKey('Category')
-    description = models.TextField(blank=True, null=True)
+    create_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
 
     def primary_image_subdir(self):
         image = ProductImage.objects.get(product=self, is_primary=True)
