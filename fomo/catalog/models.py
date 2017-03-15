@@ -21,9 +21,8 @@ class Product(PolymorphicModel):
     create_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
-    def primary_image_subdir(self):
-        image = ProductImage.objects.get(product=self, is_primary=True)
-        return image.subdir
+    def default_image(self):
+        return self.images.get(is_primary=True)
 
     def to_json(self):
         json = {}
@@ -39,7 +38,7 @@ class Product(PolymorphicModel):
         }
 
         product_images = {}
-        for image in ProductImage.objects.filter(product=self):
+        for image in self.images.all():
             product_images[image.id] = {
                 'uri': image.subdir,
                 'alttext': image.alttext,
@@ -67,7 +66,7 @@ class RentalProduct(Product):
     serial_number = models.TextField(blank=True, null=True)
 
 class ProductImage(models.Model):
-    product = models.ForeignKey('Product')
+    product = models.ForeignKey(Product, related_name='images')
     subdir = models.TextField()
     alttext = models.TextField(null=True)
     mimetype = models.TextField(null=True)

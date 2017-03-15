@@ -33,19 +33,19 @@ def process_request(request):
 
 @view_function
 def modal(request):
-        if request.user.is_authenticated:
-            return HttpResponseRedirect('/account/index')
+        # if request.user.is_authenticated:
+        #     return HttpResponseRedirect('/account/index')
 
         form = LoginForm(request)
 
         form.form_action = '/account/login.modal'
         if form.is_valid():
             # set redirect_url to home index page if the a next urlparam doesn't exist
-            redirect_url = request.GET.get('next')
-            if redirect_url is None: redirect_url = '/homepage/index'
+            # redirect_url = request.GET.get('next')
+            # if redirect_url is None: redirect_url = '/homepage/index'
             return HttpResponse(
                 "<script>" +
-                    "window.location.href='" + redirect_url + "'"
+                    "window.location.href=window.location.href" +
                 "</script>"
             )
 

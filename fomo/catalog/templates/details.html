@@ -18,7 +18,7 @@
   <div class="row">
 
     <div id="product-image" class="col-md-5">
-      <img data-pid=${product.id} class="img-responsive thumbnail" src="${STATIC_URL + product.primary_image_subdir()}" alt="">
+      <img data-pid=${product.id} class="img-responsive thumbnail" src="${STATIC_URL + product.default_image().subdir}" alt="">
     </div>
 
     <div id="product-action">

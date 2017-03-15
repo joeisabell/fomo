@@ -36,13 +36,18 @@ def process_request(request):
 class GetProductForm(FormMixIn, forms.Form):
 
     def init(self, product):
-        self.fields['product_name'] = forms.CharField(max_length=100)
-        self.fields['category_name'] = forms.CharField(max_length=100)
-        self.fields['min_price'] = forms.DecimalField()
-        self.fields['max_price'] = forms.DecimalField()
+        self.fields['product_name'] = forms.CharField(max_length=100, required=False)
+        self.fields['category_name'] = forms.CharField(max_length=100, required=False)
+        self.fields['min_price'] = forms.DecimalField(required=False)
+        self.fields['max_price'] = forms.DecimalField(required=False)
 
     def clean(self):
-        pass
+        if 'min_price' in self.cleaned_data:
+            self.cleaned_data['min_price'] = 0
+        if 'max_price' in self.cleaned_data:
+            self.cleaned_data['max_price'] = 99999999999
+            
+        return self.cleaned_data
 
     def commit(self):
         pass

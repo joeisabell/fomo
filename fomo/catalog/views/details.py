@@ -14,11 +14,11 @@ def process_request(request):
     except cmod.Product.DoesNotExist:
         return HttpResponseRedirect('/catalog/index')
 
-    # product details dictionary used for populating the product information table
     # these attributes should be hidden from user
     hidden = [
         'product_images', 'category', 'create_date',
         'modified_date', 'quantity', 'id', 'reorder_point', 'reorder_quantity']
+    # product details dictionary used for populating the product information table
     product_details = {k:v for (k,v) in product.to_json().items() if k not in hidden}
     product_details['category'] = product.category.name
     product_details['price'] = '$' + str(product.price)
@@ -45,12 +45,11 @@ def image_modal(request):
 
     if request.is_ajax():
         product = cmod.Product.objects.get(id=request.urlparams[0])
-        images = cmod.ProductImage.objects.filter(product=product)
     else:
         raise Http404
 
     context = {
         'product': product,
-        'product_images': images,
+        'product_images': product.images.all(),
     }
     return dmp_render(request, 'image_modal.html', context)

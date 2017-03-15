@@ -1,6 +1,7 @@
 <%inherit file="/homepage/templates/base.htm" />
 
 <%block name="header_menu_items">
+  <li class=${ 'active' if request.dmp_router_page == 'index' else '' }><a href="/manager/index">Dashboard</a></li>
   <li class=${ 'active' if request.dmp_router_page == 'products' else '' }><a href="/manager/products">Products</a></li>
   <li class=${ 'active' if request.dmp_router_page == 'users' else '' }><a href="/manager/users">Users</a></li>
 </%block>
