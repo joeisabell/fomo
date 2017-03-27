@@ -2,9 +2,7 @@ from django.db import models
 from polymorphic.models import PolymorphicModel
 
 # Create your models here.
-
 class Category(models.Model):
-    #id
     name = models.TextField(blank=True, null=True)
     codename = models.TextField(blank=True, null=True)
 
@@ -12,7 +10,6 @@ class Category(models.Model):
         return self.name
 
 class Product(PolymorphicModel):
-    #id
     name = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
@@ -25,6 +22,10 @@ class Product(PolymorphicModel):
         return self.images.get(is_primary=True)
 
     def to_json(self):
+        '''
+        Method used primarily for returning a more user friendly
+        JSON response to api requests.
+        '''
         json = {}
         for field in self._meta.get_fields():
             if field.related_model == None:
@@ -52,17 +53,14 @@ class Product(PolymorphicModel):
         return self.name
 
 class BulkProduct(Product):
-    #id
     quantity = models.IntegerField(default=0, null=True)
     reorder_point = models.IntegerField(default=0, null=True)
     reorder_quantity = models.IntegerField(default=0, null=True)
 
 class UniqueProduct(Product):
-    #id
     serial_number = models.TextField(blank=True, null=True)
 
 class RentalProduct(Product):
-    #id
     serial_number = models.TextField(blank=True, null=True)
 
 class ProductImage(models.Model):

@@ -5,7 +5,7 @@ from django import forms
 
 # Create your models here.
 class FomoUser(AbstractUser):
-    ### inheriting from super
+    ## inheriting from super
     # id
     # first_name
     # last_name

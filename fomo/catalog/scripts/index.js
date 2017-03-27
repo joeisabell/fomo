@@ -10,6 +10,6 @@ $(function(){
       $(this).find('.tile-text').removeClass("hover");
       $(this).find('.tile-details').addClass("hidden");
       console.log('End_hover');
-    }
-  );
+    });
+    
 });

@@ -1,4 +1,6 @@
-
+#body_section_before {
+  margin-top: 60px;
+}
 
 #body_section_right {
   position: fixed;
@@ -17,8 +19,4 @@
 
 #body_section_content {
   padding: 10px;
-}
-
-#body_section_before {
-  margin-top: 60px;
 }

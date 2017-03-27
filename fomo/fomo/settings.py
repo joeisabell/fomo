@@ -31,6 +31,10 @@ AUTH_USER_MODEL = 'account.FomoUser'
 
 LOGIN_URL = '/account/login'
 
+# Stripe API Keys
+STRIPE_PUBLIC_KEY = 'pk_test_jbrwqk6C9nSritKUogsOTHRj'
+STRIPE_PRIVATE_KEY = 'sk_test_d3PRcjrGAxq5k2Fs8jXSpH5b'
+
 # Application definition
 
 INSTALLED_APPS = [

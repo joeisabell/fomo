@@ -11,7 +11,6 @@ from catalog import models as cmod
 
 @view_function
 def process_request(request):
-
     form = GetProductForm(request, request.GET.dict())
 
     if form.is_valid():
@@ -21,10 +20,17 @@ def process_request(request):
             price__gte=form.cleaned_data.get('min_price'),
             price__lte=form.cleaned_data.get('max_price'),
         )
-
         products_list = []
         for product in products:
             products_list.append(product.to_json())
+
+            for field in product._meta.get_fields():
+                print(field, field.__class__)
+                print(field, field.related_model)
+                # attr = str(field).split('.')[2]
+                # val = getattr(self, attr, ' ')
+                # print(val)
+                # json[attr] = str(val)
 
         return JsonResponse(products_list, safe=False)
 
@@ -46,7 +52,7 @@ class GetProductForm(FormMixIn, forms.Form):
             self.cleaned_data['min_price'] = 0
         if 'max_price' in self.cleaned_data:
             self.cleaned_data['max_price'] = 99999999999
-            
+
         return self.cleaned_data
 
     def commit(self):

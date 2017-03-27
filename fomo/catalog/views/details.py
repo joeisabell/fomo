@@ -8,7 +8,6 @@ from catalog import models as cmod
 
 @view_function
 def process_request(request):
-
     try:
         product = cmod.Product.objects.get(id=request.urlparams[0])
     except cmod.Product.DoesNotExist:
@@ -42,7 +41,6 @@ def process_request(request):
 
 @view_function
 def image_modal(request):
-
     if request.is_ajax():
         product = cmod.Product.objects.get(id=request.urlparams[0])
     else:

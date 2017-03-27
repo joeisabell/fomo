@@ -10,4 +10,5 @@ $(function() {
           closeButton: true
       })
   });
+  
 });
