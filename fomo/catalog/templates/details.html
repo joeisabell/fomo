@@ -25,26 +25,15 @@
       <h2 id="product-name">${ product.name}</h2>
       <h5>${ product.brand }</h5>
       <h1 class="text-center text-success">$${ product.price }</h1>
-      <form id="buy-now-form" class="form-inline" action="#" method="get">
-        <div class="form-group">
-        %if hasattr(product, 'quantity'):
-          <div class="input-group">
-            <span class="input-group-addon">Qty</span>
-            <input id="order-qty" class="form-control" type="number" name="quantity" value="1">
-          </div>
-        %endif
-        </div>
-        <button class="btn btn-warning" type="button">BUY NOW</button>
-      </form>
+      ${ form }
     </div>
 
   </div>
 
-
   <div id="product-info">
   <h3>Product Information</h3>
     <table class="table table-striped">
-    %for k,v in product_details.items():
+    %for k,v in product.details.items():
       <tr>
         <td>${ ' '.join(k.split('_')).title() }: </td>
         <td>${ v }</td>

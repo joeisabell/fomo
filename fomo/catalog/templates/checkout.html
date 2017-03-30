@@ -1,5 +1,11 @@
 <%inherit file="app_base.htm"/>
 
 <%block name="head_extra">
-  
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+</%block>
+
+<%block name="body_section_content">
+  <div id="payment_form_container">
+    ${ form }
+  </div>
 </%block>

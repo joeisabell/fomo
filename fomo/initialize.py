@@ -14,6 +14,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from catalog import models as cmod
 from account import models as amod
+from catalog.models import ViewHistory as sh
 
 # drop and recreate database tables
 with connection.cursor() as cursor:
@@ -38,10 +39,10 @@ for data in (
 
 # add users
 for data in (
-        ('Joe', 'Isabell', 'joeisabell0@gmail.com', 'isabell7', 'Utslcw2014', True, True, '465 N 300 W Apt 29', 'Provo', 'UT', '84601', '479-802-9621', ['Managers', 'Customers']),
         ('Margo', 'Isabell', 'margobrockbank5@gmail.com', 'misabell', 'mypass', False, False, '465 N 300 W Apt 29', 'Provo', 'UT', '84601', '479-802-9621', ['Customers',]),
         ('Jim', 'Fife', 'jamesafife@bearriver.net', 'primeguard68', 'mypass', False, False, '12695 Strawberry Ridge Road', 'Bentonville', 'AR', '72712', '479-898-3344', ['Customers',]),
         ('Jill', 'River', 'jill@bearriver.net', 'jackrabit', 'mypass', False, False, '12695 Strawberry Ridge Road', 'Bentonville', 'AR', '72712', '479-898-3344', ['Customers',]),
+        ('Joe', 'Isabell', 'joeisabell0@gmail.com', 'isabell7', 'Utslcw2014', True, True, '465 N 300 W Apt 29', 'Provo', 'UT', '84601', '479-802-9621', ['Managers', 'Customers']),
     ):
     user = amod.FomoUser()
     user.first_name = data[0]
@@ -62,6 +63,10 @@ for data in (
     for group_name in data[12]:
         group = Group.objects.get(name__exact=group_name)
         user.groups.add(group)
+    # create initial shopping cart for user
+    cart = cmod.ShoppingCart()
+    cart.user = user
+    cart.save()
 
 # add categories
 for data in (
@@ -109,6 +114,7 @@ for data in (
     bulk_product.reorder_quantity = data[6]
     bulk_product.description = data[8]
     bulk_product.save()
+    sh.add(user, bulk_product)
     for img in data[7]:
         product_image = cmod.ProductImage()
         product_image.product = bulk_product
@@ -147,6 +153,7 @@ for data in (
     unique_product.serial_number = data[4]
     unique_product.description = data[6]
     unique_product.save()
+    sh.add(user, unique_product)
     for img in data[5]:
         product_image = cmod.ProductImage()
         product_image.product = unique_product
@@ -185,6 +192,7 @@ for data in (
     rental_product.serial_number = data[4]
     rental_product.description = data[6]
     rental_product.save()
+    sh.add(user, rental_product)
     for img in data[5]:
         product_image = cmod.ProductImage()
         product_image.product = rental_product
@@ -193,3 +201,7 @@ for data in (
         product_image.mimetype = img[1]
         product_image.is_primary = img[2]
         product_image.save()
+
+user.shopping_cart.add_item(bulk_product)
+user.shopping_cart.add_item(unique_product)
+user.shopping_cart.add_item(rental_product)

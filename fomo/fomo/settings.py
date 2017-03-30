@@ -63,7 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_mako_plus.RequestInitMiddleware',
-    'fomo.middleware.LastFiveMiddleware',
+    # 'fomo.middleware.LastFiveMiddleware',
 ]
 
 ROOT_URLCONF = 'fomo.urls'

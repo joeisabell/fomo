@@ -40,7 +40,6 @@ def process_request(request):
         'form': form,
         'title': 'Edit Product',
     }
-    print(form)
     return dmp_render(request, 'product.html', context)
 
 
@@ -48,7 +47,6 @@ def process_request(request):
 class EditProductForm(FormMixIn, forms.Form):
 
     def init(self, product):
-
         self.fields['name'] = forms.CharField(label='Product Name', max_length=100)
         self.fields['category'] = forms.ModelChoiceField(label="Category",
             queryset=cmod.Category.objects.order_by('name').all())

@@ -73,6 +73,10 @@ class FormMixIn(object):
     form_submit = 'Submit'
     field_css = [ 'form-control' ]
 
+    form_template = 'form.htm'
+    form_class = ''
+    form_id = ''
+
     def __init__(self, request, *args, **kwargs):
         '''Constructor'''
         # save the request object
@@ -123,7 +127,7 @@ class FormMixIn(object):
             field.widget.attrs['class'] = ' '.join(css | current)
 
         # render the string
-        return dmp_render_to_string(self.request, 'form.htm', { 'form': self })
+        return dmp_render_to_string(self.request, self.form_template, { 'form': self })
 
 
     def __str__(self):

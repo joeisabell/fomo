@@ -3,15 +3,11 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django import forms
 
+from catalog import models as cmod
+
 # Create your models here.
 class FomoUser(AbstractUser):
-    ## inheriting from super
-    # id
-    # first_name
-    # last_name
-    # username
-    # email
-    #password
+    ## See Django documentation for attributes inherited from AbstractUser
     birthday = models.DateTimeField(default=timezone.now)
     phone = models.CharField(max_length = 20)
     address = models.CharField(max_length = 200)

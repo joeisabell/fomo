@@ -1,4 +1,5 @@
 <%! from django_mako_plus import get_template_css, get_template_js %>
+<%! from catalog.models import ViewHistory%>
 
 <!DOCTYPE html>
 <html>
@@ -64,6 +65,13 @@
             </%block>
 
             %if request.user.is_authenticated:
+                <li>
+                  <a id="shopping-cart" href="/catalog/shoppingcart">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    Cart
+                    <span id="badge-notify" class="badge">${ request.user.shopping_cart.active_items().count()}</span>
+                  </a>
+                </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopups="true" aria-expanded="true">
                         Welcome,  ${ request.user.first_name } <span class="glyphicon glyphicon-chevron-down"></span>
@@ -106,12 +114,14 @@
 
         <div id = "body_section_right">
             <%block name="body_section_right">
+            %if request.user.is_authenticated:
             <h5>Recently Viewed Items</h5>
             <ul class="nav last-5-items">
-              %for product in request.last5products[:5]:
-                <li><a href="/catalog/details/${ product.id }">${ product.name }</a></li>
+              %for product in ViewHistory.last_five(request.user):
+              <li><a href="/catalog/details/${ product.id }">${ product.name }</a></li>
               %endfor
             </ul>
+            %endif
             </%block>
         </div>
 

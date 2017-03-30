@@ -27,6 +27,17 @@
     border-radius: 0px;
 }
 
+#shopping-cart {
+    font-size: 18px;
+}
+
+#badge-notify{
+   background:red;
+   position:relative;
+   top: -15px;
+   left: -5px;
+}
+
 #body_section_before{
     text-align: center;
     margin-left: auto;
