@@ -5,17 +5,15 @@ ${ django_mako_plus.link_css(self) }
 
     ## csrf token
     ${ csrf_input }
-    <div class="form-group">
+    <div id=input-qty-container class="form-group">
       %if form.show_qty:
-      <div class="input-group">
-        <span class="input-group-addon">Qty</span>
+      <div id="input-qty" class="input-group">
+        <span id="input-addon" class="input-group-addon">Qty</span>
         ## form fields, help text, and errors
         ${ form.as_table() }
       </div>
       %endif
     </div>
-
-    ## submit button
 
     <button class="btn btn-warning" type="submit">BUY NOW</button>
 

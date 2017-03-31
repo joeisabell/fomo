@@ -20,3 +20,15 @@
 #body_section_content {
   padding: 10px;
 }
+
+@media (max-width: 1010px) {
+  #search-box {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  #search-box {
+    display: inline;
+  }
+}

@@ -1,4 +1,10 @@
 
+#header_message {
+  top: 80px;
+  right: 220px;
+  max-width: 300px;
+}
+
 #body_section_content {
   margin-left: 40px;
   padding: 15px;
@@ -39,13 +45,29 @@ padding-top: 20px;
   padding-top: 10px;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 768px) {
   .row {
     text-align: center;
   }
+  #input-addon {
+
+  }
+  #id_quantity {
+    width: 100%;
+  }
+  #input-qty-container {
+    text-align: center;
+    display: table;
+    padding-right: 25px;
+    padding-left: 25px;
+  }
+
 }
 
 @media (max-width: 1000px) {
+  #header_message {
+    right: 20px;
+  }
   #body_section_content  {
     max-width: 100%;
     margin-left: 20px;

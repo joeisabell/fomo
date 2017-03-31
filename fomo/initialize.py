@@ -99,7 +99,7 @@ for data in (
             [ dir + 'trumpet_mouthpiece_2.jpg', 'jpg', False ],
             [ dir + 'trumpet_mouthpiece_3.jpg', 'jpg', False ],
         ], desc),
-        ('Violin String Set', 'string', 'E-Tune', Decimal('9.99'), 20, 5, 10, [
+        ('Violin String Set', 'string', 'E-Tune', Decimal('9.99'), 2, 5, 10, [
             [ dir + 'violin_string_set.jpg', 'jpg', True ],
             [ dir + 'violin_string_set_1.jpg', 'jpg', False ],
         ], desc),
@@ -205,3 +205,6 @@ for data in (
 user.shopping_cart.add_item(bulk_product)
 user.shopping_cart.add_item(unique_product)
 user.shopping_cart.add_item(rental_product)
+
+rental_product.sold = True
+rental_product.save()

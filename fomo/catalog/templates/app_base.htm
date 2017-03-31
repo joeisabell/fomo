@@ -2,7 +2,7 @@
 
 <%block name="header_menu_items">
     <li>
-      <form class="navbar-form" action="/catalog/search" method="get">
+      <form id="search-box" class="navbar-form" action="/catalog/search" method="get">
        <div class="form-group">
          <input name="terms" type="text" class="form-control" placeholder="${request.GET.get('terms') if request.GET.get('terms') else 'Search Catalog' }">
        </div>

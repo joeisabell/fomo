@@ -30,12 +30,13 @@ class Product(PolymorphicModel):
         return self.images.get(is_primary=True)
     image = property(default_image)
 
-    def check_qty(self):
+    def _on_hand_qty(self):
         if hasattr(self, 'quantity'):
             qty = self.quantity
         else:
             qty = 1 if self.sold is False else 0
         return qty
+    on_hand_qty = property(_on_hand_qty)
 
     def to_json(self):
         '''
@@ -132,18 +133,18 @@ class ShoppingCart(models.Model):
     def active_items(self):
         return self.items.filter(purchase_date=None, remove_date=None)
 
-    def add_item(self, product, qty=1):
+    def item_count(self):
+        return self.active_items().aggregate(Sum('quantity')).get('quantity__sum')
 
+    def add_item(self, product, qty=1):
         if product.id not in self.items.values_list('product__id', flat=True):
             shopping_cart_item = ShoppingCartItem(shopping_cart=self, product=product, quantity=qty)
             shopping_cart_item.save()
-            print('add')
         else:
             shopping_cart_item = self.items.get(product=product)
             if hasattr(product, 'quantity'):
                 shopping_cart_item.quantity = shopping_cart_item.quantity + qty
                 shopping_cart_item.save()
-
         return shopping_cart_item
 
     def remove_item(self, shopping_cart_item):
@@ -168,11 +169,32 @@ class ShoppingCart(models.Model):
 
     def _calc_shipping(self):
         return 10
-    shipping = property(_calc_shipping)
+    shipping_fee = property(_calc_shipping)
 
     def _calc_total(self):
         return self.subtotal + self.taxes + self.shipping
     total = property(_calc_total)
+
+    def check_inv(self, product, form_qty):
+        # check available inventory and items already in cart
+        on_hand_qty = product.on_hand_qty
+        try:
+            cart_item = self.items.get(product=product)
+            in_cart_qty = cart_item.quantity
+        except ShoppingCartItem.DoesNotExist:
+            in_cart_qty = 0
+        is_available = form_qty <= on_hand_qty - in_cart_qty
+        # based on availability and type of product give the correct
+        # notification to be returned to the user
+        if is_available:
+            alert_message = 'The item has been added to your cart.'
+        else:
+            if hasattr(product, 'quantity'):
+                alert_message = 'Please select a lower number, {} of {} '.format(in_cart_qty, on_hand_qty)
+                alert_message += ' items instock are already your cart.'
+            else:
+                alert_message = 'This item is already in your cart.'
+        return (is_available, alert_message)
 
 class ShoppingCartItem(models.Model):
     shopping_cart = models.ForeignKey(ShoppingCart, related_name='items')
@@ -187,8 +209,6 @@ class ShoppingCartItem(models.Model):
         subtotal = self.product.price * self.quantity
         return subtotal
     subtotal = property(_calc_subtotal)
-
-
 
 
 ######################################################################

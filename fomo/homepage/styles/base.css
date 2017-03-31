@@ -87,7 +87,7 @@
     text-align: center;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1010px) {
     #body_section_top, #body_section_content{
         margin-left: 0px;
         margin-right: 0px;
@@ -98,5 +98,16 @@
         position: relative;
         width: auto;
         display: none;
+    }
+}
+#brand-short {
+  display: none;
+}
+@media (max-width: 460px) {
+    #brand-long {
+      display: none;
+    }
+    #brand-short {
+      display: inherit;
     }
 }

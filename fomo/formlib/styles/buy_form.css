@@ -2,6 +2,7 @@ ul.errorlist {
     margin: 0;
     padding: 0;
     list-style-type: none;
+    display: none;
 }
 
 ul.errorlist > li {
@@ -14,4 +15,5 @@ ul.errorlist > li {
     font-size: 85%;
     white-space: nowrap;
     vertical-align: baseline;
+    display: none;
 }
