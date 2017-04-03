@@ -5,6 +5,10 @@ $(function() {
   });//ajaxForm
 
   $('#badge-notify').html("${ request.user.shopping_cart.item_count()}");
+  
+  if($('#badge-notify').html() > 0) {
+    $('#badge-notify').show()
+  }
 
   var alertClass = ${"'alert-success'" if form.inv_status[0] else "'alert-danger'"}
   $('#form-response').addClass(alertClass)

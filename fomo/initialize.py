@@ -208,3 +208,19 @@ user.shopping_cart.add_item(rental_product)
 
 rental_product.sold = True
 rental_product.save()
+
+
+# shipping = {
+#     'address': '465 N 300 W Apt 29',
+#     'city': 'Provo',
+#     'state': 'UT',
+#     'zipcode': 84601,
+# }
+#
+# sale = cmod.Sale.record(user, shipping)
+# print(sale.address)
+# print(sale.city)
+# print(sale.state)
+# print(sale.zipcode)
+#
+# print(sale._calc_total())

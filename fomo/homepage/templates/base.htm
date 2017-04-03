@@ -11,7 +11,9 @@
 
     ## add any site-wide scripts or CSS here; for example, jquery:
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="${STATIC_URL}homepage/media/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/jquery.datetimepicker.min.css"/>
@@ -70,7 +72,10 @@
                   <a id="shopping-cart" href="/catalog/shoppingcart">
                     <span class="glyphicon glyphicon-shopping-cart"></span>
                     Cart
-                    <span id="badge-notify" class="badge">${ request.user.shopping_cart.item_count()}</span>
+                    <span id="badge-notify" class="badge">
+                      ${ request.user.shopping_cart.item_count()}
+                    </span>
+
                   </a>
                 </li>
                 <li class="dropdown">

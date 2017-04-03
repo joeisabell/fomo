@@ -125,6 +125,7 @@ class ViewHistory(models.Model):
         for view in user.view_history.order_by('view_date').reverse():
             if view.product not in products:
                 products.append(view.product)
+            if len(products) == 5: break
         return products[:5]
 
 class ShoppingCart(models.Model):
@@ -134,7 +135,8 @@ class ShoppingCart(models.Model):
         return self.items.filter(purchase_date=None, remove_date=None)
 
     def item_count(self):
-        return self.active_items().aggregate(Sum('quantity')).get('quantity__sum')
+        count = self.active_items().aggregate(Sum('quantity')).get('quantity__sum')
+        return 0 if count == None else count
 
     def add_item(self, product, qty=1):
         if product.id not in self.items.values_list('product__id', flat=True):
@@ -154,26 +156,8 @@ class ShoppingCart(models.Model):
 
     def clear_cart(self):
         for item in self.items.all():
-            print(item)
-
-    def _calc_subtotal(self):
-        subtotal = 0
-        for item in self.active_items():
-            subtotal += item.subtotal
-        return subtotal
-    subtotal = property(_calc_subtotal)
-
-    def _calc_tax(self):
-        return self.subtotal * Decimal('.0725')
-    taxes = property(_calc_tax)
-
-    def _calc_shipping(self):
-        return 10
-    shipping_fee = property(_calc_shipping)
-
-    def _calc_total(self):
-        return self.subtotal + self.taxes + self.shipping
-    total = property(_calc_total)
+            item.remove_date = datetime.now()
+            item.save()
 
     def check_inv(self, product, form_qty):
         # check available inventory and items already in cart
@@ -196,6 +180,25 @@ class ShoppingCart(models.Model):
                 alert_message = 'This item is already in your cart.'
         return (is_available, alert_message)
 
+    def _calc_subtotal(self):
+        subtotal = 0
+        for item in self.active_items():
+            subtotal += item.subtotal
+        return subtotal
+    subtotal = property(_calc_subtotal)
+
+    def _calc_tax(self):
+        return self.subtotal * Decimal('.0725')
+    taxes = property(_calc_tax)
+
+    def _calc_shipping(self):
+        return 10
+    shipping_fee = property(_calc_shipping)
+
+    def _calc_total(self):
+        return self.subtotal + self.taxes + self.shipping_fee
+    total = property(_calc_total)
+
 class ShoppingCartItem(models.Model):
     shopping_cart = models.ForeignKey(ShoppingCart, related_name='items')
     product = models.ForeignKey(Product)
@@ -205,11 +208,82 @@ class ShoppingCartItem(models.Model):
     purchase_date = models.DateTimeField(null=True)
     remove_date = models.DateTimeField(null=True)
 
+    def validate_inv(self):
+        return self.quantity <= self.product.on_hand_qty
+
     def _calc_subtotal(self):
         subtotal = self.product.price * self.quantity
         return subtotal
     subtotal = property(_calc_subtotal)
 
-
 ######################################################################
 ## Checkout
+
+class Sale(models.Model):
+    user = models.ForeignKey(FomoUser)
+    sale_date = models.DateTimeField(auto_now=True)
+    address = models.CharField(max_length = 200, blank=True, null=True)
+    city = models.CharField(max_length = 50, blank=True, null=True)
+    state = models.CharField(max_length = 50, blank=True, null=True)
+    zipcode = models.CharField(max_length = 50, blank=True, null=True)
+
+    @classmethod
+    def record(cls, user, shipping_details):
+        # create sale object
+        sale = cls(user=user, **shipping_details)
+        sale.save()
+        # add sale line items
+        sale._add_cart_items()
+        sale._add_tax()
+        sale._add_shipping_fee()
+        # create payment object
+        payment = Payment(sale=sale, charge=sale.total)
+        # decrement inventory quantities
+        sale._decrement_inv()
+        return sale
+
+    def _add_cart_items(self):
+        for item in self.user.shopping_cart.active_items():
+            item.purchase_date = datetime.now()
+            item.save()
+            line_item = SaleLineItem(sale=self, product=item.product,
+                quantity=item.quantity, price=(item.product.price * item.quantity))
+            line_item.save()
+
+    def _add_tax(self):
+        line_item = SaleLineItem(sale=self, sale_item_type='TAX', quantity=1, price=self.user.shopping_cart.taxes)
+        line_item.save()
+
+    def _add_shipping_fee(self):
+        line_item = SaleLineItem(sale=self, sale_item_type='SHIPPING', quantity=1, price=self.user.shopping_cart.shipping_fee)
+        line_item.save()
+
+    def _calc_total(self):
+        total = 0
+        for line_item in self.line_items.all():
+            total += line_item.price
+        return total
+    total = property(_calc_total)
+
+    def _decrement_inv(self):
+        for item in self.user.shopping_cart.active_items():
+            if hasattr(item.product, 'quantity'):
+                item.product.quantity -= item.quantity
+                item.product.save()
+            else:
+                item.product.sold = True
+                item.product.save()
+
+
+class SaleLineItem(models.Model):
+    sale = models.ForeignKey(Sale, related_name='line_items')
+    sale_item_type = models.CharField(max_length = 50, default='PRODUCT')
+    product = models.ForeignKey(Product, null=True)
+    quantity = models.IntegerField(default=0, null=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
+
+class Payment(models.Model):
+    sale = models.OneToOneField(Sale)
+    stripe_token = models.TextField(blank=True, null=True)
+    date = models.DateTimeField(auto_now=True)
+    charge = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)

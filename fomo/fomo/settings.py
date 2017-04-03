@@ -35,6 +35,9 @@ LOGIN_URL = '/account/login'
 STRIPE_PUBLIC_KEY = 'pk_test_jbrwqk6C9nSritKUogsOTHRj'
 STRIPE_PRIVATE_KEY = 'sk_test_d3PRcjrGAxq5k2Fs8jXSpH5b'
 
+# Google Server Keys
+GOOGLE_SERVER_KEY = 'AIzaSyCR5es2f7QwaoMKOJH0L8FXN3BeYs_QG-4'
+
 # Application definition
 
 INSTALLED_APPS = [
