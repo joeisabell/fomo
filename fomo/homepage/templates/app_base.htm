@@ -2,9 +2,18 @@
 
 <%block name="header_menu_items">
     <li class=${ 'active' if request.dmp_router_page == 'index' else '' }><a href="/homepage/index">Home</a></li>
-    <li class=${ 'active' if request.dmp_router_page == 'about' else '' }><a href="/homepage/about">About</a></li>
-    <li class=${ 'active' if request.dmp_router_page == 'contact' else '' }><a href="/catalog/index">Catalog</a></li>
-    <li class=${ 'active' if request.dmp_router_page == 'terms' else '' }><a href="/homepage/terms">Terms</a></li>
-    <li class=${ 'active' if request.dmp_router_page == 'faq' else '' }><a href="/homepage/faq">FAQ</a></li>
-    <li class=${ 'active' if request.dmp_router_page == 'sections' else '' }><a href="/homepage/sections">Sections</a></li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopups="true" aria-expanded="true">
+          About Us
+      </a>
+      <ul class="dropdown-menu">
+        <li class=${ 'active' if request.dmp_router_page == 'about' else '' }><a href="/homepage/about">About</a></li>
+        <li class=${ 'active' if request.dmp_router_page == 'terms' else '' }><a href="/homepage/terms">Terms</a></li>
+        <li class=${ 'active' if request.dmp_router_page == 'faq' else '' }><a href="/homepage/faq">FAQ</a></li>
+        <li class=${ 'active' if request.dmp_router_page == 'sections' else '' }><a href="/homepage/sections">Sections</a></li>
+      </ul>
+    </li>
+
+    <li class=${ 'active' if request.dmp_router_page == 'contact' else '' }><a href="/catalog/index">Shop</a></li>
+
 </%block>

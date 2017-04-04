@@ -99,7 +99,7 @@ for data in (
             [ dir + 'trumpet_mouthpiece_2.jpg', 'jpg', False ],
             [ dir + 'trumpet_mouthpiece_3.jpg', 'jpg', False ],
         ], desc),
-        ('Violin String Set', 'string', 'E-Tune', Decimal('9.99'), 2, 5, 10, [
+        ('Violin String Set', 'string', 'E-Tune', Decimal('9.99'), 10, 5, 10, [
             [ dir + 'violin_string_set.jpg', 'jpg', True ],
             [ dir + 'violin_string_set_1.jpg', 'jpg', False ],
         ], desc),
@@ -206,9 +206,6 @@ user.shopping_cart.add_item(bulk_product)
 user.shopping_cart.add_item(unique_product)
 user.shopping_cart.add_item(rental_product)
 
-rental_product.sold = True
-rental_product.save()
-
 
 # shipping = {
 #     'address': '465 N 300 W Apt 29',
@@ -217,10 +214,14 @@ rental_product.save()
 #     'zipcode': 84601,
 # }
 #
-# sale = cmod.Sale.record(user, shipping)
-# print(sale.address)
-# print(sale.city)
-# print(sale.state)
-# print(sale.zipcode)
+# for item in user.shopping_cart.items.all():
+#     print(item.product.name, ' ', item.product.on_hand_qty)
 #
-# print(sale._calc_total())
+# sale = cmod.Sale.objects.create(user=user, **shipping)
+# sale._add_cart_items()
+# sale._decrement_inv()
+# for item in sale.line_items.all():
+#     print(item.product)
+#
+# for item in user.shopping_cart.items.all():
+#     print(item.product.name, ' ', item.product.on_hand_qty)

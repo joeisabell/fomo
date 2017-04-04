@@ -6,6 +6,7 @@ from django_mako_plus import view_function
 from .. import dmp_render, dmp_render_to_string
 import stripe
 
+from fomo.methods import geocode_address as geo
 from formlib.form import FormMixIn
 from account import models as amod
 from catalog.models import Sale
@@ -69,7 +70,7 @@ class ShippingForm(FormMixIn, forms.Form):
         zipcode = self.cleaned_data.get('zipcode')
         full_address = address + ' ' + city + ', ' + state + ' ' + zipcode
 
-        g_result = amod.FomoUser.geocode_address(full_address)
+        g_result = geo(full_address)
 
         self.data = self.data.copy()
         if full_address != g_result.get('full_address'):

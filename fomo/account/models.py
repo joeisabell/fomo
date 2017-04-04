@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from django import forms
 import googlemaps
 
+from fomo.methods import geocode_address as geo
 from catalog import models as cmod
 
 # Create your models here.
@@ -24,29 +25,4 @@ class FomoUser(AbstractUser):
     full_address = property(_get_full_address)
 
     def verify_address(self):
-        return FomoUser.geocode_address(self.full_address)
-
-    @staticmethod
-    def geocode_address(address):
-        gmaps = googlemaps.Client(key=settings.GOOGLE_SERVER_KEY)
-        g_result = gmaps.geocode(address)
-
-        # flatten out address_components of geocode response to be more usable
-        g_components = {}
-        for component in g_result[0].get('address_components'):
-            key = component.get('types')[0]
-            value = component.get('short_name')
-            g_components[key] = value
-
-        # build address from components and add apt number to address if exists
-        g_address = g_components.get('street_number') + ' ' + g_components.get('route')
-        if g_components.get('subpremise'):
-            g_address += ' #' + g_components.get('subpremise')
-
-        return {
-            'full_address': g_address + ' ' + g_components.get('locality') + ', ' + g_components.get('administrative_area_level_1') + ' ' + g_components.get('postal_code'),
-            'address': g_address,
-            'city': g_components.get('locality'),
-            'state': g_components.get('administrative_area_level_1'),
-            'zipcode': g_components.get('postal_code'),
-        }
+        return geo(self.full_address)

@@ -15,13 +15,12 @@ def process_request(request):
         product = cmod.Product.objects.get(id=request.urlparams[0])
     except cmod.Product.DoesNotExist:
         return HttpResponseRedirect('/catalog/index')
+    ViewHistory.add(request.user, product)
 
     form = AddToCartForm(request, product=product)
-
     if form.is_valid():
-        form.commit(product)
+        form.commit()
 
-    ViewHistory.add(request.user, product)
     context = {
         'product': product,
         # provide return url to return to the same set of search results
@@ -31,14 +30,13 @@ def process_request(request):
     return dmp_render(request, 'details_ajax.html' if request.method == 'POST' else 'details.html' , context)
 
 class AddToCartForm(FormMixIn, forms.Form):
+    form_template = 'buy_form.htm'
+    form_class = 'form-inline'
+    form_id = 'buy-now-form'
+    show_qty = False
 
     def init(self, product):
         self.product = product
-        self.form_template = 'buy_form.htm'
-        self.form_class = 'form-inline'
-        self.form_id = 'buy-now-form'
-        self.show_qty = False
-
         if hasattr(product, 'quantity'):
             self.show_qty = True
             self.fields['quantity'] = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'value':1}))
@@ -53,12 +51,12 @@ class AddToCartForm(FormMixIn, forms.Form):
             raise forms.ValidationError('')
         return self.cleaned_data
 
-    def commit(self, product):
-        if hasattr(product, 'quantity'):
+    def commit(self):
+        if hasattr(self.product, 'quantity'):
             qty = self.cleaned_data.get('quantity')
         else:
             qty = 1
-        cart_item = self.request.user.shopping_cart.add_item(product, qty)
+        cart_item = self.request.user.shopping_cart.add_item(self.product, qty)
         cart_item.save()
 
 @view_function

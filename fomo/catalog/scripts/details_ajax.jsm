@@ -4,10 +4,10 @@ $(function() {
     target:'#purchase-container',
   });//ajaxForm
 
-  $('#badge-notify').html("${ request.user.shopping_cart.item_count()}");
-  
-  if($('#badge-notify').html() > 0) {
-    $('#badge-notify').show()
+  var badge = $('#badge-notify')
+  badge.html("${ request.user.shopping_cart.item_count()}");
+  if(badge.html() > 0) {
+    badge.show()
   }
 
   var alertClass = ${"'alert-success'" if form.inv_status[0] else "'alert-danger'"}

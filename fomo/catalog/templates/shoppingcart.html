@@ -1,13 +1,11 @@
 <%inherit file="app_base.htm"/>
 
-
 <%block name="body_section_content">
     <h1>Shopping Cart</h1>
     <div class="search-results">
-      %for cart_item in cart.active_items():
+      %for cart_item in cart.active_items.all():
       <div class="row search-result-container">
         <div class="tile-image">
-
           <img src="${ STATIC_URL + cart_item.product.image.subdir }" alt="">
 
           <div class="search-result-title">
