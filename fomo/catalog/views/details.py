@@ -20,7 +20,7 @@ def process_request(request):
     form = AddToCartForm(request, product=product)
     if form.is_valid():
         form.commit()
-
+        
     context = {
         'product': product,
         # provide return url to return to the same set of search results
