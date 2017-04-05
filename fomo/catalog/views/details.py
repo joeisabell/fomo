@@ -54,6 +54,7 @@ class AddToCartForm(FormMixIn, forms.Form):
     def commit(self):
         if hasattr(self.product, 'quantity'):
             qty = self.cleaned_data.get('quantity')
+            print(qty)
         else:
             qty = 1
         cart_item = self.request.user.shopping_cart.add_item(self.product, qty)
