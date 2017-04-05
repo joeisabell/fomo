@@ -1,0 +1,12 @@
+<%inherit file="base_ajax.htm"/>
+
+<%block name="content">
+  %if form.is_valid():
+  <div class="success">
+  </div>
+  <a id="btn-shop" class="btn btn-success" href="/catalog/index">Continue Shopping</a>
+  <a id="btn-checkout" class="btn btn-primary" href="/catalog/shoppingcart">Checkout Now</a>
+  %else:
+  ${ form }
+  %endif
+</%block>

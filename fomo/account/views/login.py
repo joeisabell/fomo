@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login
 from django import forms
 
@@ -11,7 +11,6 @@ from account import models as amod
 
 @view_function
 def process_request(request):
-
     if request.user.is_authenticated:
         return HttpResponseRedirect('/account/index')
 
@@ -27,9 +26,27 @@ def process_request(request):
         'form': form,
         'title': 'Login',
     }
-
     # if not authenticated
     return dmp_render(request, 'login.html', context)
+
+@view_function
+def modal(request):
+        form = LoginForm(request)
+
+        form.form_action = '/account/login.modal'
+        if form.is_valid():
+            return HttpResponse(
+                "<script>" +
+                    "window.location.href=window.location.href" +
+                "</script>"
+            )
+
+        context = {
+            'form': form,
+            'title': 'Login',
+        }
+        # if not authenticated
+        return dmp_render(request, 'login_modal.html', context)
 
 class LoginForm(FormMixIn, forms.Form):
 

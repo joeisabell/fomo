@@ -1,8 +1,46 @@
-<%inherit file="base.htm" />
+<%inherit file="app_base.htm" />
 
-<%block name="content">
-    <div class="content">
-        <h3>Congratulations -- you've successfully created a new django-mako-plus app!</h3>
-        <h4>Next Up: Go through the django-mako-plus tutorial and add Javascript, CSS, and urlparams to this page.</h4>
+
+<%block name="body_section_left">
+<h5>Show results for:</h5>
+  <ul class="nav categories">
+    <li><a href="/catalog/index">All Categories</a></li>
+    %for category in categories:
+    <li><a href="/catalog/index?categoryid=${ category.id }">${ category.name }</a></li>
+    %endfor
+  </ul>
+</%block>
+
+<%block name="body_section_content">
+<h1>Product Catalog</h1>
+  %for product in products:
+    <div class="tile-container">
+
+      <a href="/catalog/details/${ product.id }">
+
+        <div class="tile-image">
+          <img src="${ STATIC_URL + product.default_image().subdir }" alt="">
+        </div>
+
+        <div class="tile-text">
+          <div class="tile-title">
+            ${product.name}
+            <div class="tile-details hidden">
+            <ul>
+              <li class="brand-name">from ${ product.brand }</li>
+              <li class="price">$${ product.price }</li>
+            </ul>
+            <div class="view-now-button">
+              <button class="btn btn-info" type="button" name="button">More Details</button>
+            </div>
+
+            </div>
+          </div>
+
+        </div>
+      </a>
+
     </div>
+  %endfor
+
 </%block>

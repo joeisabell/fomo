@@ -1,4 +1,5 @@
 <%! from django_mako_plus import get_template_css, get_template_js %>
+<%! from catalog.models import ViewHistory%>
 
 <!DOCTYPE html>
 <html>
@@ -10,10 +11,14 @@
 
     ## add any site-wide scripts or CSS here; for example, jquery:
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="${STATIC_URL}homepage/media/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/jquery.datetimepicker.min.css"/>
-
+    <script src="${STATIC_URL}homepage/media/jquery.loadmodal.js"></script>
+    <script src="${STATIC_URL}homepage/media/jquery.form.js"></script>
     ## render the css with the same name as this page
     ${ get_template_css(self, request, context)}
 
@@ -35,7 +40,7 @@
 
     <%block name="body_container">
     <header id=body_header>
-        <nav id="header_navbar" class="navbar navbar-default ">
+        <nav id="header_navbar" class="navbar navbar-default">
         <div class="container-fluid">
           <div id="header_icon">
               <a href="/" title="FOMO Homepage">
@@ -49,7 +54,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Family Oriented Music Organization</a>
+          <a id="brand-long" class="navbar-brand" href="/">Family Oriented Music Organization</a>
+          <a id="brand-short" class="navbar-brand" href="/">FOMO</a>
         </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="collapse_nav">
@@ -62,6 +68,16 @@
             </%block>
 
             %if request.user.is_authenticated:
+                <li>
+                  <a id="shopping-cart" href="/catalog/shoppingcart">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    <!-- Cart -->
+                    <span id="badge-notify" class="badge">
+                      ${ request.user.shopping_cart.item_count()}
+                    </span>
+
+                  </a>
+                </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopups="true" aria-expanded="true">
                         Welcome,  ${ request.user.first_name } <span class="glyphicon glyphicon-chevron-down"></span>
@@ -78,7 +94,7 @@
                     </ul>
                 </li>
             %else:
-                <li><a href="/account/login"> Login </a></li>
+                <li><a id="modallogin_button">Login</a></li>
             %endif
             </ul>
           </div><!-- /.navbar-collapse -->
@@ -104,6 +120,14 @@
 
         <div id = "body_section_right">
             <%block name="body_section_right">
+            %if request.user.is_authenticated:
+            <h5>Recently Viewed Items</h5>
+            <ul class="nav last-5-items">
+              %for product in ViewHistory.last_five(request.user):
+              <li><a href="/catalog/details/${ product.id }">${ product.name }</a></li>
+              %endfor
+            </ul>
+            %endif
             </%block>
         </div>
 
@@ -124,12 +148,9 @@
             &copy; Copyright ${datetime.now().year}. All rights reserved.
         </%block>
     </footer>
-
     <%block name="modal">
 
     </%block>
-
-
     </%block>
     ## JavaScript References ## render the JS with the same name as this page
     ${ get_template_js(self, request, context) }

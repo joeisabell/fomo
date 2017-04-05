@@ -1,0 +1,30 @@
+<%inherit file="app_base.htm"/>
+
+<%block name="body_section_content">
+    <h1>Shopping Cart</h1>
+    <div class="search-results">
+      %for cart_item in cart.active_items.all():
+      <div class="row search-result-container">
+        <div class="tile-image">
+          <img src="${ STATIC_URL + cart_item.product.image.subdir }" alt="">
+
+          <div class="search-result-title">
+            ${ cart_item.product.name }
+            <span class="brand">from ${ cart_item.product.brand }</span>
+          </div>
+
+            Qty: ${ cart_item.quantity }
+
+          <div class="view-now-button pull-right">
+            <div class="price">$${ cart_item.product.price }</div>
+            <button class="btn btn-info btn-sm pull-right" type="button" name="button">View Now</button>
+          </div>
+
+        </div>
+      </div>
+      %endfor
+      <a class="btn btn-warning pull-right" href="/catalog/checkout">Checkout</a>
+    </div>
+
+
+</%block>

@@ -1,0 +1,23 @@
+#body_section_content {
+  margin-left: 20px;
+  padding: 20px;
+  padding-right: 40px;
+}
+
+#body_section_left {
+  position: fixed;
+  display: none;
+}
+
+/*ui-accordion: The outer container of the accordion.
+ui-accordion-header: The headers of the accordion.
+  The active header will additionally have a ui-accordion-content-active class,
+  the inactive headers will have a ui-accordion-header-collapsed class.
+  The headers will also have a ui-accordion-icons class if they contain icons.
+ui-accordion-header-icon: Icon elements within each accordion header.
+ui-accordion-content: The content panels of the accordion.
+  The active content panel will additionally have a ui-accordion-content-active*/
+
+.ui-accordion-header-active {
+  background-color: #2c3e50;
+}

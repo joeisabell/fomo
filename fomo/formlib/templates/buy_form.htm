@@ -1,0 +1,24 @@
+## including these directly so the form doesn't have to inherit and can be standalone
+${ django_mako_plus.link_css(self) }
+
+<form id="${ form.form_id }" class="${ form.form_class }" action="${ form.form_action or '' }" method="${ form.form_method }">
+
+    ## csrf token
+    ${ csrf_input }
+    <div id=input-qty-container class="form-group">
+      %if form.show_qty:
+      <div id="input-qty" class="input-group">
+        <span id="input-addon" class="input-group-addon">Qty</span>
+        ## form fields, help text, and errors
+        ${ form.as_table() }
+      </div>
+      %endif
+    </div>
+
+    <button class="btn btn-warning" type="submit">Add to Cart</button>
+
+</form>
+
+
+## render any scripts with the form
+${ django_mako_plus.link_js(self) }

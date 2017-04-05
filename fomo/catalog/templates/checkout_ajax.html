@@ -1,0 +1,17 @@
+<%inherit file="base_ajax.htm"/>
+
+<%block name="content">
+  %if form.is_valid():
+  <div id="shipping-address">
+    <p>${form.cleaned_data.get('address')}</p>
+    <p>${form.cleaned_data.get('city')}, ${form.cleaned_data.get('state')} ${form.cleaned_data.get('zipcode')}</p>
+  </div>
+  <div class="pull-right">
+    <button id="load-address-form" class="btn btn-success">Change Address</button>
+    <button id="shipping-continue" class="btn btn-success">Use this address</button>
+  </div>
+  %else:
+    ${ form }
+  %endif
+
+</%block>

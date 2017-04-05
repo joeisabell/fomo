@@ -10,7 +10,6 @@ from account import models as amod
 
 @view_function
 def process_request(request):
-
         if request.user.is_authenticated:
             return HttpResponseRedirect('/account/index')
 
@@ -31,7 +30,6 @@ def process_request(request):
 class CreateUserForm(FormMixIn, forms.Form):
 
     def init(self, user):
-
         self.fields['first_name'] = forms.CharField(label='First Name', max_length=30)
         self.fields['last_name'] = forms.CharField(label='Last Name', max_length=30)
         self.fields['username'] = forms.CharField(label='Username', max_length=150)
@@ -52,7 +50,6 @@ class CreateUserForm(FormMixIn, forms.Form):
         return username
 
     def commit(self, user):
-
         user.first_name = self.cleaned_data.get('first_name')
         user.last_name = self.cleaned_data.get('last_name')
         user.username = self.cleaned_data.get('username')

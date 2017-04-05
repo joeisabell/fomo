@@ -19,12 +19,13 @@ def process_request(request):
     except amod.FomoUser.DoesNotExist:
         return HttpResponseRedirect('/manager/users')
 
-
     user_groups = {}
     for p in user.groups.all():
         user_groups[p.id] = p
 
-    print(user_groups)
+    user_permissions = {}
+    for p in user.user_permissions.all():
+        user_permissions[p.id] = p
 
     # process the form
     form = EditUserForm(request, user=user, initial={
@@ -39,6 +40,7 @@ def process_request(request):
         'state' : user.state,
         'zipcode' : user.zipcode,
         'groups' : user_groups,
+        'permissions' : user_permissions,
     })
 
     if form.is_valid():
@@ -68,6 +70,7 @@ class EditUserForm(FormMixIn, forms.Form):
         self.fields['state'] = forms.CharField(label='State', max_length=50)
         self.fields['zipcode'] = forms.CharField(label='Zipcode', max_length=50)
         self.fields['groups'] = forms.ModelMultipleChoiceField(label='Groups', queryset=Group.objects.all())
+        self.fields['permissions'] = forms.ModelMultipleChoiceField(label='User Permissions', queryset=Permission.objects.all())
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
@@ -90,8 +93,12 @@ class EditUserForm(FormMixIn, forms.Form):
         user.zipcode = self.cleaned_data.get('zipcode')
         user.save()
         user.groups.clear()
+        user.user_permissions.clear()
         for group in self.cleaned_data.get('groups'):
             user.groups.add(group)
+        for perm in self.cleaned_data.get('permissions'):
+            user.user_permissions.add(perm)
+            user.save()
 
 
 ###################################################
@@ -149,8 +156,8 @@ class CreateUserForm(FormMixIn, forms.Form):
         self.fields['city'] = forms.CharField(label='City', max_length=50)
         self.fields['state'] = forms.CharField(label='State', max_length=50)
         self.fields['zipcode'] = forms.CharField(label='Zipcode', max_length=50)
-        self.fields['group'] = forms.ModelMultipleChoiceField(label='Groups', queryset=Group.objects.all())
-
+        self.fields['groups'] = forms.ModelMultipleChoiceField(label='Groups', queryset=Group.objects.all())
+        self.fields['permissions'] = forms.ModelMultipleChoiceField(label='User Permissions', queryset=Permission.objects.all())
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
@@ -165,7 +172,6 @@ class CreateUserForm(FormMixIn, forms.Form):
         user.last_name = self.cleaned_data.get('last_name')
         user.username = self.cleaned_data.get('username')
         user.email = self.cleaned_data.get('email')
-        # user.password = self.cleaned_data.get('password')
         user.set_password(self.cleaned_data.get('password'))
         user.birthday = self.cleaned_data.get('birthday')
         user.phone = self.cleaned_data.get('phone')
@@ -174,6 +180,10 @@ class CreateUserForm(FormMixIn, forms.Form):
         user.state = self.cleaned_data.get('state')
         user.zipcode = self.cleaned_data.get('zipcode')
         user.save()
+        for group in self.cleaned_data.get('groups'):
+            user.groups.add(group)
+        for perm in self.cleaned_data.get('permissions'):
+            user.user_permissions.add(perm)
 
 
 ###################################################

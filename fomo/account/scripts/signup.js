@@ -4,7 +4,5 @@ $(function(){
     timepicker: false,
     format: 'm/d/Y'
   });
-
-  console.log($('#id_birthday'))
-
+  
 });

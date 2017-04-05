@@ -12,7 +12,6 @@ from account import models as amod
 @view_function
 @login_required
 def process_request(request):
-
     try:
         user = request.user
     except amod.FomoUser.DoesNotExist:
@@ -43,12 +42,9 @@ def process_request(request):
     }
     return dmp_render(request, 'edit.html', context)
 
-
-
 class EditUserForm(FormMixIn, forms.Form):
 
     def init(self, user):
-
         self.fields['first_name'] = forms.CharField(label='First Name', max_length=30)
         self.fields['last_name'] = forms.CharField(label='Last Name', max_length=30)
         self.fields['username'] = forms.CharField(label='Username', max_length=150)
@@ -86,7 +82,6 @@ class EditUserForm(FormMixIn, forms.Form):
 @view_function
 @login_required
 def password(request):
-
         # process the form
         form = ChangeUserPasswordForm(request)
 
@@ -125,7 +120,6 @@ class ChangeUserPasswordForm(FormMixIn, forms.Form):
     def commit(self, user):
         user.set_password(self.cleaned_data.get('new_password'))
         user.save()
-
         # log user back in
         auth_user = authenticate(username=self.request.user.username, password=self.cleaned_data.get('new_password'))
         login(self.request, auth_user)

@@ -1,0 +1,34 @@
+#body_section_before {
+  margin-top: 60px;
+}
+
+#body_section_right {
+  position: fixed;
+  margin-top: 60px;
+  background-color: rgba(128, 128, 128, .1);
+  padding-left: 10px;
+}
+
+#body_section_left {
+  position: fixed;
+  margin-top: 60px;
+  background-color: rgba(128, 128, 128, .1);
+  padding-top: 30px;
+  padding-left: 10px;
+}
+
+#body_section_content {
+  padding: 10px;
+}
+
+@media (max-width: 1010px) {
+  #search-box {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  #search-box {
+    display: inline;
+  }
+}

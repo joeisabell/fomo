@@ -31,6 +31,13 @@ AUTH_USER_MODEL = 'account.FomoUser'
 
 LOGIN_URL = '/account/login'
 
+# Stripe API Keys
+STRIPE_PUBLIC_KEY = 'pk_test_jbrwqk6C9nSritKUogsOTHRj'
+STRIPE_PRIVATE_KEY = 'sk_test_d3PRcjrGAxq5k2Fs8jXSpH5b'
+
+# Google Server Keys
+GOOGLE_SERVER_KEY = 'AIzaSyCR5es2f7QwaoMKOJH0L8FXN3BeYs_QG-4'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,6 +54,7 @@ INSTALLED_APPS = [
     'account',
     'manager',
     'formlib',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_mako_plus.RequestInitMiddleware',
+    # 'fomo.middleware.LastFiveMiddleware',
 ]
 
 ROOT_URLCONF = 'fomo.urls'

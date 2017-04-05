@@ -1,0 +1,40 @@
+<%inherit file="app_base.htm"/>
+
+<%block name="head_extra">
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+</%block>
+
+<%block name="body_section_content">
+  <h1>Checkout</h1>
+  <div id="accordion">
+
+    <h3>Order Summary</h3>
+    <div id="order-summary">
+      <ul>
+        <li>Order Sub-total: $${request.user.shopping_cart.subtotal}</li>
+        <li>Taxes: $${request.user.shopping_cart.taxes}</li>
+        <li>Shipping Fee: $${request.user.shopping_cart.shipping_fee}</li>
+        <li>Total Cost: $${request.user.shopping_cart.total}</li>
+      </ul>
+      <button id="summary-continue" class="btn btn-success pull-right">Continue</button>
+    </div>
+
+    <h3>Shipping</h3>
+      <div id="shipping-form-container">
+        <div id="shipping-address">
+          <p>${request.user.address}</p>
+          <p>${request.user.city}, ${request.user.state} ${request.user.zipcode}</p>
+        </div>
+        <div class="pull-right">
+          <button id="load-address-form" class="btn btn-success">Verify Address</button>
+        </div>
+      </div>
+
+    <h3>Payment</h3>
+    <div id="payment_form_container">
+      ${ form }
+    </div>
+
+  </div>
+
+</%block>

@@ -19,7 +19,7 @@
         <td>${ p.category.name }</td>
         <td>${ p.name }</td>
         <td>${ p.serial_number if hasattr(p, 'serial_number') else '-' }</td>
-        <td>${ p.price }</td>
+        <td>$${ p.price }</td>
         <td>
           %if hasattr(p, 'quantity'):
             <button data-pid=${p.id} class="update_button btn btn-info pull-right btn-xs">Update</button>

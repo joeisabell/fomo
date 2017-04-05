@@ -1,0 +1,13 @@
+#image-modal {
+  text-align: center;
+}
+
+.product-images {
+  width: 400px;
+  display: inline-block;
+}
+
+.modal-buttons {
+    display: inline-block;
+    margin-top: 15px;
+}

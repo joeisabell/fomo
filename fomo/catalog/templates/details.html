@@ -1,0 +1,59 @@
+<%inherit file="app_base.htm"/>
+
+<%block name="body_section_before">
+
+</%block>
+
+<%block name="header_message">
+  <div id="form-response" class="alert  alert-dismissible hidden">
+    <div id="alert-message">
+      If you see this text something went wrong :(
+    </div>
+  </div>
+</%block>
+
+<%block name="body_section_content">
+  <div id="return-link">
+    %if previous_page.find('catalog/index') != -1:
+    <a href="${ previous_page }"> <span class="glyphicon glyphicon-chevron-left"></span> Return to results</a>
+    %elif previous_page.find('catalog/search') != -1:
+    <a href="${ previous_page }"> <span class="glyphicon glyphicon-chevron-left"></span> Return to search results</a>
+    %else:
+    <a href="/catalog/index"> <span class="glyphicon glyphicon-chevron-left"></span> Return to catalog</a>
+    %endif
+  </div>
+
+  <div class="row">
+
+    <div id="product-image" class="col-md-5 col-sm-6">
+      <img data-pid=${product.id} class="img-responsive thumbnail" src="${STATIC_URL + product.default_image().subdir}" alt="">
+    </div>
+
+    <div id="product-action">
+      <h2 id="product-name">${ product.name}</h2>
+      <h5>${ product.brand }</h5>
+      <h1 class="text-center text-success">$${ product.price }</h1>
+      <div id="purchase-container">
+      %if product.on_hand_qty > 0:
+        ${ form }
+      %else:
+        <h2 class="text-center text-danger">Out of Stock</h4>
+      %endif
+      </div>
+    </div>
+
+  </div>
+
+  <div id="product-info">
+  <h3>Product Information</h3>
+    <table class="table table-striped">
+    %for k,v in product.details.items():
+      <tr>
+        <td>${ ' '.join(k.split('_')).title() }: </td>
+        <td>${ v }</td>
+      </tr>
+    %endfor
+    </table>
+  </div>
+
+</%block>
