@@ -1,5 +1,22 @@
+import os
+
 from django.conf import settings
+from django.http import HttpResponse
+
 import googlemaps
+
+def letsencrypt(request, acme_data):
+    '''
+    Method used to return challenge response to ACME CA Server
+    '''
+    for root, dirs, files in os.walk('.'):
+        for file in files:
+            if file == acme_data:
+                challenge = os.path.join(settings.BASE_DIR,'.well-known', 'acme-challenge', file)
+
+    response = open(challenge).read()
+    return HttpResponse(response, content_type="text/plain")
+
 
 def geocode_address(address):
     '''

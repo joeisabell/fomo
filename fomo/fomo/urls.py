@@ -16,9 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from . import methods
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^\.well-known/', include('letsencrypt.urls')),
+    
+    # handles ACME challenge requests
+    url(r'^.well-known/acme-challenge/(?P<acme_data>.+)$', methods.letsencrypt, name='detail'),
 
      # the django_mako_plus controller handles every request - this line is the glue that connects Mako to Django
     url('', include('django_mako_plus.urls')),
