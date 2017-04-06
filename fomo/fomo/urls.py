@@ -18,6 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^\.well-known/', include('letsencrypt.urls')),
 
      # the django_mako_plus controller handles every request - this line is the glue that connects Mako to Django
     url('', include('django_mako_plus.urls')),
