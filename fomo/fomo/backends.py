@@ -16,6 +16,11 @@ class ActiveDirectoryBackend(object):
         if ad_user != None:
             try:
                 user = FomoUser.objects.get(username=ad_user.sAMAccountName)
+                user.username = ad_user.sAMAccountName
+                user.first_name = ad_user.givenName
+                user.last_name = ad_user.sn
+                user.email = str(ad_user.userPrincipalName).replace('.local', '.us')
+                user.save()
             except FomoUser.DoesNotExist:
                 user = FomoUser()
                 user.username = ad_user.sAMAccountName
