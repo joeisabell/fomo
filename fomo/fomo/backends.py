@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth.models import Group
 
 from ldap3 import Server, Connection, ObjectDef, AttrDef, Reader, Writer, ALL
 from account.models import FomoUser
@@ -23,6 +24,8 @@ class ActiveDirectoryBackend(object):
                 user.email = str(ad_user.userPrincipalName).replace('.local', '.us')
                 user.is_staff = True
                 user.save()
+                group = Group.objects.get(name__exact='Managers')
+                user.groups.add(group)
                 cart = ShoppingCart(user=user)
                 cart.save()
             return user
