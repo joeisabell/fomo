@@ -10,17 +10,15 @@
     <link rel="icon" type="image/png" href="${STATIC_URL}homepage/media/logo.png" />
 
     ## add any site-wide scripts or CSS here; for example, jquery:
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400">
+    <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/jquery.datetimepicker.min.css"/>
+    ## render the css with the same name as this page
+    ${ get_template_css(self, request, context)}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="${STATIC_URL}homepage/media/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/jquery.datetimepicker.min.css"/>
-    <script src="${STATIC_URL}homepage/media/jquery.loadmodal.js"></script>
-    <script src="${STATIC_URL}homepage/media/jquery.form.js"></script>
-    ## render the css with the same name as this page
-    ${ get_template_css(self, request, context)}
 
     <%block name="head_extra">
     </%block>
@@ -71,11 +69,7 @@
                 <li>
                   <a id="shopping-cart" href="/catalog/shoppingcart">
                     <span class="glyphicon glyphicon-shopping-cart"></span>
-                    <!-- Cart -->
-                    <span id="badge-notify" class="badge">
-                      ${ request.user.shopping_cart.item_count()}
-                    </span>
-
+                    <span id="badge-notify" class="badge">${ request.user.shopping_cart.item_count()}</span>
                   </a>
                 </li>
                 <li class="dropdown">
@@ -84,11 +78,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="/account/index"><span class="glyphicon glyphicon-user"></span> My Account </a></li>
-
                         %if request.user.has_perm('catalog.change_product'):
                         <li><a href="/manager/index"><span class="glyphicon glyphicon-th"></span> Manager </a></li>
                         %endif
-
                         <li role="separator" class="divider"></li>
                         <li><a href="/account/logout"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
                     </ul>
@@ -96,11 +88,12 @@
             %else:
                 <li><a id="modallogin_button">Login</a></li>
             %endif
+
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
-    </header>
+    </header><!-- /#body_header -->
 
     <div id = "body_section_before">
         <%block name="body_section_before">
@@ -135,7 +128,7 @@
             <%block name="body_section_content">
             </%block>
         </div>
-    </div>
+    </div><!-- /#body_section -->
 
     <div id="body_section_after">
         <%block name="body_section_after">
@@ -148,12 +141,17 @@
             &copy; Copyright ${datetime.now().year}. All rights reserved.
         </%block>
     </footer>
-    <%block name="modal">
 
+    <%block name="modal">
     </%block>
-    </%block>
+
+    </%block><!-- /block: body_container-->
+
+    ## add any site-wide scripts here:
+    <script src="${STATIC_URL}homepage/media/jquery.loadmodal.js"></script>
+    <script src="${STATIC_URL}homepage/media/jquery.form.js"></script>
+    <script src="${STATIC_URL}homepage/media/jquery.datetimepicker.full.js"></script>
     ## JavaScript References ## render the JS with the same name as this page
     ${ get_template_js(self, request, context) }
-    <script src="${STATIC_URL}homepage/media/jquery.datetimepicker.full.js"></script>
     </body>
 </html>

@@ -179,7 +179,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -228,3 +227,13 @@ LOGGING = {
          },
      },
  }
+
+# Active Directory Backend Integration
+AD_ADMIN_DN = 'CN=Administrator,CN=Users,DC=familymusic,DC=local'
+AD_ADMIN_PASS = 'PythonDanger12'
+AD_SERVER = 'localhost'
+
+AUTHENTICATION_BACKENDS = (
+    'fomo.backends.ActiveDirectoryBackend',
+    'django.contrib.auth.backends.ModelBackend'
+    )

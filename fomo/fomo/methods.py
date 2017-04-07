@@ -13,7 +13,6 @@ def letsencrypt(request, acme_data):
         for file in files:
             if file == acme_data:
                 challenge = os.path.join(settings.BASE_DIR,'.well-known', 'acme-challenge', file)
-
     response = open(challenge).read()
     return HttpResponse(response, content_type="text/plain")
 

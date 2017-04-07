@@ -3,7 +3,6 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django import forms
-import googlemaps
 
 from fomo.methods import geocode_address as geo
 from catalog import models as cmod
