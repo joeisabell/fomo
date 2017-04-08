@@ -7,6 +7,7 @@ from .. import dmp_render, dmp_render_to_string
 
 from formlib.form import FormMixIn
 from account import models as amod
+from catalog.models import ShoppingCart
 
 @view_function
 def process_request(request):
@@ -62,3 +63,5 @@ class CreateUserForm(FormMixIn, forms.Form):
         user.state = self.cleaned_data.get('state')
         user.zipcode = self.cleaned_data.get('zipcode')
         user.save()
+        cart = ShoppingCart(user=user)
+        cart.save()
