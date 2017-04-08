@@ -234,6 +234,6 @@ AD_ADMIN_PASS = 'PythonDanger12'
 AD_SERVER = 'localhost'
 
 AUTHENTICATION_BACKENDS = (
-    'fomo.backends.ActiveDirectoryBackend',
-    'django.contrib.auth.backends.ModelBackend'
+    #'fomo.backends.ActiveDirectoryBackend',
+    'django.contrib.auth.backends.ModelBackend',
     )

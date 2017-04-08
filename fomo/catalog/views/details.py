@@ -10,6 +10,7 @@ from catalog import models as cmod
 from catalog.models import ViewHistory
 
 @view_function
+@login_required
 def process_request(request):
     try:
         product = cmod.Product.objects.get(id=request.urlparams[0])
@@ -20,7 +21,7 @@ def process_request(request):
     form = AddToCartForm(request, product=product)
     if form.is_valid():
         form.commit()
-        
+
     context = {
         'product': product,
         # provide return url to return to the same set of search results

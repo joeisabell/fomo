@@ -1,0 +1,26 @@
+#body_section_content {
+  margin: 40px;
+  padding: 15px;
+}
+
+#body_section_left, #body_section_right {
+  position: fixed;
+  display: none;
+}
+
+#receipt-container {
+  display: inline-block;
+  max-width: 600px;
+  padding: 10px;
+  border-style: solid;
+  border-width:thin;
+  border-radius: 5px;
+}
+
+#total-row {
+  border-top-style:double;
+}
+
+td {
+  text-align: right;
+}

@@ -10,9 +10,9 @@
 
     <h3>Order Summary</h3>
     <div id="order-summary">
-      <ul>
-        <li>Order Sub-total: $${request.user.shopping_cart.subtotal}</li>
-        <li>Taxes: $${request.user.shopping_cart.taxes}</li>
+      <ul id="cart-summary">
+        <li>Subtotal: $${request.user.shopping_cart.subtotal}</li>
+        <li>Taxes: $${request.user.shopping_cart.tax}</li>
         <li>Shipping Fee: $${request.user.shopping_cart.shipping_fee}</li>
         <li>Total Cost: $${request.user.shopping_cart.total}</li>
       </ul>
@@ -21,7 +21,8 @@
 
     <h3>Shipping</h3>
       <div id="shipping-form-container">
-        <div id="shipping-address">
+      <h4>Shipping Address</h4>
+        <div id="shipping-address" class="text-center">
           <p>${request.user.address}</p>
           <p>${request.user.city}, ${request.user.state} ${request.user.zipcode}</p>
         </div>

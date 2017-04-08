@@ -103,7 +103,7 @@ class ProductImage(models.Model):
 
 
 ######################################################################
-## Shopping
+## Item View History
 
 class ViewHistory(models.Model):
     user = models.ForeignKey(FomoUser, related_name='view_history')
@@ -127,6 +127,9 @@ class ViewHistory(models.Model):
                 products.append(view.product)
             if len(products) == 5: break
         return products[:5]
+
+######################################################################
+## Shopping Cart
 
 class ShoppingCart(models.Model):
     user = models.OneToOneField(FomoUser, related_name='shopping_cart')
@@ -182,11 +185,12 @@ class ShoppingCart(models.Model):
         return 0 if count == None else count
 
     def _calc_tax(self):
-        return self.subtotal * Decimal('.0725')
-    taxes = property(_calc_tax)
+        tax = self.subtotal * Decimal('.0725')
+        return round(tax, 2)
+    tax = property(_calc_tax)
 
     def _calc_shipping(self):
-        return 10
+        return Decimal('10')
     shipping_fee = property(_calc_shipping)
 
     def _calc_subtotal(self):
@@ -197,7 +201,7 @@ class ShoppingCart(models.Model):
     subtotal = property(_calc_subtotal)
 
     def _calc_total(self):
-        return self.subtotal + self.taxes + self.shipping_fee
+        return self.subtotal + self.tax + self.shipping_fee
     total = property(_calc_total)
 
 class ShoppingCartItem(models.Model):
@@ -274,7 +278,8 @@ class Sale(models.Model):
             line_item.save()
 
     def _add_tax(self):
-        line_item = SaleLineItem(sale=self, sale_item_type='TAX', quantity=1, price=self.user.shopping_cart.taxes)
+        tax = self.subtotal * Decimal('.0725')
+        line_item = SaleLineItem(sale=self, sale_item_type='TAX', quantity=1, price=tax)
         line_item.save()
 
     def _add_shipping_fee(self):

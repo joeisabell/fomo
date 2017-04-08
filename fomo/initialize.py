@@ -14,6 +14,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from catalog import models as cmod
 from account import models as amod
+from catalog.models import Sale
 from catalog.models import ViewHistory as sh
 
 # drop and recreate database tables
@@ -206,22 +207,20 @@ user.shopping_cart.add_item(bulk_product)
 user.shopping_cart.add_item(unique_product)
 user.shopping_cart.add_item(rental_product)
 
+print(user.shopping_cart.subtotal.__class__)
+print(user.shopping_cart.tax.__class__)
+print(user.shopping_cart.shipping_fee.__class__)
+print(user.shopping_cart.total.__class__)
 
-# shipping = {
-#     'address': '465 N 300 W Apt 29',
-#     'city': 'Provo',
-#     'state': 'UT',
-#     'zipcode': 84601,
-# }
-#
-# for item in user.shopping_cart.items.all():
-#     print(item.product.name, ' ', item.product.on_hand_qty)
-#
-# sale = cmod.Sale.objects.create(user=user, **shipping)
-# sale._add_cart_items()
-# sale._decrement_inv()
-# for item in sale.line_items.all():
-#     print(item.product)
-#
-# for item in user.shopping_cart.items.all():
-#     print(item.product.name, ' ', item.product.on_hand_qty)
+shipping = {
+    'address': '465 N 300 W Apt 29',
+    'city': 'Provo',
+    'state': 'UT',
+    'zipcode': 84601,
+}
+sale = Sale.record(user, shipping)
+
+print(sale.subtotal.__class__)
+print(sale.tax.__class__)
+print(sale.shipping_fee.__class__)
+print(sale.total.__class__)

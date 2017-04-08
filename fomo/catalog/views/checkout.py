@@ -12,11 +12,14 @@ from account import models as amod
 from catalog.models import Sale
 
 @view_function
+@login_required
 def process_request(request):
     try:
         user = amod.FomoUser.objects.get(id=request.user.id)
     except amod.FomoUser.DoesNotExist:
         return HttpResponseRedirect('/account/login')
+    if user.shopping_cart.active_items.count() == 0:
+        return HttpResponseRedirect('/catalog/index')
 
     form = CheckoutForm(request)
 

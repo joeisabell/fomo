@@ -2,7 +2,8 @@
 
 <%block name="content">
   %if form.is_valid():
-  <div id="shipping-address">
+  <h4>Shipping Address</h4>
+  <div id="shipping-address" class="text-center">
     <p>${form.cleaned_data.get('address')}</p>
     <p>${form.cleaned_data.get('city')}, ${form.cleaned_data.get('state')} ${form.cleaned_data.get('zipcode')}</p>
   </div>

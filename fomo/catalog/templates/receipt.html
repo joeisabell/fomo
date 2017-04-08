@@ -1,5 +1,35 @@
 <%inherit file="app_base.htm"/>
 
+<%block name="header_menu_items">
+</%block>
+
 <%block name="body_section_content">
-  Here is my reciept!
+  <div class="row text-center">
+    <h1>Thank You!</h1>
+    <div id="receipt-container">
+      <table class="table">
+        <thead>
+          <h3>Receipt</h3>
+        </thead>
+          <tbody>
+            <tr>
+                <th>Ship to:</th> <td>${ sale.user.first_name } ${ sale.user.last_name }</td>
+            </tr>
+            <tr>
+                <th>Address:</th>
+                <td>
+                  ${ sale.address } <br>
+                  ${ sale.city }, ${ sale.state } ${ sale.zipcode }
+                </td>
+            </tr>
+            <tr> <th>Order #:</th> <td>${ sale.id }</td> </tr>
+            <tr> <th>Subtotal:</th> <td>$ ${ sale.subtotal }</td> </tr>
+            <tr> <th>Tax:</th> <td>$ ${ sale.tax }</td> </tr>
+            <tr> <th>Shipping:</th> <td>$ ${ sale.shipping_fee }</td> </tr>
+            <tr id="total-row"> <th>Total:</th> <td>$ ${ sale.total }</td> </tr>
+          </tbody>
+      </table>
+      Purchase Date: ${ sale.sale_date.strftime('%m/%d/%Y') }
+    </div>
+  </div>
 </%block>
