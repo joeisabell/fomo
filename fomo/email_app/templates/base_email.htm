@@ -1,0 +1,13 @@
+## this is the skeleton of all *ajax* pages on our site - page snippets that are retrieved with Ajax.
+## it's primary function is to insert the CSS and JS for the email file template inheritance
+
+## render the styles with the same name as this template and its supertemplates
+<%! from email_app.models import style %>
+<style>
+  <%include file="${style(self)}"/>
+</style>
+
+## render the email content
+<%block name="content">
+    Sub-templates should place their ajax content here.
+</%block>

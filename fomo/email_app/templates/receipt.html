@@ -1,0 +1,38 @@
+<%inherit file="base_email.htm"/>
+
+<%block name="content">
+<div class="email-background">
+  <div id="pre-header">
+    Thanks for your purchase!
+  </div>
+  <div class="email-container">
+  <div class="email-header">
+    <img src="https://familymusic.us${STATIC_URL}homepage/media/logo.png" alt="">
+  </div>
+    <h2>Receipt</h2>
+    <table>
+        <tbody>
+        <tr> <th>Order Date:</th> <td>${ sale.sale_date.strftime('%m/%d/%Y') }</td> </tr>
+          <tr>
+              <th>Ship to:</th> <td>${ sale.user.first_name } ${ sale.user.last_name }</td>
+          </tr>
+          <tr>
+              <th>Address:</th>
+              <td>
+                ${ sale.address } <br>
+                ${ sale.city }, ${ sale.state } ${ sale.zipcode }
+              </td>
+          </tr>
+          <tr> <th>Order #:</th> <td>${ sale.id }</td> </tr>
+          <tr> <th>Subtotal:</th> <td>$ ${ sale.subtotal }</td> </tr>
+          <tr> <th>Tax:</th> <td>$ ${ sale.tax }</td> </tr>
+          <tr> <th>Shipping:</th> <td>$ ${ sale.shipping_fee }</td> </tr>
+          <tr id="total-row"> <th>Total:</th> <td>$ ${ sale.total }</td> </tr>
+        </tbody>
+    </table>
+    <div class="cta">
+      <a href="https://familymusic.us/catalog/receipt/${ sale.id }">View Receipt</a>
+    </div>
+  </div>
+</div>
+</%block>
