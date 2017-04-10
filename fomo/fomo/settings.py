@@ -25,7 +25,7 @@ SECRET_KEY = '1htt1lx*!0e=9o2&h4*bk!&@f2gceai4!n-4ul5#w1$zmcg=d8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['familymusic.us', 'www.familymusic.us']
 
 AUTH_USER_MODEL = 'account.FomoUser'
 
@@ -154,9 +154,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'fomo',
         'USER': 'postgres',
-        'PASSWORD': 'IsabellJ7260',
+        'PASSWORD': 'PythonDanger12',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5000',
     }
 }
 
