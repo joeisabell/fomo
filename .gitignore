@@ -6,6 +6,6 @@
 .cached_templates/
 __pychache__/
 .sass-cache/
-fomo/fomo/settings.py
 
+fomo/fomo/settings.py
 fomo/static/
