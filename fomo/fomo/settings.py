@@ -66,7 +66,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_mako_plus.RequestInitMiddleware',
-    # 'fomo.middleware.LastFiveMiddleware',
 ]
 
 ROOT_URLCONF = 'fomo.urls'
@@ -109,7 +108,7 @@ TEMPLATES = [
 
            # whether to minify using rjsmin, rcssmin during 1) collection of static files, and 2) on the fly as .jsm and .cssm files are rendered
            # rjsmin and rcssmin are fast enough that doing it on the fly can be done without slowing requests down
-           'MINIFY_JS_CSS': True,
+           'MINIFY_JS_CSS': False,
 
            # the name of the SASS binary to run if a .scss file is newer than the resulting .css file
            # happens when the corresponding template.html is accessed the first time after server startup
@@ -234,6 +233,6 @@ AD_ADMIN_PASS = 'PythonDanger12'
 AD_SERVER = 'localhost'
 
 AUTHENTICATION_BACKENDS = (
-    #'fomo.backends.ActiveDirectoryBackend',
+    'fomo.backends.ActiveDirectoryBackend',
     'django.contrib.auth.backends.ModelBackend',
     )
