@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400">
     <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/jquery.datetimepicker.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     ## render the css with the same name as this page
     ${ get_template_css(self, request, context)}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -137,8 +138,43 @@
 
     <footer id="body_footer">
         <%block name="body_footer">
+        <div class="row">
+            <div class="col-lg-1">
+
+            </div>
+            <div class="col-lg-3 mobile_footer">
+                <div id="followUs">
+                    <p class="social_style">Keep In Touch</p>
+                    <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-snapchat fa-2x" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-4 mobile_footer">
+                <ul class="nav">
+                    <a href="/homepage/about/"><li>About Us</li></a>
+                    <a href="/homepage/terms/"><li>Music Terms</li></a>
+                    <a href="/homepage/faq/"><li>FAQs</li></a>
+                    <a href="/catalog/index/"><li>Shop</li></a>
+                </ul>
+            </div>
+            <div class="col-lg-3 mobile_footer">
+                <label for="subscribe">Email:</label>
+                <input type="text" class="form-control" id="subscribe" value="email@example.com">
+                <p>Learn more about upcoming offers</p>
+                <a href="#"><button type="button" class="btn btn-default">Submit</button></a>
+            </div>
+            <div class="col-lg-1">
+
+            </div>
+        </div>
+
+        <div class="copyright">
             <%! from datetime import datetime %>
             &copy; Copyright ${datetime.now().year}. All rights reserved.
+        </div>
+
         </%block>
     </footer>
 
