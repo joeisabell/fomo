@@ -85,8 +85,15 @@
 
 #body_footer{
     text-align: center;
+    background-color: #eff2f6;
+    padding: 15px;
+    padding-top: 50px;
 }
-
+@media (max-width: 500px) {
+    .mobile_footer {
+        margin-bottom: 50px;
+    }
+}
 @media (max-width: 1010px) {
     #body_section_top, #body_section_content{
         margin-left: 0px;
@@ -110,4 +117,20 @@
     #brand-short {
       display: inherit;
     }
+}
+.copyright {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+i {
+    padding: 15px;
+}
+a {
+    color: #2c3e50;
+}
+.social_style {
+    border-bottom-style: double;
+}
+#subscribe{
+    margin-bottom: 5px;
 }
