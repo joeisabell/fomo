@@ -43,6 +43,9 @@ for data in (
         ('Margo', 'Isabell', 'margobrockbank5@gmail.com', 'misabell', 'mypass', False, False, '465 N 300 W Apt 29', 'Provo', 'UT', '84601', '479-802-9621', ['Customers',]),
         ('Jim', 'Fife', 'jamesafife@bearriver.net', 'primeguard68', 'mypass', False, False, '12695 Strawberry Ridge Road', 'Bentonville', 'AR', '72712', '479-898-3344', ['Customers',]),
         ('Jill', 'River', 'jill@bearriver.net', 'jackrabit', 'mypass', False, False, '12695 Strawberry Ridge Road', 'Bentonville', 'AR', '72712', '479-898-3344', ['Customers',]),
+        ('Carsen', 'Beyer', 'carsen.beyer@gmail.com', 'carsenb', 'carsenb', True, True, '465 N 300 W Apt 29', 'Provo', 'UT', '84601', '479-802-9621', ['Managers', 'Customers']),
+        ('Kate', 'Cousineau', 'kcousineau95@gmail.com', 'kate', 'kate', True, True, '465 N 300 W Apt 29', 'Provo', 'UT', '84601', '479-802-9621', ['Managers', 'Customers']),
+        ('Kaitlyn', 'Whipple', 'sunnykw@outlook.com', 'kaitlyn', 'kaitlyn', True, True, '465 N 300 W Apt 29', 'Provo', 'UT', '84601', '479-802-9621', ['Managers', 'Customers']),
         ('Joe', 'Isabell', 'joeisabell@me.com', 'isabell7', 'Utslcw2014', True, True, '465 N 300 W Apt 29', 'Provo', 'UT', '84601', '479-802-9621', ['Managers', 'Customers']),
     ):
     user = amod.FomoUser()
