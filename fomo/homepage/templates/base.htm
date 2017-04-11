@@ -113,7 +113,7 @@
         </div>
 
         <div id = "body_section_right">
-            <%block name="body_section_right">
+            <!-- <%block name="body_section_right">
             %if request.user.is_authenticated:
             <h5>Recently Viewed Items</h5>
             <ul class="nav last-5-items">
@@ -122,7 +122,7 @@
               %endfor
             </ul>
             %endif
-            </%block>
+            </%block> -->
         </div>
 
         <div id = "body_section_content">
@@ -139,37 +139,30 @@
     <footer id="body_footer">
         <%block name="body_footer">
         <div class="row">
-            <div class="col-lg-1">
-
+          <div class="site-map-column col-md-4 mobile_footer">
+              <h4>Shop</h4>
+              <ul class="site-map-list">
+                  <li><a href="/homepage/about/">About Us</a></li>
+                  <li><a href="/homepage/terms/">Music Terms</a></li>
+                  <li><a href="/homepage/faq/">FAQs</a></li>
+                  <li><a href="/catalog/index/">Shop</a></li>
+              </ul>
+          </div>
+          <div class="col-md-4 mobile_footer">
+            <div id="social_icons">
+                <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-snapchat fa-2x" aria-hidden="true"></i></a>
             </div>
-            <div class="col-lg-3 mobile_footer">
-                <div id="followUs">
-                    <p class="social_style">Keep In Touch</p>
-                    <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-snapchat fa-2x" aria-hidden="true"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-4 mobile_footer">
-                <ul class="nav">
-                    <a href="/homepage/about/"><li>About Us</li></a>
-                    <a href="/homepage/terms/"><li>Music Terms</li></a>
-                    <a href="/homepage/faq/"><li>FAQs</li></a>
-                    <a href="/catalog/index/"><li>Shop</li></a>
-                </ul>
-            </div>
-            <div class="col-lg-3 mobile_footer">
-                <label for="subscribe">Email:</label>
-                <input type="text" class="form-control" id="subscribe" value="email@example.com">
-                <p>Learn more about upcoming offers</p>
-                <a href="#"><button type="button" class="btn btn-default">Submit</button></a>
-            </div>
-            <div class="col-lg-1">
-
-            </div>
+          </div>
+          <div class="col-md-4 mobile_footer">
+              <label for="subscribe">Email:</label>
+              <input type="text" class="form-control" id="subscribe" value="email@example.com">
+              <p>Learn more about upcoming offers</p>
+              <a href="#"><button type="button" class="btn btn-default">Submit</button></a>
+          </div>
         </div>
-
         <div class="copyright">
             <%! from datetime import datetime %>
             &copy; Copyright ${datetime.now().year}. All rights reserved.

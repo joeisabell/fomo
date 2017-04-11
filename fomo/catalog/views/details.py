@@ -45,6 +45,12 @@ class AddToCartForm(FormMixIn, forms.Form):
     def clean(self):
         qty = self.cleaned_data.get('quantity')
         qty = 1 if qty == None else qty
+        
+        if qty <= 0:
+            self.response_message = 'Please enter a number greater than 0'
+            self.inv_status = []
+            self.inv_status.append(False)
+            raise forms.ValidationError('')
 
         self.inv_status = self.request.user.shopping_cart.check_inv(self.product, qty)
         self.response_message = self.inv_status[1]
