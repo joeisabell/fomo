@@ -43,7 +43,7 @@ for data in (
         ('Margo', 'Isabell', 'margobrockbank5@gmail.com', 'misabell', 'mypass', False, False, '465 N 300 W Apt 29', 'Provo', 'UT', '84601', '479-802-9621', ['Customers',]),
         ('Jim', 'Fife', 'jamesafife@bearriver.net', 'primeguard68', 'mypass', False, False, '12695 Strawberry Ridge Road', 'Bentonville', 'AR', '72712', '479-898-3344', ['Customers',]),
         ('Jill', 'River', 'jill@bearriver.net', 'jackrabit', 'mypass', False, False, '12695 Strawberry Ridge Road', 'Bentonville', 'AR', '72712', '479-898-3344', ['Customers',]),
-        ('Joe', 'Isabell', 'joeisabell0@gmail.com', 'isabell7', 'Utslcw2014', True, True, '465 N 300 W Apt 29', 'Provo', 'UT', '84601', '479-802-9621', ['Managers', 'Customers']),
+        ('Joe', 'Isabell', 'joeisabell@me.com', 'isabell7', 'Utslcw2014', True, True, '465 N 300 W Apt 29', 'Provo', 'UT', '84601', '479-802-9621', ['Managers', 'Customers']),
     ):
     user = amod.FomoUser()
     user.first_name = data[0]
@@ -104,6 +104,12 @@ for data in (
             [ dir + 'violin_string_set.jpg', 'jpg', True ],
             [ dir + 'violin_string_set_1.jpg', 'jpg', False ],
         ], desc),
+        ('Triangle', 'percussion', 'Squares Are For Squares', Decimal('8.99'), 15, 5, 10, [
+           [ dir + 'triangle.jpg', 'jpg', True ],
+           [ dir + 'triangle_1.jpg', 'jpg', False ],
+           [ dir + 'triangle_2.jpg', 'jpg', False ],
+       ], desc),
+
     ):
     bulk_product = cmod.BulkProduct()
     bulk_product.name = data[0]
@@ -145,6 +151,12 @@ for data in (
             [ dir + 'french_horn_2.jpg', 'jpg', False ],
             [ dir + 'french_horn_3.jpg', 'jpg', False ],
         ], desc),
+        ('Drums', 'percussion', 'Gammon', Decimal('189.99'), '908777', [
+           [ dir + 'drums.jpg', 'jpg', True ],
+           [ dir + 'drums_1.jpg', 'jpg', False ],
+           [ dir + 'drums_2.jpg', 'jpg', False ],
+           [ dir + 'drums_3.jpg', 'jpg', False ],
+       ], desc),
     ):
     unique_product = cmod.UniqueProduct()
     unique_product.name = data[0]
@@ -207,11 +219,6 @@ user.shopping_cart.add_item(bulk_product)
 user.shopping_cart.add_item(unique_product)
 user.shopping_cart.add_item(rental_product)
 
-print(user.shopping_cart.subtotal.__class__)
-print(user.shopping_cart.tax.__class__)
-print(user.shopping_cart.shipping_fee.__class__)
-print(user.shopping_cart.total.__class__)
-
 shipping = {
     'address': '465 N 300 W Apt 29',
     'city': 'Provo',
@@ -219,8 +226,3 @@ shipping = {
     'zipcode': 84601,
 }
 sale = Sale.record(user, shipping)
-
-print(sale.subtotal.__class__)
-print(sale.tax.__class__)
-print(sale.shipping_fee.__class__)
-print(sale.total.__class__)

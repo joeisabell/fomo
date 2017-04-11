@@ -2,6 +2,10 @@
   position: relative;
 }
 
+#body_section_before > img {
+  width: 100%;
+}
+
 #cover_text_area{
   position: absolute;
   bottom: 20%;
@@ -18,10 +22,31 @@
   margin-right: 15%;
 }
 
+
+
 @media (max-width: 800px) {
-    #cover_text{
-      margin-left: 5%;
-      margin-right: 5%;
-      font-size: 28px;
-    }
+  #cover_text_area{
+    position:inherit;
+    font-size: 38px;
+    text-align: center;
+    width: 100%;
+    background-color: #eee;
+  }
+
+  #cover_text{
+    margin-left: 7%;
+    margin-right: 7%;
+    font-size: 28px;
+    opacity: inherit;
+    padding: 20px;
+    background: transparent;
+  }
+
+  #cta {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+
 }
