@@ -10,7 +10,7 @@ from fomo.methods import geocode_address as geo
 from formlib.form import FormMixIn
 from account import models as amod
 from catalog.models import Sale
-from email_app.views import receipt
+from email_app.views.receipt import process_email
 
 @view_function
 @login_required
@@ -42,7 +42,7 @@ class CheckoutForm(FormMixIn, forms.Form):
         user = self.request.user
         shipping_details = self.request.session.get('shipping_address')
         self.sale = Sale.record(user, shipping_details)
-        receipt.send(self.request, self.sale)
+        process_email('receipt', { 'sale': self.sale })
 
 @view_function
 def shipping_form(request):
