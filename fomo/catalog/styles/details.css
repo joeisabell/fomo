@@ -55,7 +55,7 @@ padding-top: 20px;
 
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
   #header_message {
     right: 20px;
   }
@@ -63,9 +63,6 @@ padding-top: 20px;
     max-width: 100%;
     margin-left: 20px;
     margin-right: 20px;
-  }
-  #body_section_right {
-    display: none;
   }
 }
 

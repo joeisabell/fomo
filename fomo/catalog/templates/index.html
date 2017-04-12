@@ -1,5 +1,30 @@
 <%inherit file="app_base.htm" />
 
+<!-- Mobile Nav -->
+<%block name="body_section_before">
+<div id="mobile_nav_btn_container">
+  <a id="mobile_nav_btn" class="btn btn-primary" role="button" data-toggle="collapse" href="#mobile_nav" aria-expanded="false" aria-controls="collapseExample">
+    Filter <span class="glyphicon glyphicon-chevron-down"></span>
+  </a>
+</div>
+<div id="mobile_nav" class="collapse">
+  <h4 class="text-center">Search Products by</h4>
+  <h5>Category</h5>
+  <ul class="nav categories">
+    <li><a href="/catalog/index">All Categories</a></li>
+    %for category in categories:
+    <li><a href="/catalog/index?category__id=${ category.id }">${ category.name }</a></li>
+    %endfor
+  </ul>
+  <h5>Brand</h5>
+  <ul class="nav categories">
+    <li><a href="/catalog/index">All Brands</a></li>
+    %for brand in brands:
+    <li><a href="/catalog/index?brand=${ brand }">${ brand }</a></li>
+    %endfor
+  </ul>
+</div>
+</%block>
 
 <%block name="body_section_left">
 <div id="side_nav">
@@ -19,25 +44,20 @@
     %endfor
   </ul>
 </div>
-
-
 </%block>
 
 <%block name="body_section_content">
 <h1>Product Catalog</h1>
   %for product in products:
-    <div class="tile-container">
-
-      <a href="/catalog/details/${ product.id }">
-
-        <div class="tile-image">
-          <img src="${ STATIC_URL + product.default_image().subdir }" alt="">
-        </div>
-
-        <div class="tile-text">
-          <div class="tile-title">
-            ${product.name}
-            <div class="tile-details hidden">
+  <div class="tile-container">
+    <a href="/catalog/details/${ product.id }">
+      <div class="tile-image">
+        <img src="${ STATIC_URL + product.default_image().subdir }" alt="">
+      </div>
+      <div class="tile-text">
+        <div class="tile-title">
+          ${product.name}
+          <div class="tile-details hidden">
             <ul>
               <li class="brand-name">from ${ product.brand }</li>
               <li class="price">$${ product.price }</li>
@@ -45,14 +65,10 @@
             <div class="view-now-button">
               <button class="btn btn-info" type="button" name="button">More Details</button>
             </div>
-
-            </div>
           </div>
-
         </div>
-      </a>
-
-    </div>
+      </div>
+    </a>
+  </div>
   %endfor
-
 </%block>

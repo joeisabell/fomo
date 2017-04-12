@@ -82,7 +82,7 @@
     padding: 20px;
 }
 
-@media (max-width: 1010px) {
+@media (max-width: 900px) {
     #body_section_top, #body_section_content{
         margin-left: 0px;
         margin-right: 0px;
