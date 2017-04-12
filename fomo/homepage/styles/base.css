@@ -138,7 +138,13 @@ a {
   position: relative;
   text-align: center;
   white-space : nowrap;
-  overflow : scroll;
+  overflow : hidden;
+}
+
+@media (max-width: 787px) {
+  #view_history_bar {
+    overflow : scroll;
+  }
 }
 
 .view_history_item_container {
@@ -150,7 +156,7 @@ a {
   max-height: 100px;
 }
 
-.view_history_item_image > img{
+.view_history_item_image > img {
   width: 100px;
   padding: 6px;
   min-height: 100px;

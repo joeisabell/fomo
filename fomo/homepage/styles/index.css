@@ -22,8 +22,6 @@
   margin-right: 15%;
 }
 
-
-
 @media (max-width: 800px) {
   #cover_text_area{
     position:inherit;
