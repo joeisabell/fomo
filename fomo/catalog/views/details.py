@@ -17,6 +17,7 @@ def process_request(request):
     except cmod.Product.DoesNotExist:
         return HttpResponseRedirect('/catalog/index')
     ViewHistory.add(request.user, product)
+    similar_products = cmod.Product.objects.filter(category=product.category).exclude(id=product.id)[:3]
 
     form = AddToCartForm(request, product=product)
     if form.is_valid():
@@ -27,6 +28,7 @@ def process_request(request):
         # provide return url to return to the same set of search results
         'previous_page': request.META.get('HTTP_REFERER'),
         'form': form,
+        'similar_products': similar_products,
     }
     return dmp_render(request, 'details_ajax.html' if request.method == 'POST' else 'details.html' , context)
 
@@ -45,7 +47,7 @@ class AddToCartForm(FormMixIn, forms.Form):
     def clean(self):
         qty = self.cleaned_data.get('quantity')
         qty = 1 if qty == None else qty
-        
+
         if qty <= 0:
             self.response_message = 'Please enter a number greater than 0'
             self.inv_status = []

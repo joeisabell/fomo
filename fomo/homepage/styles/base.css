@@ -100,7 +100,7 @@
   display: none;
 }
 
-@media (max-width: 460px) {
+@media (max-width: 990px) {
     #brand-long {
       display: none;
     }
@@ -115,9 +115,7 @@ i {
 a {
     color: #2c3e50;
 }
-.social_style {
-    border-bottom-style: double;
-}
+
 #subscribe{
   margin-bottom: 5px;
 }
@@ -127,11 +125,10 @@ a {
     margin: 12px 10px;
 
 }
-
 #view_history_title {
   text-align: left;
   padding-top: 20px;
-  margin-left: 40px;
+  margin-left: 20px;
 }
 
 #view_history_bar {
@@ -199,12 +196,6 @@ a {
     max-width: 300px;
     margin: 10px auto;
     text-align: center;
-}
-
-@media (max-width: 500px) {
-    .mobile_footer {
-        margin-bottom: 50px;
-    }
 }
 
 .copyright {

@@ -8,24 +8,22 @@
   <a href="/catalog/details/${ product.id }">
     <div class="row search-result-container">
       <div class="tile-image">
-
         <img src="${ STATIC_URL + product.image.subdir }" alt="">
-
         <div class="search-result-title">
           ${ product.name }
           <span class="brand">from ${ product.brand }</span>
         </div>
-
         <div class="view-now-button pull-right">
           <div class="price">$${ product.price }</div>
           <button class="btn btn-info btn-sm pull-right" type="button" name="button">View Now</button>
         </div>
-
       </div>
     </div>
   </a>
-
   %endfor
 </div>
+</%block>
 
+<%block name="body_section_left">
+  <a href="/catalog/index"> <span class="glyphicon glyphicon-chevron-left"></span> Return to Catalog</a>
 </%block>

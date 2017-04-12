@@ -48,17 +48,7 @@ body {
   border: none;
 }
 
-@media (max-width: 990px) {
-  #search-box {
-    display: none;
-  }
-}
-
 @media (max-width: 767px) {
-  #search-box {
-    display: inline;
-    padding: 0 auto;
-  }
   .input-group{
     display: inline-block;
   }

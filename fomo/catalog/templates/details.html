@@ -55,5 +55,22 @@
     %endfor
     </table>
   </div>
+</%block>
 
+<%block name="body_section_left">
+<div id="body_section_left">
+  <div id="similar_products_title">Similar Items</div>
+  <div id="similar_products_bar">
+  %for product in similar_products:
+    <a href="/catalog/details/${ product.id }">
+      <div class="similar_products_item_container">
+      <div class="similar_products_item_image">
+        <img src="${ STATIC_URL + product.default_image().subdir }" alt="">
+      </div>
+      ${ product.name }
+      </div>
+    </a>
+  %endfor
+  </div>
+</div>
 </%block>

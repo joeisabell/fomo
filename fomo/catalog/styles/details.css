@@ -68,3 +68,28 @@ padding-top: 20px;
     display: none;
   }
 }
+
+#similar_products_title {
+  text-align: center;
+  font-size: 19px;
+}
+
+#similar_products_bar {
+  position: relative;
+  text-align: center;
+}
+
+.similar_products_item_container {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  min-width: 120px;
+  max-height: 100px;
+  padding-top: 10px;
+}
+
+.similar_products_item_image > img {
+  width: 100px;
+  padding: 6px;
+  min-height: 100px;
+}
