@@ -113,16 +113,8 @@
         </div>
 
         <div id = "body_section_right">
-            <!-- <%block name="body_section_right">
-            %if request.user.is_authenticated:
-            <h5>Recently Viewed Items</h5>
-            <ul class="nav last-5-items">
-              %for product in ViewHistory.last_five(request.user):
-              <li><a href="/catalog/details/${ product.id }">${ product.name }</a></li>
-              %endfor
-            </ul>
-            %endif
-            </%block> -->
+            <%block name="body_section_right">
+            </%block>
         </div>
 
         <div id = "body_section_content">
@@ -131,44 +123,64 @@
         </div>
     </div><!-- /#body_section -->
 
+    %if request.user.is_authenticated:
+    <%block name="body_section_after">
     <div id="body_section_after">
-        <%block name="body_section_after">
-        </%block>
+      <div id="view_history_title">Recently viewed items</div>
+      <div id="view_history_bar">
+      %for product in ViewHistory.last_n(request.user, n=9):
+        <a href="/catalog/details/${ product.id }">
+          <div class="view_history_item_container">
+          <div class="view_history_item_image">
+            <img src="${ STATIC_URL + product.default_image().subdir }" alt="">
+          </div>
+          ${ product.name }
+          </div>
+        </a>
+      %endfor
+      </div>
     </div>
+    </%block>
+    %endif
 
     <footer id="body_footer">
         <%block name="body_footer">
         <div class="row">
-          <div class="site-map-column col-md-4 mobile_footer">
-              <h4>Shop</h4>
+          <div id="site-map">
+            <div class="site-map-column">
+                <h4>Shop</h4>
+                <ul class="site-map-list">
+                    <li><a href="/catalog/index?categoryid=1">Brass</a></li>
+                    <li><a href="/catalog/index?categoryid=2">String</a></li>
+                    <li><a href="/catalog/index?categoryid=3">Wind</a></li>
+                    <li><a href="/catalog/index?categoryid=4">Percussion</a></li>
+                    <li><a href="/catalog/index">Accessories</a></li>
+                </ul>
+            </div>
+            <div class="site-map-column">
+              <h4>Learn</h4>
               <ul class="site-map-list">
-                  <li><a href="/homepage/about/">About Us</a></li>
-                  <li><a href="/homepage/terms/">Music Terms</a></li>
-                  <li><a href="/homepage/faq/">FAQs</a></li>
-                  <li><a href="/catalog/index/">Shop</a></li>
+                <li><a href="/homepage/about/">About Us</a></li>
+                <li><a href="/homepage/terms/">Music Terms</a></li>
+                <li><a href="/homepage/faq/">FAQs</a></li>
               </ul>
-          </div>
-          <div class="col-md-4 mobile_footer">
-            <div id="social_icons">
-                <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-snapchat fa-2x" aria-hidden="true"></i></a>
+            </div>
+            <div id="site-map-contact">
+              <div id="social_icons">
+                  <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-snapchat fa-2x" aria-hidden="true"></i></a>
+              </div>
             </div>
           </div>
-          <div class="col-md-4 mobile_footer">
-              <label for="subscribe">Email:</label>
-              <input type="text" class="form-control" id="subscribe" value="email@example.com">
-              <p>Learn more about upcoming offers</p>
-              <a href="#"><button type="button" class="btn btn-default">Submit</button></a>
-          </div>
-        </div>
-        <div class="copyright">
-            <%! from datetime import datetime %>
-            &copy; Copyright ${datetime.now().year}. All rights reserved.
         </div>
 
-        </%block>
+      <div class="copyright">
+        <%! from datetime import datetime %>
+        &copy; Copyright ${datetime.now().year}. All rights reserved.
+      </div>
+      </%block>
     </footer>
 
     <%block name="modal">

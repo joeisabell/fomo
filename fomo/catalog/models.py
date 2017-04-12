@@ -128,6 +128,15 @@ class ViewHistory(models.Model):
             if len(products) == 5: break
         return products[:5]
 
+    @staticmethod
+    def last_n(user, n=5):
+        products = []
+        for view in user.view_history.order_by('view_date').reverse():
+            if view.product not in products:
+                products.append(view.product)
+            if len(products) == n: break
+        return products[:n]
+
 ######################################################################
 ## Shopping Cart
 

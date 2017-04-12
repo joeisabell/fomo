@@ -1,3 +1,13 @@
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
 #header_maintenance{
     color: white;
     background-color: #9B2C21;
@@ -46,6 +56,7 @@
 
 #body_section{
     position: relative;
+    flex: 1;
 }
 
 #body_section_top{
@@ -63,6 +74,7 @@
 #body_section_content{
     margin-left: 200px;
     margin-right: 200px;
+
 }
 
 #body_section_right{
@@ -110,38 +122,6 @@
     }
 }
 
-#body_footer{
-    background-color: #eff2f6;
-    padding: 15px;
-    padding-top: 50px;
-}
-
-.site-map-column {
-
-}
-.site-map-column > ul > a {
-  margin: 5px;
-}
-
-#social_icons {
-  border-style: solid;
-  border-radius: 5px;
-  border-width: thin;
-  max-width: 300px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-@media (max-width: 500px) {
-    .mobile_footer {
-        margin-bottom: 50px;
-    }
-}
-
-.copyright {
-    margin-top: 25px;
-    margin-bottom: 25px;
-}
 i {
     padding: 15px;
 }
@@ -152,5 +132,90 @@ a {
     border-bottom-style: double;
 }
 #subscribe{
-    margin-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+#body_section_after {
+    position: relative;
+    margin: 12px 10px;
+
+}
+
+#view_history_title {
+  text-align: left;
+  padding-top: 20px;
+  margin-left: 40px;
+}
+
+#view_history_bar {
+  position: relative;
+  text-align: center;
+  white-space : nowrap;
+  overflow : scroll;
+}
+
+.view_history_item_container {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  margin: 5px;
+  min-width: 120px;
+  max-height: 100px;
+}
+
+.view_history_item_image > img{
+  width: 100px;
+  padding: 6px;
+  min-height: 100px;
+}
+
+
+#body_footer{
+    background-color: #eff2f6;
+    padding: 15px;
+}
+
+#site-map {
+  position: relative;
+  display: block;
+  margin: 0 5%;
+}
+.site-map-column {
+  display: inline-block;
+  margin: 0 5%;
+  vertical-align: top;
+}
+.site-map-list {
+  padding-left: 8px;
+}
+.site-map-list > li {
+  list-style: none;
+  padding: 2px 0;
+}
+
+#site-map-contact {
+  display: inline;
+  width: auto;
+  text-align: center;
+}
+
+#social_icons {
+    border-style: solid;
+    border-radius: 5px;
+    border-width: thin;
+    max-width: 300px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+@media (max-width: 500px) {
+    .mobile_footer {
+        margin-bottom: 50px;
+    }
+}
+
+.copyright {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    text-align: center;
 }

@@ -1,5 +1,5 @@
 #body_section_content {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .categories > li > a {
@@ -94,5 +94,14 @@
   .tile-image > img{
     width: 300px;
     min-height: 300px;
+  }
+  #body_section_content {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1010px) {
+  #body_section_content {
+    text-align: center;
   }
 }

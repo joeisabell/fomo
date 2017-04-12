@@ -5,15 +5,6 @@
   max-width: 300px;
 }
 
-#body_section_content {
-  margin-left: 40px;
-  padding: 15px;
-}
-
-#body_section_left {
-  position: fixed;
-  display: none;
-}
 #return-link {
   padding-bottom: 10px;
 }
