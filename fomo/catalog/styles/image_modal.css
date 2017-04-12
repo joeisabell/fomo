@@ -1,3 +1,6 @@
+.modal-dialog {
+  max-width: 95% !important;
+}
 #image-modal {
   text-align: center;
 }

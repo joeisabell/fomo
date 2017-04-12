@@ -4,7 +4,7 @@
   <!-- Modal -->
   <div id="image-modal">
     %for image in product_images:
-      <img class="product-images" src="${STATIC_URL + image.subdir}" alt="">
+      <img class="img-responsive product-images" src="${STATIC_URL + image.subdir}" alt="">
     %endfor
 
     <div class="modal-buttons">
@@ -15,6 +15,6 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
       </button>
     </div>
-    
+
   </div>
 </%block>
