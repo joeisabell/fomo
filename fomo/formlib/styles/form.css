@@ -12,6 +12,6 @@ ul.errorlist > li {
     margin: 12px 0 3px 0;
     padding: .2em .6em .3em .6em;
     font-size: 85%;
-    white-space: nowrap;
+    white-space: pre-wrap;
     vertical-align: baseline;
 }

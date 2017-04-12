@@ -11,3 +11,27 @@
         <a id="cta" class="btn btn-warning" href="/catalog/index" role="button">See How</a>
     </div>
 </%block>
+
+<%block name="body_section_after">
+<div class="tiles_container">
+  <div class="home_tiles" id="left_tile">
+      <a href="/catalog/index/"><img class="img-responsive" src="${ STATIC_URL }homepage/media/piano_unique_image.jpg" alt=""></a>
+      <h4 class="tile_header">Instruments</h4>
+      <p class="text-center">Beautifully crafted instruments.</p>
+      <a href="/catalog/index/"><button type="button" class="btn btn-info">Shop Now</button></a>
+  </div>
+  <div class="home_tiles" id="middle_tile">
+      <a href="/catalog/index/"><img class="img-responsive" src="${ STATIC_URL }homepage/media/accessories.jpg" alt=""></a>
+      <h4 class="tile_header">Accessories</h4>
+      <p class="text-center">Purchase all the bulk items you need right here.</p>
+      <a href="/catalog/index/"><button type="button" class="btn btn-info">Shop Now</button></a>
+  </div>
+
+  <div class="home_tiles" id="right_tile">
+      <a href="/catalog/index/"><img class="img-responsive" src="${ STATIC_URL }homepage/media/violin.jpg" alt=""></a>
+      <h4 class="tile_header">Rentals</h4>
+      <p class="text-center">Try it out before you buy it.</p>
+      <a href="/catalog/index/"><button type="button" class="btn btn-info">Shop Now</button></a>
+  </div>
+</div>
+</%block>

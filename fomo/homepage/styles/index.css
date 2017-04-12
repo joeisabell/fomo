@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+#body_section_content, #body_section_top {
+  display: none
+}
+
 #cover_text_area{
   position: absolute;
   bottom: 20%;
@@ -45,6 +49,46 @@
   }
 }
 
-@media (max-width: 768px) {
+.tiles_container {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    padding: 0px;
+}
 
+.home_tiles {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    width: 33%;
+    margin-bottom: 20px;
+}
+
+.home_tiles > a > img {
+    width: 100%;
+    padding: 0 3px;
+}
+
+.tile_header {
+    margin-top: 30px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .tiles_container {
+        position: relative;
+        width: 100%;
+        padding: 0px;
+    }
+    .home_tiles {
+        width: 100%;
+        padding: 0px;
+        text-align: center;
+    }
+    .home_tiles > a > img {
+        padding: 0;
+    }
 }
