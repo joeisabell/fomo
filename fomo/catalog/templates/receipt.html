@@ -4,7 +4,6 @@
 </%block>
 
 <%block name="body_section_content">
-  <div class="row text-center">
     <h1>Thank You!</h1>
     <div id="receipt-container">
       <table class="table">
@@ -31,5 +30,7 @@
       </table>
       Purchase Date: ${ sale.sale_date.strftime('%m/%d/%Y') }
     </div>
-  </div>
+</%block>
+
+<%block name="body_section_after">
 </%block>

@@ -4,15 +4,15 @@
     <li class=${ 'active' if request.dmp_router_page == 'index' else '' }><a href="/homepage/index">Home</a></li>
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopups="true" aria-expanded="true">
-          Learn
+          About
       </a>
       <ul class="dropdown-menu">
-        <li class=${ 'active' if request.dmp_router_page == 'about' else '' }><a href="/homepage/about">About Us</a></li>
+        <li class=${ 'active' if request.dmp_router_page == 'about' else '' }><a href="/homepage/about">Our History</a></li>
         <li class=${ 'active' if request.dmp_router_page == 'terms' else '' }><a href="/homepage/terms">Music Terms</a></li>
         <li class=${ 'active' if request.dmp_router_page == 'faq' else '' }><a href="/homepage/faq">FAQs</a></li>
+        <li class=${ 'active' if request.dmp_router_page == 'contact' else '' }><a href="/homepage/faq">Contact</a></li>
       </ul>
     </li>
-
     <li class=${ 'active' if request.dmp_router_page == 'contact' else '' }><a href="/catalog/index">Shop</a></li>
 
 </%block>

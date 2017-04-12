@@ -78,12 +78,14 @@
                         Welcome,  ${ request.user.first_name } <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/account/index"><span class="glyphicon glyphicon-user"></span> Your Account </a></li>
+                        <li><a href="/account/index"><span class="glyphicon glyphicon-user"></span>  Account Settings</a></li>
+                        <li><a href="/account/orders"><span class="glyphicon glyphicon-credit-card"></span>  Your Orders</a></li>
+                        <li role="separator" class="divider"></li>
                         %if request.user.has_perm('catalog.change_product'):
-                        <li><a href="/manager/index"><span class="glyphicon glyphicon-th"></span> Dashboard </a></li>
+                        <li><a href="/manager/index"><span class="glyphicon glyphicon-th"></span> Dashboard</a></li>
                         %endif
                         <li role="separator" class="divider"></li>
-                        <li><a href="/account/logout"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+                        <li><a href="/account/logout"><span class="glyphicon glyphicon-log-out"></span>  Logout</a></li>
                     </ul>
                 </li>
             %else:
@@ -123,8 +125,8 @@
         </div>
     </div><!-- /#body_section -->
 
-    %if request.user.is_authenticated:
     <%block name="body_section_after">
+    %if request.user.is_authenticated:
     <div id="body_section_after">
       <div id="view_history_title">Recently viewed items</div>
       <div id="view_history_bar">
@@ -140,8 +142,8 @@
       %endfor
       </div>
     </div>
-    </%block>
     %endif
+    </%block>
 
     <footer id="body_footer">
         <%block name="body_footer">
@@ -158,11 +160,12 @@
                 </ul>
             </div>
             <div class="site-map-column">
-              <h4>Learn</h4>
+              <h4>About</h4>
               <ul class="site-map-list">
-                <li><a href="/homepage/about/">About Us</a></li>
+                <li><a href="/homepage/about/">Our History</a></li>
                 <li><a href="/homepage/terms/">Music Terms</a></li>
                 <li><a href="/homepage/faq/">FAQs</a></li>
+                <li><a href="/homepage/contact/">Contact Us</a></li>
               </ul>
             </div>
             <div id="site-map-contact">

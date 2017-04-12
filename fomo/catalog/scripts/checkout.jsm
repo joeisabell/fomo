@@ -33,7 +33,7 @@ $(function() {
       // Open checkout with further options
       handler.open({
         name: 'FOMO Music Store',
-        description: '2 Widgets',
+        description: "Number of items: " + ${ request.user.shopping_cart.item_count()},
         amount: ${ request.user.shopping_cart.total * 100 }
       });
     e.preventDefault();

@@ -1,7 +1,14 @@
 #body_section_content {
-  margin: 40px;
-  padding: 15px;
+  text-align: center;
+  margin-left: 0px;
 }
+
+@media (max-width: 767px) {
+    #body_section_content {
+      width: 100%;
+      margin: 0 auto;
+    }
+ }
 
 #body_section_left, #body_section_right {
   position: fixed;
