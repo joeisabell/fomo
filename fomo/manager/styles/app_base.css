@@ -1,0 +1,12 @@
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#body_section{
+    position: relative;
+    flex: 1;
+}

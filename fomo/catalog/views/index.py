@@ -8,15 +8,8 @@ from catalog import models as cmod
 
 @view_function
 def process_request(request):
-    try:
-        if request.GET.get('categoryid') is not None:
-            category = cmod.Category.objects.get(id=request.GET.get('categoryid'))
-            products = cmod.Product.objects.filter(category=category)
-        else:
-            products = cmod.Product.objects.all()
-    except:
-        products = cmod.Product.objects.all()
-
+    products = cmod.Product.objects.filter(**request.GET.dict())
+    brands = products.distinct('brand').values_list('brand', flat=True)
     categories = cmod.Category.objects.all()
 
     previous_page = request.META.get('HTTP_REFERER')
@@ -24,6 +17,7 @@ def process_request(request):
     context = {
         'categories': categories,
         'products': products,
+        'brands': brands,
     }
 
     return dmp_render(request, 'index.html', context)

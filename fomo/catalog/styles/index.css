@@ -1,11 +1,12 @@
-#body_section_content {
-  /*text-align: center;*/
+#body_section_left {
+  display: block;
 }
 
 .categories > li > a {
   padding-top: 2px;
   padding-bottom: 2px;
 }
+
 
 .tile-container {
   display: inline-block;
@@ -101,7 +102,7 @@
 }
 
 @media (max-width: 1010px) {
-  #body_section_content {
-    text-align: center;
+  #body_section_left {
+    display: none;
   }
 }

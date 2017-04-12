@@ -2,13 +2,25 @@
 
 
 <%block name="body_section_left">
-<h5>Show results for:</h5>
+<div id="side_nav">
+  <h4 class="text-center">Search Products by</h4>
+  <h5>Category</h5>
   <ul class="nav categories">
     <li><a href="/catalog/index">All Categories</a></li>
     %for category in categories:
-    <li><a href="/catalog/index?categoryid=${ category.id }">${ category.name }</a></li>
+    <li><a href="/catalog/index?category__id=${ category.id }">${ category.name }</a></li>
     %endfor
   </ul>
+  <h5>Brand</h5>
+  <ul class="nav categories">
+    <li><a href="/catalog/index">All Brands</a></li>
+    %for brand in brands:
+    <li><a href="/catalog/index?brand=${ brand }">${ brand }</a></li>
+    %endfor
+  </ul>
+</div>
+
+
 </%block>
 
 <%block name="body_section_content">

@@ -1,12 +1,3 @@
-html {
-  height: 100%;
-}
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 
 #header_maintenance{
     color: white;
@@ -54,11 +45,6 @@ body {
     margin-right: auto;
 }
 
-#body_section{
-    position: relative;
-    flex: 1;
-}
-
 #body_section_top{
     text-align: center;
 }
@@ -74,7 +60,8 @@ body {
 #body_section_content{
     margin-left: 200px;
     margin-right: 200px;
-
+    position: relative;
+    flex: 1;
 }
 
 #body_section_right{

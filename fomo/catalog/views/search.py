@@ -8,9 +8,6 @@ from catalog import models as cmod
 
 @view_function
 def process_request(request):
-    # if len(request.GET.get('terms')) == 0:
-    #     products = ' '
-    # else:
     products = cmod.Product.objects.annotate(
             search=SearchVector(
                 'name',
@@ -24,5 +21,4 @@ def process_request(request):
     context = {
         'products': products,
     }
-
     return dmp_render(request, 'search.html', context)
