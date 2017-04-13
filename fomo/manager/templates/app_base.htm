@@ -1,11 +1,185 @@
-<%inherit file="/homepage/templates/base.htm" />
+<%! from django_mako_plus import get_template_css, get_template_js %>
+<%! from catalog.models import ViewHistory%>
 
-<%block name="header_menu_items">
-  <li class=${ 'active' if request.dmp_router_page == 'index' else '' }><a href="/manager/index">Dashboard</a></li>
-  <li class=${ 'active' if request.dmp_router_page == 'products' else '' }><a href="/manager/products">Products</a></li>
-  <li class=${ 'active' if request.dmp_router_page == 'users' else '' }><a href="/manager/users">Users</a></li>
-</%block>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<%block name="body_section_right">
+    <title>FOMO | </title>
 
-</%block>
+    <link href="${STATIC_URL}manager/media/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${STATIC_URL}manager/media/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${STATIC_URL}manager/media/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="${STATIC_URL}manager/media/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+    <link href="${STATIC_URL}manager/media/build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/media/jquery.datetimepicker.min.css"/>
+
+    <%block name="head_extra">
+    </%block>
+
+    ## render the css with the same name as this page
+    ${ get_template_css(self, request, context)}
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col menu_fixed">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="/homepage/index" class="site_title"><img id="nav_logo" src="${STATIC_URL}homepage/media/logo.png" alt=""> <span id="nav_title">  F O M O</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_info">
+
+                <h2><span>Welcome, </span> ${ request.user.get_full_name() }</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/manager/index">Dashboard</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-user"></i> Users <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/manager/users">Manage Users</a></li>
+                      <li><a href="/manager/user.create">Create New User</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-shopping-basket"></i> Products <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/manager/products">Manage Products</a></li>
+                      <li><a href="/manager/product.create">Add New Product</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="/account/logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon " aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    ${ request.user.get_full_name() }
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="/account/index"> Profile</a></li>
+                    <li><a href="/account/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h1>
+                </h1>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h1>
+                    <%block name="page_title">
+                    </%block>
+                  </h1>
+                    <!-- <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul> -->
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <%block name="content">
+                    </%block>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%block name="modal">
+
+            </%block>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Family Oriented Music Organization
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+    ## add any app-wide scripts here:
+    <script src="${STATIC_URL}manager/media/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="${STATIC_URL}manager/media/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="${STATIC_URL}manager/media/vendors/fastclick/lib/fastclick.js"></script>
+    <script src="${STATIC_URL}manager/media/vendors/nprogress/nprogress.js"></script>
+    <script src="${STATIC_URL}manager/media/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="${STATIC_URL}manager/media/build/js/custom.min.js"></script>
+    <script src="${STATIC_URL}homepage/media/jquery.loadmodal.js"></script>
+    <script src="${STATIC_URL}homepage/media/jquery.form.js"></script>
+    <script src="${STATIC_URL}homepage/media/jquery.datetimepicker.full.js"></script>
+    ## JavaScript References ## render the JS with the same name as this page
+    ${ get_template_js(self, request, context) }
+  </body>
+</html>

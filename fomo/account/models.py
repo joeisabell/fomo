@@ -23,5 +23,6 @@ class FomoUser(AbstractUser):
         return self.address + ' ' + self.city + ', ' + self.state + ' ' + self.zipcode
     full_address = property(_get_full_address)
 
+
     def verify_address(self):
         return geo(self.full_address)

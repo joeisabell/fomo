@@ -1,22 +1,9 @@
 <%inherit file="app_base.htm" />
 
-<%block name="body_section_content">
-    <div class="body_section_content">
-        <h3>${ request.user.first_name }'s Dashboard</h3>
-        <div id="options-container">
-          <div class="option-tile">
-            <a class="btn btn-default" href="/manager/products" data-toggle="tooltip" title="Manage Products">
-              <span class="glyphicon glyphicon-tower option-icon"></span> 
-            </a>
-          </div>
-          <div class="option-tile">
-            <a class="btn btn-default" href="/manager/users" data-toggle="tooltip" title="Manage Users">
-              <span class="glyphicon glyphicon-user option-icon"></span>
-            </a>
-          </div>
+<%block name="page_title">
+${ request.user.first_name }'s Dashboard
+</%block>
 
-        </div>
-
-
-    </div>
+<%block name="content">
+    <h3>Home Dashboard</h3>
 </%block>

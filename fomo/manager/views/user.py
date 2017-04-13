@@ -50,7 +50,7 @@ def process_request(request):
     context = {
         'user' : user,
         'form': form,
-        'title': 'Edit User',
+        'title': 'Edit User Information',
     }
     return dmp_render(request, 'user.html', context)
 
