@@ -40,6 +40,9 @@ padding-top: 20px;
   .row {
     text-align: center;
   }
+  .input-group{
+    display: table;
+  }
   #input-addon {
 
   }
