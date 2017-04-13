@@ -74,15 +74,16 @@ class ShippingForm(FormMixIn, forms.Form):
         zipcode = self.cleaned_data.get('zipcode')
         full_address = address + ' ' + city + ', ' + state + ' ' + zipcode
 
-        g_result = geo(full_address)
-
-        self.data = self.data.copy()
-        if full_address != g_result.get('full_address'):
-            self.data['address'] = g_result.get('address')
-            self.data['city'] = g_result.get('city')
-            self.data['zipcode'] = g_result.get('zipcode')
-            self.data['state'] = g_result.get('state')
-            raise forms.ValidationError("We verified your address and made some slight changes. Does this address look correct?")
+        # replaced this address geocoding with SmartyStreets JQuery plug-in
+        # See checkout.jsm for address validation code as well as https://smartystreets.com/docs for documentation
+        # g_result = geo(full_address)
+        # self.data = self.data.copy()
+        # if full_address != g_result.get('full_address'):
+        #     self.data['address'] = g_result.get('address')
+        #     self.data['city'] = g_result.get('city')
+        #     self.data['zipcode'] = g_result.get('zipcode')
+        #     self.data['state'] = g_result.get('state')
+        #     raise forms.ValidationError("We verified your address and made some slight changes. Does this address look correct?")
 
     def commit(self):
         self.request.session['shipping_address'] = {

@@ -3,30 +3,31 @@
 <%block name="body_section_content">
     <h1>Shopping Cart</h1>
     %if cart.active_items.count() == 0:
+
     <div class="text-center">
       <h3>Oh man...it looks like your shopping cart is empty :( </h3>
       <a class="btn btn-warning" href="/catalog/index">Fill it up!</a>
     </div>
+
     %else:
+
     <div class="titles">
         <div class="product_title">Product</div>
         <div class="quantity_title">Quantity</div>
         <div class="price_title">Price</div>
     </div>
     <div class="search-results">
-
       %for cart_item in cart.active_items.all():
        <a href="/catalog/details/${ cart_item.product.id }">
-        <div class="row search-result-container">
+        <div class="row cart-item-container">
           <div class="tile-image">
             <img class="img-thumbnail item-image" src="${ STATIC_URL + cart_item.product.image.subdir }" alt="">
-            <div class="search-result-title">
+            <div class="cart-item-title">
               ${ cart_item.product.name }
               <span class="brand">from ${ cart_item.product.brand }</span>
             </div>
             <div class="quantity">
               <div class="quantity">${ cart_item.quantity }</div>
-
             </div>
             <div class="view-now-button pull-right">
               <div class="price">$${ cart_item.product.price }</div>
@@ -36,7 +37,15 @@
         </div>
       </a>
       %endfor
+      <div class="text-right total">
+        <ul id="cart-summary">
+          <li>Subtotal: $${ cart.subtotal }</li>
+          <li>Tax: $${ cart.tax }</li>
+          <li>Shipping: $${ cart.shipping_fee }</li>
+          <li>Total: $${ cart.total }</li>
+        </ul>
+      </div>
+      <a class="btn btn-warning pull-right" href="/catalog/checkout">Checkout</a>
     </div>
-
     %endif
 </%block>

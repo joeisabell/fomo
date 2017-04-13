@@ -7,10 +7,8 @@
     <p>${form.cleaned_data.get('address')}</p>
     <p>${form.cleaned_data.get('city')}, ${form.cleaned_data.get('state')} ${form.cleaned_data.get('zipcode')}</p>
   </div>
-  <div class="pull-right">
-    <button id="load-address-form" class="btn btn-success">Change Address</button>
-    <button id="shipping-continue" class="btn btn-success">Use this address</button>
-  </div>
+  <button id="load-address-form" class="btn btn-primary btn-sm">Change Address</button>
+  <button id="shipping-continue" class="btn btn-primary btn-sm">Use this address</button>
   %else:
     ${ form }
   %endif

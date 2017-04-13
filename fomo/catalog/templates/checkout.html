@@ -2,6 +2,7 @@
 
 <%block name="head_extra">
   <script src="https://checkout.stripe.com/checkout.js"></script>
+  <script src="//d79i1fxsrar4t.cloudfront.net/jquery.liveaddress/3.2/jquery.liveaddress.min.js"></script>
 </%block>
 
 <%block name="body_section_content">
@@ -10,13 +11,15 @@
 
     <h3>Order Summary</h3>
     <div id="order-summary">
-      <ul id="cart-summary">
-        <li>Subtotal: $${request.user.shopping_cart.subtotal}</li>
-        <li>Taxes: $${request.user.shopping_cart.tax}</li>
-        <li>Shipping Fee: $${request.user.shopping_cart.shipping_fee}</li>
-        <li>Total Cost: $${request.user.shopping_cart.total}</li>
-      </ul>
-      <button id="summary-continue" class="btn btn-success pull-right">Continue</button>
+    <table id="order-summary-table" class="table table-striped">
+        <tbody>
+          <tr> <th>Subtotal:</th> <td>$${request.user.shopping_cart.subtotal}</td> </tr>
+          <tr> <th>Tax:</th> <td>$${request.user.shopping_cart.tax}</td> </tr>
+          <tr> <th>Shipping:</th> <td>$${request.user.shopping_cart.shipping_fee}</td> </tr>
+          <tr id="total-row"> <th>Total:</th> <td>$${request.user.shopping_cart.total}</td> </tr>
+        </tbody>
+    </table>
+      <button id="summary-continue" class="btn btn-primary btn-sm">Continue</button>
     </div>
 
     <h3>Shipping</h3>
@@ -26,14 +29,13 @@
           <p>${request.user.address}</p>
           <p>${request.user.city}, ${request.user.state} ${request.user.zipcode}</p>
         </div>
-        <div class="pull-right">
-          <button id="load-address-form" class="btn btn-success">Verify Address</button>
-        </div>
+          <button id="load-address-form" class="btn btn-primary btn-sm">Verify Address</button>
       </div>
 
     <h3>Payment</h3>
     <div id="payment_form_container">
       ${ form }
+      <a id="stripe-link" href="https://stripe.com/docs/security/stripe">Is Stripe secure?</a>
     </div>
 
   </div>
