@@ -20,10 +20,11 @@ def process_request(request):
 
     # process the form
     form = EditProductForm(request, product=product, initial={
-        'id': product.id,
-        'name': product,
         'category': product.category,
         'brand': product.brand,
+        'id': product.id,
+        'name': product,
+        'image_url': product.image.subdir,
         'price': product.price,
         'serial_number': getattr(product, 'serial_number', 0),
         'quantity': getattr(product, 'quantity', 0),
@@ -47,10 +48,11 @@ def process_request(request):
 class EditProductForm(FormMixIn, forms.Form):
 
     def init(self, product):
-        self.fields['name'] = forms.CharField(label='Product Name', max_length=100)
         self.fields['category'] = forms.ModelChoiceField(label="Category",
             queryset=cmod.Category.objects.order_by('name').all())
         self.fields['brand'] = forms.CharField(label='Brand', max_length=100)
+        self.fields['name'] = forms.CharField(label='Product Name', max_length=100)
+        self.fields['image_url'] = forms.CharField(label='Image URL', max_length=100)
         self.fields['price'] = forms.DecimalField(label='Price')
         if hasattr(product, 'serial_number'):
             self.fields['serial_number'] = forms.CharField(label='Serial Number')
@@ -75,6 +77,9 @@ class EditProductForm(FormMixIn, forms.Form):
         if hasattr(product, 'reorder_quantity'):
             product.reorder_quantity = self.cleaned_data.get('reorder_quantity')
         product.save()
+        image = product.image
+        image.subdir = self.cleaned_data.get('image_url')
+        image.save()
 
 
 ###################################################
