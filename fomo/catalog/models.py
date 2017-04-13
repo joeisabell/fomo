@@ -2,6 +2,7 @@ from decimal import Decimal
 from datetime import datetime
 
 from django.db import models
+from django.conf import settings
 from django.db.models import Sum
 from polymorphic.models import PolymorphicModel
 
@@ -100,6 +101,15 @@ class ProductImage(models.Model):
     alttext = models.TextField(null=True)
     mimetype = models.TextField(null=True)
     is_primary = models.NullBooleanField()
+
+    def _get_full_url(self):
+        if self.subdir.startswith('http'):
+            url = self.subdir
+        else:
+            url = settings.STATIC_URL + self.subdir
+        return url
+    url = property(_get_full_url)
+
 
 
 ######################################################################

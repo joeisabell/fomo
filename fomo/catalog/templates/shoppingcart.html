@@ -21,7 +21,7 @@
        <a href="/catalog/details/${ cart_item.product.id }">
         <div class="row cart-item-container">
           <div class="tile-image">
-            <img class="img-thumbnail item-image" src="${ STATIC_URL + cart_item.product.image.subdir }" alt="">
+            <img class="img-thumbnail item-image" src="${ cart_item.product.image.url }" alt="">
             <div class="cart-item-title">
               ${ cart_item.product.name }
               <span class="brand">from ${ cart_item.product.brand }</span>

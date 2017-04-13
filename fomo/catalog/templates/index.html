@@ -52,7 +52,7 @@
   <div class="tile-container">
     <a href="/catalog/details/${ product.id }">
       <div class="tile-image">
-        <img src="${ STATIC_URL + product.default_image().subdir }" alt="">
+        <img src="${ product.image.url }" alt="">
       </div>
       <div class="tile-text">
         <div class="tile-title">

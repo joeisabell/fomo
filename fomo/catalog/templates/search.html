@@ -8,7 +8,7 @@
   <a href="/catalog/details/${ product.id }">
     <div class="row search-result-container">
       <div class="tile-image">
-        <img src="${ STATIC_URL + product.image.subdir }" alt="">
+        <img src="${ product.image.url }" alt="">
         <div class="search-result-title">
           ${ product.name }
           <span class="brand">from ${ product.brand }</span>

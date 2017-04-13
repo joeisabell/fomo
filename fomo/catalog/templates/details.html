@@ -26,7 +26,7 @@
   <div class="row">
 
     <div id="product-image" class="col-md-5 col-sm-6">
-      <img data-pid=${product.id} class="img-responsive thumbnail" src="${STATIC_URL + product.default_image().subdir}" alt="">
+      <img data-pid=${product.id} class="img-responsive thumbnail" src="${ product.image.url }" alt="">
     </div>
 
     <div id="product-action">
@@ -65,7 +65,7 @@
     <a href="/catalog/details/${ product.id }">
       <div class="similar_products_item_container">
       <div class="similar_products_item_image">
-        <img src="${ STATIC_URL + product.default_image().subdir }" alt="">
+        <img src="${ product.image.url }" alt="">
       </div>
       ${ product.name }
       </div>

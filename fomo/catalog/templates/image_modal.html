@@ -4,7 +4,7 @@
   <!-- Modal -->
   <div id="image-modal">
     %for image in product_images:
-      <img class="img-responsive product-images" src="${STATIC_URL + image.subdir}" alt="">
+      <img class="img-responsive product-images" src="${image.url}" alt="">
     %endfor
 
     <div class="modal-buttons">
