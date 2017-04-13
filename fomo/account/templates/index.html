@@ -1,11 +1,7 @@
 <%inherit file="app_base.htm" />
 
-<%block name="body_section_before">
-  <h1> Your Account </h1>
-</%block>
-
 <%block name="body_section_content">
-
+<h1> Account Settings </h1>
   <h2>${ request.user.get_full_name() }</h2>
 
   <ul>

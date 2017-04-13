@@ -1,5 +1,27 @@
 <%inherit file="app_base.htm" />
 
 <%block name="body_section_content">
- <h1>Order History</h1>
+<h1>Order History</h1>
+<div class="search-results">
+    <table class="table table-responsive table-striped">
+        <tbody>
+          <tr>
+              <th>Order No.</th>
+              <th>Total</th>
+              <th>Shipping Address</th>
+              <th>Order Date</th>
+              <th>Receipt</th>
+          </tr>
+        %for order in orders:
+          <tr>
+              <td>${ order.id }</td>
+              <td>$${ order.total }</td>
+              <td>${ order.address }</td>
+              <td>${ order.sale_date.strftime('%m/%d/%Y') }</td>
+              <td><a href="/catalog/receipt/${order.id}/"><button type="button" class="btn btn-primary btn-xs">Details</button></a></td>
+          </tr>
+        %endfor
+        </tbody>
+    </table>
+</div>
 </%block>

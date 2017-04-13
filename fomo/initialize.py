@@ -87,13 +87,6 @@ for data in (
 # product picture base uri
 dir = 'catalog/media/product_images/'
 
-# product description filler
-desc =  ' '.join([
-        'Nisi cillum reprehenderit anim esse aute officia Lorem nulla. Cupidatat commodo eiusmod mollit ',
-        'dolore esse eu commodo qui nostrud ex fugiat culpa deserunt eu. Non nulla reprehenderit quis ',
-        'minim eiusmod culpa qui do anim nisi esse est culpa veniam. Fugiat sint occaecat et minim cillum ',
-        ])
-
 ## add products
 # add bulk products
 for data in (
@@ -102,17 +95,16 @@ for data in (
             [ dir + 'trumpet_mouthpiece_1.jpg', 'jpg', False ],
             [ dir + 'trumpet_mouthpiece_2.jpg', 'jpg', False ],
             [ dir + 'trumpet_mouthpiece_3.jpg', 'jpg', False ],
-        ], desc),
+        ], ["On brass instruments the mouthpiece is the part of the instrument placed on the player's lips. This item is essential for any trumpet player so get yours today. "]),
         ('Violin String Set', 'string', 'E-Tune', Decimal('9.99'), 10, 5, 10, [
             [ dir + 'violin_string_set.jpg', 'jpg', True ],
             [ dir + 'violin_string_set_1.jpg', 'jpg', False ],
-        ], desc),
+        ], ["The best quality violins come with the best strings possible but even the best strings in the world will need replacing throughout a violinist’s playing career. Our strings are great quality and guaranteed to produce excellent sound. "]),
         ('Triangle', 'percussion', 'Squares Are For Squares', Decimal('8.99'), 15, 5, 10, [
            [ dir + 'triangle.jpg', 'jpg', True ],
            [ dir + 'triangle_1.jpg', 'jpg', False ],
            [ dir + 'triangle_2.jpg', 'jpg', False ],
-       ], desc),
-
+       ], ["The coolest instrument around. Everyone can use a little more triangle in their life."]),
     ):
     bulk_product = cmod.BulkProduct()
     bulk_product.name = data[0]
@@ -122,7 +114,7 @@ for data in (
     bulk_product.quantity = data[4]
     bulk_product.reorder_point = data[5]
     bulk_product.reorder_quantity = data[6]
-    bulk_product.description = data[8]
+    bulk_product.description = data[8][0]
     bulk_product.save()
     sh.add(user, bulk_product)
     for img in data[7]:
@@ -141,25 +133,25 @@ for data in (
             [ dir + 'trumpet_1.jpg', 'jpg', False ],
             [ dir + 'trumpet_2.jpg', 'jpg', False ],
             [ dir + 'trumpet_3.jpg', 'jpg', False ],
-        ], desc),
+        ], ["Joining a marching band? Trying to pick up a new skill? We have trumpets for all ages and skill levels, and all our instruments are made using the finest materials."]),
         ('Tuba', 'brass', 'E-Tune', Decimal('999.99'), '909839', [
             [ dir + 'tuba.jpg', 'jpg', True ],
             [ dir + 'tuba_1.jpg', 'jpg', False ],
             [ dir + 'tuba_2.jpg', 'jpg', False ],
             [ dir + 'tuba_3.jpg', 'jpg', False ],
-        ], desc),
+        ], ["Joining a marching band? Trying to pick up a new skill? We have tubas for all ages and skill levels, and all our instruments are made using the finest materials."]),
         ('French Horn', 'brass', 'Mendini', Decimal('250.99'), '909787', [
             [ dir + 'french_horn.jpg', 'jpg', True ],
             [ dir + 'french_horn_1.jpg', 'jpg', False ],
             [ dir + 'french_horn_2.jpg', 'jpg', False ],
             [ dir + 'french_horn_3.jpg', 'jpg', False ],
-        ], desc),
+        ], ["The French horn is a brass instrument made of tubing wrapped into a coil with a flared bell. Our horns are made from the finest materials so they are guaranteed to look and sound great."]),
         ('Drums', 'percussion', 'Gammon', Decimal('189.99'), '908777', [
            [ dir + 'drums.jpg', 'jpg', True ],
            [ dir + 'drums_1.jpg', 'jpg', False ],
            [ dir + 'drums_2.jpg', 'jpg', False ],
            [ dir + 'drums_3.jpg', 'jpg', False ],
-       ], desc),
+       ], ["Our drum sets are suitable for all ages and skill level. The sound quality is excellent, and the drums themselves are carefully crafted for your pleasure."]),
     ):
     unique_product = cmod.UniqueProduct()
     unique_product.name = data[0]
@@ -167,7 +159,7 @@ for data in (
     unique_product.brand = data[2]
     unique_product.price = data[3]
     unique_product.serial_number = data[4]
-    unique_product.description = data[6]
+    unique_product.description = data[6][0]
     unique_product.save()
     sh.add(user, unique_product)
     for img in data[5]:
@@ -186,19 +178,19 @@ for data in (
             [ dir + 'clarinet_1.jpg', 'jpg', False ],
             [ dir + 'clarinet_2.jpg', 'jpg', False ],
             [ dir + 'clarinet_3.jpg', 'jpg', False ],
-        ], desc),
+        ], ["Need a clarinet? Our clarinets are perfect for any age group. Great quality, great sound. What more could you want?"]),
         ('Violin', 'string', 'Samsung', Decimal('1499.99'), '809839', [
             [ dir + 'violin.jpg', 'jpg', True ],
             [ dir + 'violin_1.jpg', 'jpg', False ],
             [ dir + 'violin_2.jpg', 'jpg', False ],
             [ dir + 'violin_3.jpg', 'jpg', False ],
-        ], desc),
+        ], ["Made with great attention to detail and using only the finest materials, our violins are suitable for all ages and skill level. Find the perfect violin for you today!"]),
         ('Guitar', 'string', 'Fender', Decimal('575.99'), '909187', [
             [ dir + 'guitar.jpg', 'jpg', True ],
             [ dir + 'guitar_1.jpg', 'jpg', False ],
             [ dir + 'guitar_2.jpg', 'jpg', False ],
             [ dir + 'guitar_3.jpg', 'jpg', False ],
-        ], desc),
+        ], ["Ready to explore the world of guitar? Come try one of our rentals today. Our instruments are crafted using only the finest materials and are suitable for all ages and skill levels."]),
     ):
     rental_product = cmod.RentalProduct()
     rental_product.name = data[0]
@@ -206,7 +198,7 @@ for data in (
     rental_product.brand = data[2]
     rental_product.price = data[3]
     rental_product.serial_number = data[4]
-    rental_product.description = data[6]
+    rental_product.description = data[6][0]
     rental_product.save()
     sh.add(user, rental_product)
     for img in data[5]:

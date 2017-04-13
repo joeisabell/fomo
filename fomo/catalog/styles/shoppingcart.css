@@ -24,3 +24,92 @@ a {
 td {
   vertical-align: middle;
 }
+
+.search-result-container {
+  position: relative;
+  border-top-style: solid;
+  border-top-width: thin;
+  margin-right: 10px;
+  padding: 8px;
+}
+
+.tile-image {
+    position: relative;
+}
+
+.tile-image > a > img {
+  width: 110px;
+
+}
+.search-result-title {
+  display: inline-block;
+  font-size: 2vw;
+  margin-left: 20px;
+}
+
+
+
+.brand {
+  font-size: 14px;
+  padding-left: 12px;
+}
+
+.price {
+  font-size: 28px;
+  padding-bottom: 15px;
+}
+
+.quantity {
+    position: absolute;
+    display: inline-block;
+    left: 53%;
+    top: 35%;
+}
+.titles {
+    display: inline-block;
+    position: relative;
+    width: 100%
+}
+.quantity_title {
+    position: absolute;
+    display: inline-block;
+    left:50%;
+}
+
+.price_title {
+    display: inline-block;
+    float:right;
+    margin-right: 50px;
+
+
+
+}
+
+.product_title {
+    display: inline-block;
+}
+
+.search-results {
+  margin: 10px;
+}
+
+@media (max-width: 893px) {
+    .tile-image > a > img {
+        display: none;
+    }
+    .search-result-title{
+        width:100px;
+        margin-left: 0px;
+        font-size: 20px;
+    }
+    .quantity {
+      left: 50%;
+      top: 20%;
+      margin: 0 auto;
+    }
+    .quantity_title {
+        left: 40%;
+
+        margin: 0 auto;
+    }
+}

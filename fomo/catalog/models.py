@@ -69,7 +69,7 @@ class Product(PolymorphicModel):
     def _get_details(self):
         # these attributes should be hidden from user
         hidden = [
-            'product_images', 'category', 'create_date',
+            'product_images', 'category', 'create_date', 'sold',
             'modified_date', 'quantity', 'id', 'reorder_point', 'reorder_quantity']
         # product details dictionary used for populating the product information table
         product_details = {k:v for (k,v) in self.to_json().items() if k not in hidden}
@@ -199,7 +199,7 @@ class ShoppingCart(models.Model):
     tax = property(_calc_tax)
 
     def _calc_shipping(self):
-        return Decimal('10')
+        return Decimal('10.00')
     shipping_fee = property(_calc_shipping)
 
     def _calc_subtotal(self):
@@ -234,7 +234,7 @@ class ShoppingCartItem(models.Model):
 ## Checkout
 
 class Sale(models.Model):
-    user = models.ForeignKey(FomoUser)
+    user = models.ForeignKey(FomoUser, related_name='orders')
     sale_date = models.DateTimeField(auto_now=True)
     address = models.CharField(max_length = 200, blank=True, null=True)
     city = models.CharField(max_length = 50, blank=True, null=True)

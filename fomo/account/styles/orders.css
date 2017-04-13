@@ -1,0 +1,8 @@
+#body_section_content > a {
+  padding-top: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

@@ -8,42 +8,35 @@
       <a class="btn btn-warning" href="/catalog/index">Fill it up!</a>
     </div>
     %else:
-    <table class="table table-striped">
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Extended Amount</th>
-        <th></th>
-      </tr>
-      %for cart_item in cart.active_items.all():
-      <tr class="cart-row">
-        <td><img class="img-thumbnail item-image" src="${ STATIC_URL + cart_item.product.image.subdir }" alt=""></td>
-        <td>
-          <a href="/catalog/details/${ cart_item.product.id }">${ cart_item.product.name }</a>
-        </td>
-        <td>$${ cart_item.product.price }</td>
-        <td>${ cart_item.quantity }</td>
-        <td>$${ cart_item.subtotal }</td>
-        <td>
-          <a href="/catalog/shoppingcart.remove_item/${cart_item.id}" class="delete_button btn btn-danger btn-xs">
-            Remove
-          </a>
-        </td>
-      </tr>
-      %endfor
-    </table>
-    <div class="text-right">
-      <ul id="cart-summary">
-        <li>Subtotal: $${ cart.subtotal }</li>
-        <li>Tax: $${ cart.tax }</li>
-        <li>Shipping: $${ cart.shipping_fee }</li>
-        <li>Total: $${ cart.total }</li>
-      </ul>
+    <div class="titles">
+        <div class="product_title">Product</div>
+        <div class="quantity_title">Quantity</div>
+        <div class="price_title">Price</div>
     </div>
-      <a class="btn btn-warning pull-right" href="/catalog/checkout">Checkout</a>
+    <div class="search-results">
+
+      %for cart_item in cart.active_items.all():
+       <a href="/catalog/details/${ cart_item.product.id }">
+        <div class="row search-result-container">
+          <div class="tile-image">
+            <img class="img-thumbnail item-image" src="${ STATIC_URL + cart_item.product.image.subdir }" alt="">
+            <div class="search-result-title">
+              ${ cart_item.product.name }
+              <span class="brand">from ${ cart_item.product.brand }</span>
+            </div>
+            <div class="quantity">
+              <div class="quantity">${ cart_item.quantity }</div>
+
+            </div>
+            <div class="view-now-button pull-right">
+              <div class="price">$${ cart_item.product.price }</div>
+              <a href="/catalog/shoppingcart.remove_item/${cart_item.id}"class="btn btn-danger btn-sm pull-right"  name="button">Remove</a>
+            </div>
+          </div>
+        </div>
+      </a>
+      %endfor
+    </div>
+
     %endif
-
-
 </%block>
