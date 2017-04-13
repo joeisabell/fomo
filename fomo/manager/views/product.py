@@ -130,10 +130,11 @@ class CreateProductForm(FormMixIn, forms.Form):
         ]
 
         self.fields['product_type'] = forms.ChoiceField(label='Product Type', choices=PRODUCT_TYPE_CHOICES)
-        self.fields['name'] = forms.CharField(label='Product Name', max_length=100)
         self.fields['category'] = forms.ModelChoiceField(label="Category",
             queryset=cmod.Category.objects.order_by('name').all())
+        self.fields['name'] = forms.CharField(label='Product Name', max_length=100)
         self.fields['brand'] = forms.CharField(label='Brand', max_length=100)
+        self.fields['image_url'] = forms.CharField(label='Image URL', max_length=100)
         self.fields['price'] = forms.DecimalField(label='Price')
         self.fields['serial_number'] = forms.CharField(label='Serial Number', required=False)
         self.fields['quantity'] = forms.IntegerField(label='Quantity', required=False)
@@ -168,3 +169,9 @@ class CreateProductForm(FormMixIn, forms.Form):
         if hasattr(product, 'reorder_quantity'):
             product.reorder_quantity = self.cleaned_data.get('reorder_quantity')
         product.save()
+
+        product.images.create(
+            product=product,
+            subdir=self.cleaned_data.get('image_url'),
+            is_primary=True
+        )
