@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'formlib',
     'api',
     'email_app',
+    'pynliner',
 ]
 
 MIDDLEWARE = [
