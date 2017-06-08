@@ -68,6 +68,7 @@ class FormMixIn(object):
         ${ form }
 
     """
+    form_id = None                      # set in __init__ below
     form_action = None
     form_method = 'POST'
     form_submit = 'Submit'
@@ -79,6 +80,11 @@ class FormMixIn(object):
 
     def __init__(self, request, *args, **kwargs):
         '''Constructor'''
+
+        # set the id of this form to the name of the subclass
+        if not self.form_id:
+            self.form_id = 'formlib-{}'.format(self.__class__.__qualname__.lower())
+
         # save the request object
         self.request = request
 

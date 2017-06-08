@@ -6,3 +6,4 @@ psycopg2==2.6.2
 django-polymorphic==1.1
 googlemaps==2.4.6
 stripe==1.51.0
+pynliner
